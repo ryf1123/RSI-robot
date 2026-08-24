@@ -39,6 +39,17 @@ class Run:
         arm = self.cfg["arm"]
         if arm == "random":
             return [Design.random(rng) for _ in range(k)]
+        if arm.startswith("sparse"):
+            n_act = int(arm[6:])
+            out = []
+            for _ in range(k):
+                d = Design.zeros()
+                for name in rng.choice(TERM_NAMES, size=n_act, replace=False):
+                    d["w"][name] = float(rng.choice([0.25, 0.5, 1.0, 2.0, 4.0]))
+                for key, lv in HP_LEVELS.items():
+                    d["hp"][key] = float(rng.choice(lv))
+                out.append(d)
+            return out
         if arm == "contrast":
             return self._contrast(k, rng)
         if arm == "evo":

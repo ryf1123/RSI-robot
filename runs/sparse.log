@@ -1,0 +1,77 @@
+init runs/sparse2_s0 {'arm': 'sparse2', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse2_s0 8/32 best=0.137
+runs/sparse2_s0 16/32 best=1.358
+runs/sparse2_s0 24/32 best=1.358
+runs/sparse2_s0 32/32 best=1.358
+init runs/sparse3_s0 {'arm': 'sparse3', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse3_s0 8/32 best=0.872
+runs/sparse3_s0 16/32 best=0.872
+runs/sparse3_s0 24/32 best=1.187
+runs/sparse3_s0 32/32 best=1.187
+init runs/sparse5_s0 {'arm': 'sparse5', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse5_s0 8/32 best=2.578
+runs/sparse5_s0 16/32 best=2.578
+runs/sparse5_s0 24/32 best=3.786
+runs/sparse5_s0 32/32 best=3.786
+init runs/sparse8_s0 {'arm': 'sparse8', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse8_s0 8/32 best=0.024
+runs/sparse8_s0 16/32 best=0.116
+runs/sparse8_s0 24/32 best=0.189
+runs/sparse8_s0 32/32 best=0.451
+init runs/sparse12_s0 {'arm': 'sparse12', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse12_s0 8/32 best=1.194
+runs/sparse12_s0 16/32 best=1.194
+runs/sparse12_s0 24/32 best=1.194
+runs/sparse12_s0 32/32 best=1.194
+init runs/sparse14_s0 {'arm': 'sparse14', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse14_s0 8/32 best=2.144
+runs/sparse14_s0 16/32 best=2.144
+runs/sparse14_s0 24/32 best=2.144
+runs/sparse14_s0 32/32 best=2.144
+init runs/sparse2_s1 {'arm': 'sparse2', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse2_s1 8/32 best=0.047
+runs/sparse2_s1 16/32 best=1.383
+runs/sparse2_s1 24/32 best=1.383
+runs/sparse2_s1 32/32 best=1.383
+init runs/sparse3_s1 {'arm': 'sparse3', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse3_s1 8/32 best=0.901
+runs/sparse3_s1 16/32 best=0.901
+runs/sparse3_s1 24/32 best=1.026
+runs/sparse3_s1 32/32 best=2.126
+init runs/sparse5_s1 {'arm': 'sparse5', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse5_s1 8/32 best=0.503
+runs/sparse5_s1 16/32 best=0.503
+runs/sparse5_s1 24/32 best=0.503
+runs/sparse5_s1 32/32 best=0.503
+init runs/sparse8_s1 {'arm': 'sparse8', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse8_s1 8/32 best=0.935
+runs/sparse8_s1 16/32 best=0.935
+runs/sparse8_s1 24/32 best=0.935
+runs/sparse8_s1 32/32 best=0.935
+init runs/sparse12_s1 {'arm': 'sparse12', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse12_s1 8/32 best=0.194
+runs/sparse12_s1 16/32 best=0.194
+runs/sparse12_s1 24/32 best=1.389
+runs/sparse12_s1 32/32 best=1.389
+init runs/sparse14_s1 {'arm': 'sparse14', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse14_s1 8/32 best=0.284
+runs/sparse14_s1 16/32 best=0.284
+runs/sparse14_s1 24/32 best=0.284
+runs/sparse14_s1 32/32 best=0.364
+init runs/sparse2_s2 {'arm': 'sparse2', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse2_s2 8/32 best=2.962
+runs/sparse2_s2 16/32 best=2.962
+runs/sparse2_s2 24/32 best=2.962
+runs/sparse2_s2 32/32 best=2.962
+init runs/sparse3_s2 {'arm': 'sparse3', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse3_s2 8/32 best=0.802
+runs/sparse3_s2 16/32 best=0.802
+runs/sparse3_s2 24/32 best=0.813
+runs/sparse3_s2 32/32 best=0.813
+init runs/sparse5_s2 {'arm': 'sparse5', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse5_s2 8/32 best=3.860
+runs/sparse5_s2 16/32 best=3.860
+runs/sparse5_s2 24/32 best=3.860
+runs/sparse5_s2 32/32 best=3.860
+init runs/sparse8_s2 {'arm': 'sparse8', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparse8_s2 8/32 best=1.469
