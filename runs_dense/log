@@ -1,0 +1,53 @@
+init runs_dense/random_s0 {'arm': 'random', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s0 8/32 best=0.188
+runs_dense/random_s0 16/32 best=0.188
+runs_dense/random_s0 24/32 best=0.188
+runs_dense/random_s0 32/32 best=0.807
+init runs_dense/evo_s0 {'arm': 'evo', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/evo_s0 8/32 best=0.188
+runs_dense/evo_s0 16/32 best=2.262
+runs_dense/evo_s0 24/32 best=3.906
+runs_dense/evo_s0 32/32 best=3.906
+init runs_dense/llm_named_nofb_s0 {'arm': 'llm', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/random_s1 {'arm': 'random', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s1 8/32 best=1.375
+runs_dense/random_s1 16/32 best=1.375
+runs_dense/random_s1 24/32 best=1.679
+runs_dense/random_s1 32/32 best=1.679
+init runs_dense/evo_s1 {'arm': 'evo', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/evo_s1 8/32 best=1.375
+runs_dense/evo_s1 16/32 best=1.411
+runs_dense/evo_s1 24/32 best=1.411
+runs_dense/evo_s1 32/32 best=1.600
+init runs_dense/llm_named_nofb_s1 {'arm': 'llm', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/random_s2 {'arm': 'random', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s2 8/32 best=0.036
+runs_dense/random_s2 16/32 best=1.103
+runs_dense/random_s2 24/32 best=1.103
+runs_dense/random_s2 32/32 best=1.103
+init runs_dense/evo_s2 {'arm': 'evo', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/evo_s2 8/32 best=0.036
+runs_dense/evo_s2 16/32 best=0.062
+runs_dense/evo_s2 24/32 best=0.066
+runs_dense/evo_s2 32/32 best=0.066
+init runs_dense/llm_named_nofb_s2 {'arm': 'llm', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/random_s3 {'arm': 'random', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s3 8/32 best=0.195
+runs_dense/random_s3 16/32 best=0.195
+runs_dense/random_s3 24/32 best=0.370
+runs_dense/random_s3 32/32 best=0.370
+init runs_dense/evo_s3 {'arm': 'evo', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/evo_s3 8/32 best=0.195
+runs_dense/evo_s3 16/32 best=0.296
+runs_dense/evo_s3 24/32 best=0.296
+runs_dense/evo_s3 32/32 best=0.296
+init runs_dense/llm_named_nofb_s3 {'arm': 'llm', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+runs_dense/llm_named_nofb_s0 decoy 0.028
+runs_dense/llm_named_nofb_s1 decoy 0.046
+runs_dense/llm_named_nofb_s2 decoy 0.04
+runs_dense/llm_named_nofb_s3 decoy 0.029
+runs_dense/llm_named_nofb_s0 32/32 best=3.737
+runs_dense/llm_named_nofb_s1 32/32 best=2.598
+runs_dense/llm_named_nofb_s2 32/32 best=3.783
+runs_dense/llm_named_nofb_s3 32/32 best=3.672
+DENSE_DONE

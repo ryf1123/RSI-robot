@@ -1,0 +1,13 @@
+72 jobs
+runs_dense/evo_s0                reported=3.91 re-eval=1.26±1.39
+runs_dense/evo_s1                reported=1.60 re-eval=0.62±0.69
+runs_dense/evo_s2                reported=0.07 re-eval=-0.02±0.09
+runs_dense/evo_s3                reported=0.30 re-eval=0.01±0.13
+runs_dense/llm_named_nofb_s0     reported=3.74 re-eval=0.35±0.60
+runs_dense/llm_named_nofb_s1     reported=2.60 re-eval=0.66±0.76
+runs_dense/llm_named_nofb_s2     reported=3.78 re-eval=2.18±1.32
+runs_dense/llm_named_nofb_s3     reported=3.67 re-eval=1.80±1.47
+runs_dense/random_s0             reported=0.81 re-eval=1.02±0.52
+runs_dense/random_s1             reported=1.68 re-eval=0.68±0.41
+runs_dense/random_s2             reported=1.10 re-eval=0.73±1.40
+runs_dense/random_s3             reported=0.37 re-eval=0.14±0.20

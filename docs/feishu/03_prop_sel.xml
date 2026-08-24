@@ -1,0 +1,37 @@
+<h1>把「提议」和「选择」拆开</h1>
+<p>任何「提议—评估—保留最好的」循环，best-so-far 曲线都一定向上。<b>哪怕提议者是完全瞎的。</b>因为 best-so-far 是对越来越多次采样取 max，而每次采样都带噪声。所以「曲线在涨」不是任何东西的证据。</p>
+<p>要把两半拆开，需要一个<b>选择压力抬不动</b>的量：<b>每一代 8 个提议的平均适应度</b>。它只反映提议本身。</p>
+<h1>数字</h1>
+<table><colgroup><col width="180"/><col width="130"/><col width="130"/><col width="130"/><col width="150"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂</p></th><th background-color="light-gray"><p>32 个提议的<b>平均</b></p></th><th background-color="light-gray"><p>中位数</p></th><th background-color="light-gray"><p>best-so-far</p></th><th background-color="light-gray"><p>精英重评（6 种子）</p></th></tr></thead>
+<tbody>
+<tr><td><p>random</p></td><td><p>0.10</p></td><td><p>0.01</p></td><td><p>2.05</p></td><td><p>0.59</p></td></tr>
+<tr><td><p><b>evo</b></p></td><td><p><b>0.59</b></p></td><td><p>0.31</p></td><td><p>2.16</p></td><td><p>0.75</p></td></tr>
+<tr><td><p>匿名 · 有反馈</p></td><td><p><b>0.69</b></p></td><td><p><b>0.56</b></p></td><td><p>2.50</p></td><td><p>0.98</p></td></tr>
+<tr><td><p>命名 · 有反馈</p></td><td><p>0.59</p></td><td><p>0.41</p></td><td><p>2.80</p></td><td><p>1.05</p></td></tr>
+<tr><td><p>命名 · 无反馈</p></td><td><p>0.34</p></td><td><p>0.14</p></td><td><p>2.59</p></td><td><p><b>1.34</b></p></td></tr>
+<tr><td><p>匿名 · 无反馈</p></td><td><p><b>0.19</b></p></td><td><p><b>0.03</b></p></td><td><p>2.63</p></td><td><p><b>1.43</b></p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>第一行和第二行：evo 的提议质量是 random 的 6 倍（0.59 vs 0.10），而它的 best-so-far 只高出 5%（2.16 vs 2.05）。</b></p><p>换句话说，random 那 2.05 m 里有 <b>1.95 m 完全来自「在噪声上取 max」</b>，跟提议者一点关系都没有。<b>「反馈驱动的迭代」这件事，在 best-so-far 这个口径下几乎不可见。</b></p></callout>
+<h1>核对：观察到的 best-so-far 用纯噪声就能解释</h1>
+<p>第一环量到好设计的内层种子标准差是 <b>1.17</b>，32 个 run 的精英重评均值是 <b>0.94 m</b>。假装所有 32 个设计的真实质量都是 0.94、每次评估加一个 σ = 1.17 的噪声，那么</p>
+<pre lang="text"><code>E[max of 32 draws | true = 0.94, sd = 1.17] = 3.36 m
+E[max of 32 draws | true = 0.94, sd = 0.34] = 1.64 m
+实际观测到的 best-so-far 平均                = 2.37 m</code></pre>
+<p>实测值<b>落在这两条纯噪声基线之间</b>（真实的 σ 随设计变化，好设计 1.17、中等设计 0.34）。也就是说：<b>不需要假设任何一个设计比别的好，就已经能复现出观测到的 best-so-far。</b></p>
+<h1>最后一击：提议质量预测得了 best-so-far，预测不了真实质量</h1>
+<table><colgroup><col width="330"/><col width="160"/><col width="160"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>相关（跨 32 个 run）</p></th><th background-color="light-gray"><p>Spearman ρ</p></th><th background-color="light-gray"><p>p</p></th></tr></thead>
+<tbody>
+<tr><td><p>best-so-far ~ 该 run 提议的平均适应度</p></td><td><p><b>+0.65</b></p></td><td><p><b>&lt; 0.001</b></p></td></tr>
+<tr><td><p>精英重评 ~ 该 run 提议的平均适应度</p></td><td><p>+0.19</p></td><td><p>0.31</p></td></tr>
+<tr><td><p>精英重评 ~ 该 run 提议的 p90 适应度</p></td><td><p>+0.09</p></td><td><p>0.65</p></td></tr>
+</tbody></table>
+<callout emoji="📌" background-color="light-orange"><p><b>「提议得更好」和「最后拿到的东西更好」之间没有可测的联系。</b></p><p>为什么？因为「提议的平均适应度」和「best-so-far」共用同一批带噪声的评估，共同的噪声把相关系数抬到 0.65；一旦换成用新种子重评的真实质量，相关就塌到 0.19（不显著）。</p><p>而且方向是<b>反的</b>：两条<b>提议质量最差</b>的臂（匿名 · 无反馈 0.19、命名 · 无反馈 0.34）拿到了<b>最好的重评精英</b>（1.43 / 1.34）。这和第一环那条机制假说完全一致——<b>局部搜索把预算押在幸运样本周围，而独立同分布采样不会。</b></p></callout>
+<h1>所以这一环给出的操作建议</h1>
+<ol seq="auto">
+<li><b>别报 best-so-far。</b>它是 max-of-noise，而且这里实测和真实质量相关系数 0.04。要报就报<b>用新种子重评过的精英</b>。</li>
+<li><b>要论证「迭代有用」，必须给出选择压力相同的对照。</b>「随机提议 + 同样的精英保留」是免费的，也是唯一诚实的下限。</li>
+<li><b>提议质量要用「一代的平均」看，不是「一代的最好」。</b>平均是选择压力抬不动的那一半。</li>
+<li>如果内层学习器方差大（RL 基本都大），<b>把预算花在「同一设计多跑几个种子」上，可能比花在「多提几个设计」上更划算</b>——这一条本项目还没测，列在效果提升路线里。</li>
+</ol>

@@ -1,0 +1,39 @@
+<h1>按「agent 改的是什么」分六条轴</h1>
+<p>每条轴只写三件事：<b>它改什么</b>、<b>它的反馈是什么</b>、以及<b>它没有控制住什么</b>。最后一列是本项目存在的理由。</p>
+<h2>轴 1：agent 改奖励函数</h2>
+<p><b>Eureka</b>（Ma et al., ICLR 2024，<a type="url-preview" href="https://arxiv.org/abs/2310.12931">arXiv:2310.12931</a>）是这条线的起点。环境源码进 prompt，GPT-4 写奖励代码，RL 训完把「奖励反思」（各奖励项的数值统计 + 任务指标）喂回去，演化式迭代。29 个任务里 83% 超过人类专家。</p>
+<p>它自己做了两组消融：<b>去掉演化</b>（一次性采 32 个样本）和<b>去掉奖励反思</b>（只给快照数值），两组都变差，于是论文的结论是「演化不可或缺」。</p>
+<callout emoji="🎯" background-color="light-blue"><p><b>它没有控制住的是「语义」。</b>GPT-4 一上来就知道 humanoid 要往前跑、要站直、要省力。「先验」和「迭代」在它的设置里没有被分开——因为在自由形式的代码空间里，「随机提议」根本没法定义，也就<b>没有下限可比</b>。</p><p>本项目就是把搜索空间做成离散可枚举的，好让「随机」这条下限存在，并且用<b>匿名化</b>把语义这一路单独关掉。</p></callout>
+<ul>
+<li><b>Text2Reward</b>（<a type="url-preview" href="https://text-to-reward.github.io/">text-to-reward.github.io</a>）——从自然语言目标生成稠密奖励程序，强调可读、可人工迭代。</li>
+<li><b>DrEureka</b>——同一套东西用在域随机化参数上；<b>Eurekaverse</b>——用在环境课程上，环境与策略共演化。</li>
+<li><b>CurricuLLM</b>（<a type="url-preview" href="https://arxiv.org/abs/2409.18382">arXiv:2409.18382</a>, ICRA 2025）——改的是<b>任务课程</b>，不是奖励本身。</li>
+<li><b>Text2Touch</b>（<a type="url-preview" href="https://arxiv.org/html/2509.07445v1">arXiv:2509.07445</a>）——LLM 设计的奖励做到了真机灵巧操作，是这条线少见的实机结果。</li>
+<li><b>Reward Design Agent</b>（<a type="url-preview" href="https://arxiv.org/html/2606.01672v1">arXiv:2606.01672</a>，2026）——明确指出 <b>Eureka 的反思信号是纯数值且粗糙的，失败模式不同但分数相近时无法区分</b>，于是无法诊断「为什么坏」和「怎么修」；解法是加视觉评估。这一条直接对应本项目关心的「反馈的粒度值多少钱」。</li>
+</ul>
+<h2>轴 2：agent 改任务 / 场景 / 数据</h2>
+<p><b>RoboGen</b>（<a type="url-preview" href="https://arxiv.org/pdf/2311.01455">arXiv:2311.01455</a>）、<b>GenSim</b>、<b>Gen2Sim</b>——用基础模型自动造任务、场景和监督信号。<b>Voyager</b>——终身学习 agent：自动课程 + 可执行技能库 + 自我验证。</p>
+<h2>轴 3：agent 改代码 / 算法本身</h2>
+<p><b>FunSearch</b>、<b>AlphaEvolve</b>、<b>The AI Scientist</b>、<b>MLE-STAR</b>——agent 直接编辑源码去刷指标。综述见<b>《The Landscape of Agentic RL for LLMs》</b>（<a type="url-preview" href="https://arxiv.org/pdf/2509.02547">arXiv:2509.02547</a>）。</p>
+<h2>轴 4：反思与自我改进的通用机制</h2>
+<p>Reflexion / Self-Refine / CRITIC / Chain-of-Verification——「生成—反馈—再生成」的一般形式。本项目只关心其中<b>反馈那一路到底带了多少信息</b>。</p>
+<h2>轴 5：这条线的对照组问题（和本项目最相关）</h2>
+<p><b>《When Is an LLM Worth It for Hyperparameter Optimization?》</b>（<a type="url-preview" href="https://arxiv.org/html/2606.21641v1">arXiv:2606.21641</a>，2026）在表格数据 HPO 上做预算匹配对照。关键控制是：<b>把 LLM 那个「默认配置热启动」也发给经典方法</b>。结论极硬：</p>
+<ul>
+<li>第 1 次评估 LLM 就到 88.7%，<b>但那是默认配置，不是 LLM 提的</b>；</li>
+<li>12 次评估里 LLM 自己的提议只多加 <b>+0.40 个百分点</b>；测试集上是 <b>−0.01 pp（p = 0.92）</b>；</li>
+<li>经典方法一旦拿到同样的热启动，<b>5 次评估内领先就消失</b>，12 次时反超 0.37 pp。</li>
+</ul>
+<callout emoji="📌" background-color="light-orange"><p>一句话：<b>表观上的样本效率全部来自那个默认配置，不来自模型。</b></p><p>本项目预注册的第 1 条预测就是它在机器人奖励设计里的版本。差别在于：他们的「默认配置」是一个人给的常数；而在机器人奖励设计里，<b>LLM 的先验本身就是那个默认配置</b>——它不需要人给，它自己就知道 hopper 要往前走。所以这个问题必须在机器人这一侧重新问一遍，而且要能把「先验」单独关掉。<b>关掉的办法就是把奖励项名匿名化。</b></p></callout>
+<h2>轴 6：评测方法学</h2>
+<p>GENEA Challenge 系列（在姊妹项目 seamless-interaction 里详细写过）给的教训在这里同样成立：<b>指标必须同时有上限和下限。</b>本项目的 decoy mass 天然两条线都有——下限 0.000（完美），随机水平 5/17 = 0.294。</p>
+<h1>这张地图上，本项目占哪个格子</h1>
+<table><colgroup><col width="150"/><col width="330"/><col width="330"/></colgroup>
+<thead><tr><th background-color="light-gray"><p></p></th><th background-color="light-gray"><p>已有工作</p></th><th background-color="light-gray"><p>本项目</p></th></tr></thead>
+<tbody>
+<tr><td><p>搜索空间</p></td><td><p>自由形式代码（「随机提议」无法定义）</p></td><td><p><b>离散可枚举</b>：17 项 × 6 档权重 + 4 个超参 ≈ 2.8×10¹⁴。随机提议 = 严格下限</p></td></tr>
+<tr><td><p>消融的对象</p></td><td><p>演化 on/off、反思 on/off</p></td><td><p><b>语义 on/off（匿名化）× 反馈 on/off</b> 的 2×2</p></td></tr>
+<tr><td><p>主指标</p></td><td><p>任务成功率</p></td><td><p>任务指标 <b>+ decoy mass（上下限都已知）</b></p></td></tr>
+<tr><td><p>埋点</p></td><td><p>无</p></td><td><p><b>5 个已知诱饵项</b>（3 个有害 + 2 个无关）</p></td></tr>
+<tr><td><p>内层噪声</p></td><td><p>一般 1–5 个种子，很少报</p></td><td><p><b>先量噪声底，再读曲线</b>（见第一环）</p></td></tr>
+</tbody></table>

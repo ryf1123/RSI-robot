@@ -1,0 +1,33 @@
+<h1>先量噪声底，再读任何曲线</h1>
+<p>外层循环每一步都在比较「设计 A 的适应度」和「设计 B 的适应度」。可这两个数各自是<b>一次随机 RL 训练</b>的结果。所以第一件事不是跑对照，是问：<b>同一个设计，只换内层种子，能差多少？</b></p>
+<img path="@./docs/figs/noise_curse.png" caption="左：三个固定设计各跑 6 个内层种子。右：32 个 run 的「报出来的 best-so-far」对「用 6 个新种子重评同一设计」。"/>
+<table><colgroup><col width="180"/><col width="110"/><col width="110"/><col width="230"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>设计</p></th><th background-color="light-gray"><p>均值</p></th><th background-color="light-gray"><p>标准差</p></th><th background-color="light-gray"><p>6 个种子的实际取值</p></th></tr></thead>
+<tbody>
+<tr><td><p>中等（fwd+alive+height）</p></td><td><p>0.42 m</p></td><td><p>0.34</p></td><td><p>0.16 … 1.05</p></td></tr>
+<tr><td><p><b>好设计</b>（同上 + step 0.05）</p></td><td><p><b>0.85 m</b></p></td><td><p><b>1.17</b></p></td><td><p><b>0.014 … 2.77</b></p></td></tr>
+<tr><td><p>带诱饵（+stand_still 2）</p></td><td><p>0.035 m</p></td><td><p>0.05</p></td><td><p>−0.02 … 0.12</p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>好设计的标准差（1.17）比它自己的均值（0.85）还大。</b>同一份奖励、同一份超参，换一个种子，结果在 0.014 m 和 2.77 m 之间。</p><p>这意味着：在「好」的那个区域里，<b>单种子适应度基本不携带关于设计的信息</b>。而外层循环恰恰是在这个区域里做选择。</p></callout>
+<p>好消息是<b>坏设计的方差很小</b>（带诱饵那组 std 0.05）。所以噪声不是均匀的：它<b>只在好的一侧爆炸</b>——因为 ARS 有时候找到跳跃步态，有时候没找到，而坏设计根本没有跳跃步态可找。这个结构后面会反复出现。</p>
+<h1>赢家诅咒：外层报出来的数，60% 是运气</h1>
+<p>每个 run 结束后，把它的精英设计拿出来，用 <b>6 个全新的内层种子（100–105，所有 run 共用）</b>重训重评。</p>
+<table><colgroup><col width="200"/><col width="170"/><col width="170"/><col width="110"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂</p></th><th background-color="light-gray"><p>报出来的 best-so-far</p></th><th background-color="light-gray"><p>6 个新种子重评</p></th><th background-color="light-gray"><p>缩水</p></th></tr></thead>
+<tbody>
+<tr><td><p>random（n=8）</p></td><td><p>2.05 [1.40, 2.73]</p></td><td><p>0.59 [0.19, 1.06]</p></td><td><p>71%</p></td></tr>
+<tr><td><p>evo（n=8）</p></td><td><p>2.16 [1.21, 3.07]</p></td><td><p>0.75 [0.33, 1.22]</p></td><td><p>65%</p></td></tr>
+<tr><td><p>匿名 · 无反馈（n=4）</p></td><td><p>2.63 [1.80, 3.47]</p></td><td><p><b>1.43 [0.94, 2.07]</b></p></td><td><p><b>46%</b></p></td></tr>
+<tr><td><p>匿名 · 有反馈（n=4）</p></td><td><p>2.50 [1.08, 3.92]</p></td><td><p>0.98 [0.45, 1.77]</p></td><td><p>61%</p></td></tr>
+<tr><td><p>命名 · 无反馈（n=4）</p></td><td><p>2.59 [1.91, 3.06]</p></td><td><p><b>1.34 [0.91, 1.78]</b></p></td><td><p><b>48%</b></p></td></tr>
+<tr><td><p>命名 · 有反馈（n=4）</p></td><td><p>2.80 [1.54, 3.59]</p></td><td><p>1.05 [0.21, 1.89]</p></td><td><p>62%</p></td></tr>
+</tbody></table>
+<p>整体：32 个 run，平均报 <b>2.37 m</b>，重评 <b>0.94 m</b>，<b>缩水 60%</b>，28 个在对角线下方。</p>
+<callout emoji="📌" background-color="light-orange"><p><b>最硬的一个数：报出来的 best-so-far 和重评结果的相关系数是 ρ = 0.043（p = 0.82）。</b></p><p>不是「有偏但仍可用」——是<b>统计上完全无关</b>。外层循环用来排名的那个数，对「这个设计到底好不好」<b>不携带任何信息</b>。所有六条臂的 best-so-far 曲线，本质上是一条 max-of-noise 曲线。</p></callout>
+<h1>一个反直觉的结构：看反馈的臂缩水更多</h1>
+<p>两条<b>无反馈</b>臂的缩水是 46% / 48%，四条其余的是 61% / 62% / 65% / 71%；重评之后，无反馈臂反而排在最前面（1.43 / 1.34 vs 0.59–1.05）。</p>
+<p>机制不难猜，但值得写清楚：<b>「看反馈再改」就是在追那个 ρ = 0.04 的数。</b>某个候选侥幸拿了高分，有反馈的提议者会围着它做局部编辑，于是<b>整整一代的预算都押在一次运气上</b>；无反馈的臂只是从先验里独立同分布地采样，它不会被任何一次幸运牵着走。</p>
+<callout emoji="⚠️" background-color="light-yellow"><p>区间还是重叠的（无反馈 [0.91, 1.78] vs random [0.19, 1.06]，n 只有 4–8）。<b>方向清楚，量还不够。</b>这一条现在只能说成「有一个可检验的机制假说 + 与之相符的初步数据」，不能说成结论。要判死需要把无反馈臂的种子提到 16 个以上。</p></callout>
+<h1>这件事对 Eureka 那一路意味着什么</h1>
+<p>Eureka 的消融结论是「演化不可或缺」——依据是<b>去掉演化后 best-so-far 变低</b>。但如果内层学习器的种子方差和这里同一个量级，那么「演化让 best-so-far 更高」和「演化让循环采样更多次、于是 max-of-noise 更大」<b>是同一件事的两种说法</b>，靠单种子的 best-so-far 分不开。</p>
+<p>能分开的办法只有一个，而且很便宜：<b>把最终的精英拿去用一批新种子重评一遍再报。</b>本项目里这一步只花了 192 次评估（约 8 分钟），却把「谁赢了」的排序整个换掉了。</p>

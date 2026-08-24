@@ -1,0 +1,34 @@
+<h1>建议的阅读顺序</h1>
+<ol seq="auto">
+<li><b>子页 00</b>——搜索空间和 5 个诱饵是怎么埋的。不看这一页，后面所有数字都读不懂，因为主指标 decoy mass 就定义在这里。</li>
+<li><b>子页 01</b>——噪声底和赢家诅咒。这一页决定了「哪些数可以信」。<b>如果只读一页，读这页。</b></li>
+<li><b>子页 02</b>——靶心：命名 × 反馈 的 2×2。项目的主结果。</li>
+<li><b>子页 03</b>——提议 vs 选择。解释 02 里「为什么适应度上什么都测不出来」。</li>
+<li><b>子页 04</b>——预注册的干预：把诱饵密度加倍，先验的优势第一次显现。</li>
+<li><b>子页 08</b>——文献地图，以及本项目在这张图上占哪个格子。</li>
+</ol>
+<h1>每个设计决策：是什么 / 为什么 / 在哪个文件</h1>
+<table><colgroup><col width="150"/><col width="300"/><col width="270"/><col width="140"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>概念</p></th><th background-color="light-gray"><p>是什么</p></th><th background-color="light-gray"><p>为什么这么选</p></th><th background-color="light-gray"><p>在哪</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>任务指标</b></p></td><td><p>2.4 秒内前进的米数，8 个评估回合取平均</p></td><td><p>设计者改不动它。<b>内层只看被设计的奖励，外层只看它</b>——奖励作弊才会被看见</p></td><td><p>inner.py</p></td></tr>
+<tr><td><p><b>decoy mass</b></p></td><td><p>诱饵项权重 / 总权重</p></td><td><p>主诊断量。<b>上下限都已知</b>（0 / 0.294），且不含内层噪声</p></td><td><p>design.py</p></td></tr>
+<tr><td><p><b>诱饵</b></p></td><td><p>3 个有害 + 2 个无关的奖励项</p></td><td><p>把「提议者懂不懂」变成一个可以直接量的数，而不是靠人看代码判断</p></td><td><p>rewards.py</p></td></tr>
+<tr><td><p><b>匿名化</b></p></td><td><p>项名换成 t00…t16，每个种子一份随机置换</p></td><td><p>把「语义先验」这一路单独关掉的唯一办法。置换是为了防跨种子泄漏</p></td><td><p>design.py</p></td></tr>
+<tr><td><p><b>内层 ARS</b></p></td><td><p>线性策略 3×11，120 迭代 × 6 方向 × 2</p></td><td><p>无梯度、易并行、纯 CPU；单次评估 10–12 秒，才谈得上做几百次外层迭代</p></td><td><p>inner.py</p></td></tr>
+<tr><td><p><b>精英重评</b></p></td><td><p>用 6 个全新内层种子重训精英</p></td><td><p>量赢家诅咒。<b>只花了全部预算的 20%，却把「谁赢了」的排序整个换掉</b></p></td><td><p>scripts/reeval.py</p></td></tr>
+<tr><td><p><b>每代平均适应度</b></p></td><td><p>一代 8 个提议的平均，不是最好</p></td><td><p>选择压力抬不动它，所以它单独反映提议质量</p></td><td><p>scripts/analyze_prop_vs_sel.py</p></td></tr>
+<tr><td><p><b>bootstrap 区间</b></p></td><td><p>所有主指标都带 95% 自助区间</p></td><td><p><b>区间重叠的两组不算有差别</b>——这条规矩在本项目里砍掉过好几个「结论」</p></td><td><p>report.py</p></td></tr>
+</tbody></table>
+<h1>每个指标会在什么时候骗人</h1>
+<table><colgroup><col width="180"/><col width="290"/><col width="390"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>指标</p></th><th background-color="light-gray"><p>是什么</p></th><th background-color="light-gray"><p>什么时候会骗人</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>decoy mass ★</b></p></td><td><p>诱饵权重占比</p></td><td><p>主指标。它<b>只测「懂不懂」，不测「结果好不好」</b>——第四环之前，它和适应度的联系一直是没验证的假设</p></td></tr>
+<tr><td><p><b>best-so-far 适应度</b></p></td><td><p>一个 run 里最好的一次评估</p></td><td><p><b>基本全是骗人的。</b>本项目实测它与真实质量的相关系数 ρ = 0.043（p = 0.82）。它是 max-of-noise</p></td></tr>
+<tr><td><p>每代平均适应度</p></td><td><p>提议质量</p></td><td><p>和 best-so-far 共用同一批噪声评估；能预测 best-so-far（ρ = 0.65），预测不了真实质量（ρ = 0.19，p = 0.31）</p></td></tr>
+<tr><td><p>精英重评</p></td><td><p>6 个新种子重训精英</p></td><td><p>目前最可信的一个，但 n 只有 4–8，区间仍很宽</p></td></tr>
+<tr><td><p>fall_rate / airborne_frac</p></td><td><p>诊断量</p></td><td><p>不是目标。<b>不摔不等于好</b>——诱饵设计的典型形态就是「站着不动，一次不摔」</p></td></tr>
+</tbody></table>
+<h1>三条方法纪律（都是被数据逼出来的）</h1>
+<callout emoji="📌" background-color="light-blue"><p><b>1. 先量噪声底，再读任何曲线。</b>好设计的种子间标准差 1.17 比它的均值 0.85 还大。不知道这个数，32 次评估的曲线怎么读都是错的。</p><p><b>2. 每个指标都要有上限和下限。</b>decoy mass 有 0.000 和 0.294；没有这两条线，「0.22」是好是坏无从判断。</p><p><b>3. 不要用「跑得快不快」验证优化生效。</b>我写过一版「只算非零权重项」的快路径，计时没变就以为是「优化没用」，实际上是那次字符串替换<b>一个都没匹配上</b>（见子页 00 末尾）。</p></callout>

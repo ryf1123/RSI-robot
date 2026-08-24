@@ -1,0 +1,41 @@
+<h1>第二环留下的问题：decoy mass 到底值不值钱</h1>
+<p>第二环的结果是一对：<b>命名臂的 decoy mass 精确到 0.000，而任务适应度上六条臂完全分不开。</b>这留下一个必须回答的质疑——<b>如果「懂」不换来「好」，decoy mass 就只是一个漂亮但无关的指标。</b></p>
+<h1>先量：诱饵到底在什么时候开始伤人</h1>
+<p>把稀疏空间里全部 1024 次评估按 decoy mass 分箱：</p>
+<table><colgroup><col width="170"/><col width="90"/><col width="230"/><col width="140"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>decoy mass 区间</p></th><th background-color="light-gray"><p>n</p></th><th background-color="light-gray"><p>平均适应度</p></th><th background-color="light-gray"><p>P(适应度 &gt; 2 m)</p></th></tr></thead>
+<tbody>
+<tr><td><p>= 0（完全干净）</p></td><td><p>269</p></td><td><p>0.56 [0.46, 0.67]</p></td><td><p>0.078</p></td></tr>
+<tr><td><p>(0, 0.10)</p></td><td><p>70</p></td><td><p>0.45 [0.28, 0.64]</p></td><td><p>0.057</p></td></tr>
+<tr><td><p>[0.10, 0.20)</p></td><td><p>135</p></td><td><p>0.45 [0.29, 0.63]</p></td><td><p>0.089</p></td></tr>
+<tr><td><p>[0.20, 0.30)</p></td><td><p>240</p></td><td><p>0.53 [0.41, 0.67]</p></td><td><p>0.096</p></td></tr>
+<tr><td><p><b>[0.30, 0.45)</b></p></td><td><p>227</p></td><td><p><b>0.16 [0.09, 0.22]</b></p></td><td><p>0.013</p></td></tr>
+<tr><td><p><b>≥ 0.45</b></p></td><td><p>83</p></td><td><p><b>−0.01 [−0.11, 0.11]</b></p></td><td><p>0.012</p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>前四个箱统计上不可区分（0.45–0.56），第五个箱塌掉。伤害有一个拐点，落在 0.30 附近。</b></p><p>而均匀随机的 decoy mass 是 <b>0.294</b>——<b>正好压在拐点下面。</b></p><p>所以第二环那个「测不出差别」是有机械解释的：<b>语义先验把 decoy mass 从 0.29 买到 0.00，但它买的这整段区间里，干净是免费的。</b>随机提议本来就落在损伤阈值以下。</p></callout>
+<h1>预注册的干预：把拐点挪到随机水平的另一侧</h1>
+<p>如果上面的解释是对的，那么<b>把诱饵密度加倍</b>——让随机的 decoy mass 越过拐点——语义先验的优势就应该第一次在<b>任务适应度</b>上显现出来。这条预测写在跑之前（见 notes/00_preregistration.md 的追加部分）。</p>
+<p>做法：奖励库从 17 项扩到 <b>24 项</b>，新增 7 个诱饵（<code>crouch</code>、<code>freeze_joints</code>、<code>backward_pos</code>、<code>max_ctrl</code>、<code>foot_glue</code>、<code>const_zero</code>、<code>clock2</code>），共 <b>12 个诱饵 / 24 项</b>，随机水平从 0.294 抬到 <b>0.500</b>。任务、内层预算、评估协议、权重档位全部不动。三条臂重跑：<code>random</code> / <code>evo</code> / <code>命名 · 无反馈</code>（纯先验，零反馈）。</p>
+<img path="@./docs/figs/dense.png" caption="左：两个空间里 decoy mass 对适应度的关系，虚线是各自的随机水平。右：同样 32 次评估预算下的 best-so-far。"/>
+<h1>结果：预测成立</h1>
+<table><colgroup><col width="200"/><col width="210"/><col width="210"/><col width="150"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂</p></th><th background-color="light-gray"><p>稀疏空间（5/17 诱饵）</p></th><th background-color="light-gray"><p>密集空间（12/24 诱饵）</p></th><th background-color="light-gray"><p>变化</p></th></tr></thead>
+<tbody>
+<tr><td><p>random</p></td><td><p>2.05 [1.40, 2.73]</p></td><td><p><b>0.99 [0.55, 1.46]</b></p></td><td><p><b>腰斩</b></p></td></tr>
+<tr><td><p>evo</p></td><td><p>2.16 [1.21, 3.07]</p></td><td><p>1.47 [0.18, 3.00]</p></td><td><p>下降</p></td></tr>
+<tr><td><p><b>命名 · 无反馈</b></p></td><td><p>2.59 [1.91, 3.06]</p></td><td><p><b>3.45 [2.88, 3.76]</b></p></td><td><p><b>不受影响</b></p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>这是整个项目里第一次出现不重叠的区间：3.45 [2.88, 3.76] vs 0.99 [0.55, 1.46]。</b></p><p>而赢的这条臂是<b>零反馈</b>的——它一次都没看过训练结果，32 个设计是一口气提完的。<b>起作用的确实是先验，不是迭代。</b></p></callout>
+<h1>但要按重评的口径再说一遍</h1>
+<p>第一环的规矩在这里同样适用：best-so-far 不能直接信。把三条臂的精英各用 6 个新种子重训：</p>
+<table><colgroup><col width="200"/><col width="220"/><col width="220"/><col width="130"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂（密集空间）</p></th><th background-color="light-gray"><p>报出来的 best-so-far</p></th><th background-color="light-gray"><p>6 个新种子重评</p></th><th background-color="light-gray"><p>缩水</p></th></tr></thead>
+<tbody>
+<tr><td><p>random</p></td><td><p>0.99 [0.55, 1.46]</p></td><td><p>0.64 [0.29, 0.93]</p></td><td><p>35%</p></td></tr>
+<tr><td><p>evo</p></td><td><p>1.47 [0.18, 3.00]</p></td><td><p>0.47 [0.00, 0.95]</p></td><td><p>68%</p></td></tr>
+<tr><td><p>命名 · 无反馈</p></td><td><p>3.45 [2.88, 3.76]</p></td><td><p>1.25 [0.51, 1.99]</p></td><td><p>64%</p></td></tr>
+</tbody></table>
+<callout emoji="⚠️" background-color="light-yellow"><p><b>重评之后方向不变（1.25 vs 0.64 vs 0.47），但区间重新重叠了。</b>n 只有 4。</p><p>所以这一环诚实的说法是两句，不是一句：</p><p>① <b>「诱饵伤害有拐点，随机恰好压在拐点下」这个机制，在两个空间里都成立</b>（拐点分别在 0.30 和 0.50，各自等于该空间的随机水平）——这一条证据是强的，因为它用的是 1024 + 384 次评估的分箱，不是 4 个种子。</p><p>② <b>「跨过拐点后先验会赢」在 best-so-far 上非常清楚，在重评口径上只有方向</b>。要判死得把种子提到 16 个。已排进队列。</p></callout>
+<h1>一处对我自己预注册推理的订正</h1>
+<p>我原来的写法是「拐点在 0.30」，像是一个绝对阈值。密集空间里测出来的拐点是 <b>0.50</b>——<b>拐点不是 decoy mass 的固定值，它跟着诱饵密度走，而且两次都正好落在该空间的随机水平上。</b></p>
+<p>这其实是更强的结论，也更不舒服：<b>「随机提议恰好压在损伤阈值下」不是这个任务的巧合，它是「均匀采样」和「按类别定义的 decoy mass」这两个定义之间的必然。</b>意思是，任何按这种方式构造的搜索空间，都会自动把随机基线放在「刚好还没坏掉」的位置上——<b>于是「agent 比随机强多少」这个问题的答案，很大程度上是被空间的构造方式决定的，而不是被 agent 决定的。</b>这一点值得写进任何一篇声称「LLM 超过随机搜索」的工作里。</p>

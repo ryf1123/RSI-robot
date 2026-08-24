@@ -1,0 +1,63 @@
+<h1>问题：agent 迭代机器人，agent 那一份到底是什么</h1>
+<p>Eureka 报的是「83% 的任务超过人类专家」。这个数里至少混着四样东西：</p>
+<ol seq="auto">
+<li><b>先验</b>——LLM 本来就知道 hopper 要往前走、要站直、要省力；</li>
+<li><b>反馈</b>——它读到了这一轮的训练统计；</li>
+<li><b>选择压力</b>——外层保留最好的，随机提议 + 精英保留本身就会变好；</li>
+<li><b>搜索空间</b>——人写的空间已经把大部分坏解排除掉了。</li>
+</ol>
+<p>本环把前两样拆开：<b>2 × 2 消融，命名 / 匿名 × 有反馈 / 无反馈</b>，加上随机下限。四条 LLM 臂之间<b>只差这两个开关</b>，任务、内层预算、权重档位、评估协议全部相同。</p>
+<table><colgroup><col width="180"/><col width="170"/><col width="150"/><col width="220"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂</p></th><th background-color="light-gray"><p>提议者</p></th><th background-color="light-gray"><p>看得到项名</p></th><th background-color="light-gray"><p>看得到反馈</p></th></tr></thead>
+<tbody>
+<tr><td><p>random</p></td><td><p>均匀采样</p></td><td><p>—</p></td><td><p>—</p></td></tr>
+<tr><td><p>evo</p></td><td><p>变异精英（1+8）</p></td><td><p>—</p></td><td><p>只有 fitness（经由选择）</p></td></tr>
+<tr><td><p>命名 · 有反馈</p></td><td><p>我（Claude）</p></td><td><p>✅</p></td><td><p>✅ 完整诊断 + 全部历史</p></td></tr>
+<tr><td><p>命名 · 无反馈</p></td><td><p>语义先验</p></td><td><p>✅</p></td><td><p>❌ 一次提完 32 个</p></td></tr>
+<tr><td><p>匿名 · 有反馈</p></td><td><p>我（只看 t00…t16）</p></td><td><p>❌</p></td><td><p>✅</p></td></tr>
+<tr><td><p>匿名 · 无反馈</p></td><td><p>结构先验</p></td><td><p>❌</p></td><td><p>❌</p></td></tr>
+</tbody></table>
+<h1>结果一：任务适应度上，六条臂完全分不开</h1>
+<table><colgroup><col width="200"/><col width="230"/><col width="230"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂</p></th><th background-color="light-gray"><p>32 次评估后的 best-so-far</p></th><th background-color="light-gray"><p>精英的 decoy mass</p></th></tr></thead>
+<tbody>
+<tr><td><p>random（n=8）</p></td><td><p>2.05 [1.40, 2.73]</p></td><td><p>0.224 [0.161, 0.286]</p></td></tr>
+<tr><td><p>evo（n=8）</p></td><td><p>2.16 [1.21, 3.07]</p></td><td><p>0.285 [0.231, 0.333]</p></td></tr>
+<tr><td><p>匿名 · 无反馈（n=4）</p></td><td><p>2.63 [1.80, 3.47]</p></td><td><p>0.192 [0.000, 0.545]</p></td></tr>
+<tr><td><p>匿名 · 有反馈（n=4）</p></td><td><p>2.50 [1.08, 3.92]</p></td><td><p>0.149 [0.111, 0.187]</p></td></tr>
+<tr><td><p>命名 · 无反馈（n=4）</p></td><td><p>2.59 [1.91, 3.06]</p></td><td><p><b>0.000 [0.000, 0.000]</b></p></td></tr>
+<tr><td><p>命名 · 有反馈（n=4）</p></td><td><p>2.80 [1.54, 3.59]</p></td><td><p><b>0.000 [0.000, 0.000]</b></p></td></tr>
+</tbody></table>
+<p>六个区间两两重叠，<b>包括随机</b>。按项目自己的规矩，区间重叠的两组不算有差别——所以在这个预算下，<b>关于任务适应度，唯一诚实的结论是「测不出差别」</b>。（而且第一环已经说明，这一列的数本身就和真实质量无关，ρ = 0.04。）</p>
+<h1>结果二：换一个不含噪声的量，差别立刻出现</h1>
+<img path="@./docs/figs/bullseye.png" caption="左：每一代 8 个提议的 decoy mass。右：每一代 8 个提议的平均适应度（不是 best-so-far，所以选择压力抬不动它）。"/>
+<callout emoji="🎯" background-color="light-red"><p><b>两条命名臂从第 1 代起就贴在 0.000 上，区间宽度是 0。</b>随机是 0.294，evo 四代下来纹丝不动（0.295 → 0.283）。</p><p>也就是说：<b>「知道奖励项叫什么」这件事，一步就把设计里的诱饵清干净了，而且不需要看任何反馈。</b></p></callout>
+<h1>结果三：三种信息，各自能把 decoy mass 推到哪</h1>
+<table><colgroup><col width="200"/><col width="120"/><col width="120"/><col width="230"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>信息来源</p></th><th background-color="light-gray"><p>第 1 代</p></th><th background-color="light-gray"><p>第 4 代</p></th><th background-color="light-gray"><p>读法</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>语义</b>（命名 · 无反馈）</p></td><td><p>0.013</p></td><td><p>0.019</p></td><td><p><b>一步到位</b>，不需要迭代</p></td></tr>
+<tr><td><p><b>反馈</b>（匿名 · 有反馈）</p></td><td><p>0.321</p></td><td><p>0.143</p></td><td><p>三代走完<b>约 60% 的路</b>，然后停住</p></td></tr>
+<tr><td><p><b>选择压力</b>（evo）</p></td><td><p>0.295</p></td><td><p>0.283</p></td><td><p><b>零贡献</b></p></td></tr>
+<tr><td><p>无（random）</p></td><td><p>0.288</p></td><td><p>0.274</p></td><td><p>随机水平</p></td></tr>
+</tbody></table>
+<p>「选择压力零贡献」这一条值得停一下。evo 的<b>提议质量</b>爬得很好（平均适应度 0.07 → 1.11，右图绿线最陡），但它的 decoy mass 一动不动。原因很直接：<b>适应度选择只能告诉你「这一个更好」，不能告诉你「好在哪一项」</b>；再叠上第一环的噪声，一次幸运足以让一个带诱饵的设计当上精英并把诱饵一路遗传下去。</p>
+<h1>反馈能发现「无效项」，但发现不了「有害项」</h1>
+<p>匿名臂里有一个可以直接看的片段。<code>llm_anon_fb_s0</code> 第 2 代我提了三个只差 <code>t05</code> 的设计（0 / 0.25 / 1.0），回来的适应度是<b>逐位相同的 1.206</b>：</p>
+<pre lang="text"><code>i=10  {t14:1.0, t10:1.0}            fit=1.206  air=0.71
+i=4   {t14:1.0, t10:1.0, t05:0.25}  fit=1.206  air=0.71
+i=11  {t14:1.0, t10:1.0, t05:1.0}   fit=1.206  air=0.71</code></pre>
+<p>三个数完全一样，只能说明 <code>t05</code> 对轨迹没有任何影响。于是后面几代我就把它固定成 0 了——<b>在没有语义的情况下，靠受控对比把一个「无关诱饵」识别了出来。</b>（事后揭晓：<code>t05</code> 是 <code>y_drift</code>，平面模型上恒等于 0。）</p>
+<callout emoji="📌" background-color="light-orange"><p><b>但「有害诱饵」用同样的办法查不出来。</b>加上 <code>back_vel</code> 之后适应度会掉，可是<b>任何一个坏改动都会让适应度掉</b>——在 ρ = 0.04 的噪声里，「这一项有害」和「这一次运气差」根本分不开。</p><p>这解释了为什么匿名臂的 decoy mass 停在 0.14 而不是 0：<b>它清掉的主要是无效项那一半，有害项那一半留在原地。</b>而语义一步就把两半都清了。</p></callout>
+<h1>预注册核对</h1>
+<table><colgroup><col width="60"/><col width="380"/><col width="120"/><col width="200"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>#</p></th><th background-color="light-gray"><p>预测</p></th><th background-color="light-gray"><p>结果</p></th><th background-color="light-gray"><p>备注</p></th></tr></thead>
+<tbody>
+<tr><td><p>1</p></td><td><p>纯先验（命名 · 无反馈）就能打过 random，decoy mass &lt; 0.05</p></td><td><p><b>一半成立</b></p></td><td><p>decoy mass 0.013 ✅；适应度打不过，因为<b>谁也打不过谁</b></p></td></tr>
+<tr><td><p>2</p></td><td><p>匿名 · 有反馈 ≈ evo</p></td><td><p><b>成立</b></p></td><td><p>提议质量曲线几乎重合；decoy mass 上匿名反而更好</p></td></tr>
+<tr><td><p>3</p></td><td><p>命名的效应量 &gt; 反馈的效应量</p></td><td><p><b>成立且很极端</b></p></td><td><p>命名：0.294 → 0.000（一步）；反馈：0.321 → 0.143（三代）</p></td></tr>
+<tr><td><p>4</p></td><td><p>匿名 · 无反馈 与 random 不可区分</p></td><td><p><b>成立</b></p></td><td><p>decoy mass 0.31 vs 0.29，落在随机水平；<b>协议对照通过</b></p></td></tr>
+<tr><td><p>5</p></td><td><p>decoy mass 会比 fitness 更早分开</p></td><td><p><b>成立，而且不只是「更早」</b></p></td><td><p>fitness 到最后<b>始终没分开</b></p></td></tr>
+</tbody></table>
+<h1>一个必须写明的污染</h1>
+<callout emoji="⚠️" background-color="light-yellow"><p>四个种子的请求是我一个人答的。<b>我不可能真的忘掉在种子 0 上学到的东西</b>，所以「有反馈」这两条臂被我<b>向上</b>污染了（种子之间的隐性迁移）。</p><p>这对结论是<b>保守方向</b>：本环的主结论是「反馈相对于纯先验没有带来可测的增益」，而污染只会让有反馈的臂显得更好。<b>在被向上污染的情况下它仍然没赢，这个结论只会更强，不会更弱。</b></p><p>反过来，如果哪天有反馈的臂赢了，这条污染就必须先排除掉才能信——那时的做法是每个种子换一个独立会话回答。</p></callout>

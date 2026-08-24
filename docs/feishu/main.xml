@@ -1,0 +1,132 @@
+<p>在 Mac mini（M4，16 GB，<b>无 CUDA</b>）上，把「LLM agent 自动迭代机器人设计」这条链路自己搭一遍，并且把它做成<b>可证伪</b>的。</p>
+<p>不问「agent 有没有用」，问一个能被数据判死的问题：<b>agent 用的到底是哪一部分信息？</b>四条臂只差两个开关——<b>看不看得到奖励项的名字</b>、<b>看不看得到训练反馈</b>——其余全部相同，外加均匀随机这条严格下限。</p>
+<p>代码：<a type="url-preview" href="https://github.com/ryf1123/RSI-robot">github.com/ryf1123/RSI-robot</a>（计划全文见仓库 PLAN.md）｜姊妹项目：<a type="url-preview" href="https://github.com/ryf1123/sonic">sonic</a>（人形运控）、<a type="url-preview" href="https://github.com/ryf1123/starvla">starvla</a>（视觉-语言-动作）、<a type="url-preview" href="https://github.com/ryf1123/seamless-interaction">seamless-interaction</a>（语音-手势）。本页是索引，每一环写在下方子页里。</p>
+<h1>成果速览（2026-08-25）</h1>
+<p>1408 次完整的「设计 → 从零训策略 → 评测」评估，六条臂 × 8 个种子，全部在一台 Mac mini 上跑完。四个数：</p>
+<table><colgroup><col width="260"/><col width="330"/><col width="200"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>结果</p></th><th background-color="light-gray"><p>数字</p></th><th background-color="light-gray"><p>在哪</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>外层报出来的分数，和真实质量无关</b></p></td><td><p>best-so-far 与「用 6 个新种子重评同一设计」的相关系数 <b>ρ = 0.043（p = 0.82）</b>；平均缩水 <b>60%</b></p></td><td><p>子页 01</p></td></tr>
+<tr><td><p><b>语义先验一步到位，反馈只走完一半</b></p></td><td><p>decoy mass：命名臂 <b>0.000</b>（第 1 代就到，随机水平 0.294）；匿名 + 反馈三代走到 <b>0.143</b>；<b>选择压力（evo）零贡献</b>（0.295 → 0.283）</p></td><td><p>子页 02</p></td></tr>
+<tr><td><p><b>「提议得更好」传导不到结果</b></p></td><td><p>evo 的提议质量是随机的 <b>6 倍</b>（0.59 vs 0.10 m），best-so-far 只高 <b>5%</b>；提议质量与真实质量 ρ = 0.19（p = 0.31）</p></td><td><p>子页 03</p></td></tr>
+<tr><td><p><b>预注册的干预成立</b></p></td><td><p>诱饵密度加倍后，随机腰斩（2.05 → <b>0.99</b>），<b>零反馈的纯先验反而更好（2.59 → 3.45）</b>——全项目第一次出现不重叠区间</p></td><td><p>子页 04</p></td></tr>
+</tbody></table>
+<img path="@./docs/figs/main.png" caption="左：六条臂的 best-so-far，区间两两重叠，包括随机。右：换成不含内层噪声的 decoy mass，命名臂立刻贴到 0。"/>
+<h1>目录</h1>
+<ul>
+<li><cite type="doc" doc-id="Z6uIdhtb7oxBGYxhQaPcrp68n2b"/> —— 为什么要把空间做成离散的、17 个奖励项里哪 5 个是诱饵、decoy mass 的上下限、匿名化协议、诱饵毁掉任务的对比视频</li>
+<li><cite type="doc" doc-id="ZXTFdchLRo6zoGx6XVvcpTdInTe"/> —— <b>如果只读一页读这页。</b>好设计的种子间标准差 1.17 比它的均值 0.85 还大；32 个 run 里 28 个被赢家诅咒，ρ = 0.04</li>
+<li><cite type="doc" doc-id="Sy2VdAEtDoqGaIxo1SJcPYMmnCv"/> —— <b>靶心。</b>命名 × 反馈 的 2×2；语义 / 反馈 / 选择压力三者各自能把 decoy mass 推到哪；预注册核对；一处必须写明的污染</li>
+<li><cite type="doc" doc-id="NIZpddXIlolovTxkfDbcmxHPnBf"/> —— best-so-far 是 max-of-noise；用纯噪声就能复现观测值；提议质量预测得了 best-so-far，预测不了真实质量</li>
+<li><cite type="doc" doc-id="U5rrdezzEoLNjTxMyu5c6fvSnVb"/> —— 诱饵伤害的拐点恰好落在随机水平上；把拐点挪过去之后先验第一次赢；一处对我自己推理的订正</li>
+<li><cite type="doc" doc-id="Bvfkd4Zyjo3AkvxofGhcqmQgnhh"/> —— 每个设计决策是什么 / 为什么 / 在哪个文件；每个指标会在什么时候骗人；三条方法纪律</li>
+<li><cite type="doc" doc-id="H4T3daMl7ovlzBxlhrociWnUnsB"/> —— 按「agent 改的是什么」分六条轴；本项目在这张地图上占哪个格子</li>
+</ul>
+<h1>这个项目在回答什么</h1>
+<callout emoji="🎯" background-color="light-blue"><p><b>Eureka 报的「29 个任务里 83% 超过人类专家」，这个数里混着四样东西：</b></p><p>① <b>先验</b>——LLM 本来就知道 hopper 要往前走、要站直、要省力；② <b>反馈</b>——它读到了训练统计；③ <b>选择压力</b>——保留最好的，随机提议本身就会变好；④ <b>搜索空间</b>——人写的空间已经排除了大部分坏解。</p><p>本项目把 ①②③ 拆开量。<b>答案是：起作用的几乎全是 ①。</b></p></callout>
+<p>为了让这句话<b>可证伪</b>，搜索空间是故意造出来的：17 个奖励项里有 <b>5 个是我埋的诱饵</b>（3 个有害 + 2 个无关）。于是<b>「诱饵权重占比」是一个上下限都已知的指标</b>——理想 0.000，均匀随机 5/17 = 0.294。它测的不是「找到多好的解」，而是<b>「提议者到底懂不懂它在改什么」</b>，而且不含内层训练噪声。</p>
+<p>这一步是必须的。Eureka 那一路让 LLM 写自由形式的奖励代码，很强，但<b>在那个空间里「随机提议」没法定义</b>——你没法均匀采样一段合法的 Python。<b>没有随机下限，「agent 比什么强」这句话就没有分母。</b></p>
+<h1>六条臂：只差两个开关</h1>
+<table><colgroup><col width="170"/><col width="180"/><col width="130"/><col width="150"/><col width="160"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂</p></th><th background-color="light-gray"><p>提议者</p></th><th background-color="light-gray"><p>看得到项名</p></th><th background-color="light-gray"><p>看得到反馈</p></th><th background-color="light-gray"><p>它是用来测什么的</p></th></tr></thead>
+<tbody>
+<tr><td><p><code>random</code></p></td><td><p>均匀采样</p></td><td><p>—</p></td><td><p>—</p></td><td><p><b>严格下限</b></p></td></tr>
+<tr><td><p><code>evo</code></p></td><td><p>变异精英（1+8）</p></td><td><p>—</p></td><td><p>只有 fitness</p></td><td><p><b>选择压力</b>单独能买到什么</p></td></tr>
+<tr><td><p><code>命名 · 有反馈</code></p></td><td><p>我（Claude）</p></td><td><p>✅</p></td><td><p>✅ 完整诊断 + 历史</p></td><td><p>完整的 Eureka 式循环</p></td></tr>
+<tr><td><p><code>命名 · 无反馈</code></p></td><td><p>语义先验（写成代码）</p></td><td><p>✅</p></td><td><p>❌ 一次提完 32 个</p></td><td><p><b>先验</b>单独值多少</p></td></tr>
+<tr><td><p><code>匿名 · 有反馈</code></p></td><td><p>我（只看 t00…t16）</p></td><td><p>❌</p></td><td><p>✅</p></td><td><p><b>反馈</b>单独值多少</p></td></tr>
+<tr><td><p><code>匿名 · 无反馈</code></p></td><td><p>结构先验</p></td><td><p>❌</p></td><td><p>❌</p></td><td><p><b>协议对照</b>：它必须 ≈ random</p></td></tr>
+</tbody></table>
+<p>最后一条是整组实验的地基：<code>匿名 · 无反馈</code> 在信息上等价于随机，实测 decoy mass <b>0.31</b>（随机水平 0.294）——<b>说明我没有从匿名化里泄漏信息。</b>如果它显著好于随机，第二环就该作废。</p>
+<h1>链路总览：一次「评估」里发生了什么</h1>
+<table><colgroup><col width="60"/><col width="200"/><col width="250"/><col width="250"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>段</p></th><th background-color="light-gray"><p>输入</p></th><th background-color="light-gray"><p>输出</p></th><th background-color="light-gray"><p>本项目实现</p></th></tr></thead>
+<tbody>
+<tr><td><p>①</p></td><td><p>历史（或什么都没有）</p></td><td><p>一个<b>设计</b>：17 个权重 + 4 个超参</p></td><td><p>proposers/：random / evo / 先验代码 / 我本人（文件式请求-响应协议）</p></td></tr>
+<tr><td><p>②</p></td><td><p>设计</p></td><td><p>逐帧奖励 r = Σ wₖ·termₖ(state)</p></td><td><p>rewards.py：17 项，其中 5 个是诱饵</p></td></tr>
+<tr><td><p>③</p></td><td><p>奖励 + MuJoCo 平面单腿跳跃机器人</p></td><td><p>线性策略 3×11（60 个参数）</p></td><td><p>inner.py：ARS-V2，120 迭代 × 6 方向 × 2</p></td></tr>
+<tr><td><p>④</p></td><td><p>策略</p></td><td><p><b>任务指标</b>（2.4 s 前进米数）+ 12 项诊断 + 失败模式文字</p></td><td><p>inner.py：8 个评估回合，term_height 固定 0.7</p></td></tr>
+<tr><td><p>⑤</p></td><td><p>全部历史</p></td><td><p>下一代的请求 JSON（可按需匿名化 / 抹掉反馈）</p></td><td><p>loop.py</p></td></tr>
+</tbody></table>
+<callout emoji="📌" background-color="light-blue"><p><b>关键分离：内层只看被设计的奖励，外层只看任务指标。</b>设计者改不动任务指标——这是整个实验能成立的前提，也是「奖励作弊」能被看见的原因。</p></callout>
+<h1>这个系统长什么样</h1>
+<table><colgroup><col width="180"/><col width="280"/><col width="360"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>项</p></th><th background-color="light-gray"><p>取值</p></th><th background-color="light-gray"><p>为什么</p></th></tr></thead>
+<tbody>
+<tr><td><p>任务</p></td><td><p>MuJoCo 平面单腿跳跃机器人，6 DOF / 3 驱动</p></td><td><p>奖励塑形真的决定成败；小到单次训练 10 秒</p></td></tr>
+<tr><td><p>控制</p></td><td><p>83 Hz（dt 0.004 × 3），回合 2.4 s</p></td><td><p>调完积分器后 22k 控制步/秒，比第一版快 6.4 倍</p></td></tr>
+<tr><td><p>内层优化器</p></td><td><p>ARS-V2，线性策略，观测在线归一化</p></td><td><p>无梯度、纯 CPU、易并行；<b>但它的种子方差就是本项目最大的发现之一</b></p></td></tr>
+<tr><td><p>设计空间</p></td><td><p>17 项 × 6 档 + 4 超参 ≈ 2.8 × 10¹⁶</p></td><td><p>离散 → <b>「均匀随机」是一个可以真跑的严格下限</b></p></td></tr>
+<tr><td><p>外层预算</p></td><td><p>每个 run 32 次评估，4 代 × 8 个</p></td><td><p>和 Eureka 论文的量级相当（它是 5 代 × 16）</p></td></tr>
+<tr><td><p>统计</p></td><td><p>所有主指标带 95% bootstrap 区间</p></td><td><p><b>区间重叠的两组不算有差别</b>——这条规矩在本项目里砍掉过好几个「结论」</p></td></tr>
+<tr><td><p>总量</p></td><td><p>1408 次评估 ≈ 4.5 小时（6 路并行）</p></td><td><p>改一个设定就重跑，不用等</p></td></tr>
+</tbody></table>
+<h1>指标：每一个会在什么时候骗人</h1>
+<table><colgroup><col width="200"/><col width="240"/><col width="380"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>指标</p></th><th background-color="light-gray"><p>是什么</p></th><th background-color="light-gray"><p>什么时候会骗人</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>decoy mass ★</b></p></td><td><p>诱饵权重 / 总权重</p></td><td><p>主指标。下限 0.000，随机 0.294。<b>但它只测「懂不懂」</b>——它和「结果好不好」的联系一直到第四环才被验证</p></td></tr>
+<tr><td><p><b>best-so-far 适应度</b></p></td><td><p>一个 run 里最好的一次评估</p></td><td><p><b>基本全是骗人的：ρ = 0.043（p = 0.82）。</b>它是 max-of-noise。<b>这是本项目最该被记住的一条</b></p></td></tr>
+<tr><td><p>每代平均适应度</p></td><td><p>提议质量（选择压力抬不动）</p></td><td><p>与 best-so-far 共用同一批噪声，ρ = 0.65；换成真实质量就塌到 0.19（不显著）</p></td></tr>
+<tr><td><p>精英重评</p></td><td><p>6 个新种子重训精英</p></td><td><p>目前最可信的一个，但 n 只有 4–8，区间仍宽</p></td></tr>
+<tr><td><p>fall_rate</p></td><td><p>摔倒率</p></td><td><p><b>不摔不等于好。</b>诱饵设计的典型形态就是「站着不动，一次不摔」</p></td></tr>
+</tbody></table>
+<h1>诱饵不是装饰：它们真的会毁掉任务</h1>
+<p>同一个基础设计，只在后三路各加<b>一个</b>权重为 4 的诱饵项。左起：干净 / +stand_still / +back_vel / +foot_press。</p>
+<img path="@./docs/figs/decoys.gif" caption="2.01 m → 0.13 / 0.03 / 0.07 m。注意后三路都不摔——它们不是失稳，是被奖励说服了「站着别动才对」。"/>
+<h1>仓库结构与复现命令</h1>
+<pre lang="text"><code>rsi/env.py          MuJoCo 平面跳跃机器人；观测、终止、任务指标
+rsi/rewards.py      17 项奖励库；哪 5 个是诱饵、为什么；RSI_SPACE=dense 扩到 24 项
+rsi/design.py       离散设计空间、变异、匿名化（按种子随机置换）
+rsi/inner.py        ARS-V2 内层 + 一次评估返回的 12 项诊断
+rsi/loop.py         外层循环；LLM 臂走 req_XX.json / resp_XX.json 文件协议
+rsi/proposers/prior.py   两个零反馈提议者：语义先验 / 结构先验（写成可审计的代码）
+rsi/report.py       bootstrap 区间汇总
+scripts/noise_floor.py       噪声底
+scripts/reeval.py            精英重评（赢家诅咒）
+scripts/analyze_prop_vs_sel.py  提议 vs 选择
+scripts/decoy_vs_fitness.py     诱饵伤害拐点
+scripts/render.py / video_grid.py  单路 / 多路对比视频
+notes/00_preregistration.md  预注册（含第五环之前的追加）
+runs/ runs_dense/            每个 run 一份 config.json + history.jsonl + reeval.json</code></pre>
+<pre lang="bash"><code>uv venv --python 3.11 .venv &amp;&amp; source .venv/bin/activate
+uv pip install mujoco torch numpy scipy imageio imageio-ffmpeg matplotlib pyyaml tqdm
+
+# 自动臂
+python -m rsi.loop init --run runs/random_s0 --arm random --seed 0 --budget 32 --gen 8
+python -m rsi.loop run  --run runs/random_s0 --procs 6
+
+# LLM 臂（文件协议：写请求 → 由模型或人填 resp_XX.json → step）
+python -m rsi.loop init    --run runs/llm_named_fb_s0 --arm llm --seed 0 --budget 32 --gen 8
+python -m rsi.loop request --run runs/llm_named_fb_s0        # 生成 req_00.json
+python -m rsi.loop step    --run runs/llm_named_fb_s0        # 读 resp_00.json 并评估
+
+# 分析
+python scripts/noise_floor.py &amp;&amp; python scripts/reeval.py
+python -m rsi.report &amp;&amp; python scripts/analyze_prop_vs_sel.py
+RSI_SPACE=dense python -m rsi.report --root runs_dense</code></pre>
+<h1>当前状态</h1>
+<p><b>2026-08-24 22:40</b>：开工。读完三个姊妹项目的文档，定下靶心问题和「埋诱饵」的构造方式。环境搭好（Python 3.11 / MuJoCo 3.12），平面跳跃机器人跑通。</p>
+<p><b>2026-08-24 23:10</b>：预注册写完（5 条预测 + 3 个我预计会踩的坑）。发现物理比预期慢 7 倍——每步都在做 <code>mj_name2id</code> 字符串查找；缓存 id + 换积分器后快 6.4 倍。</p>
+<p><b>2026-08-24 23:35</b>：<b>噪声底量出来了，而且比预期严重得多</b>——好设计的种子间标准差 1.17 比它的均值 0.85 还大（0.014 … 2.77 m）。据此把主指标从任务适应度改成 decoy mass，并加上「精英用 6 个新种子重评」这一步。</p>
+<p><b>2026-08-25 00:00</b>：六条臂 × 4–8 个种子跑完（1024 次评估）。<b>结果是一对</b>：任务适应度上六条臂区间两两重叠（包括随机）；decoy mass 上命名臂精确到 0.000、区间宽度为 0。第 5 条预测成立得比预期彻底——适应度<b>到最后始终没分开</b>。</p>
+<p><b>2026-08-25 00:15</b>：重评跑完。<b>ρ(报出来的 best-so-far, 重评) = 0.043，p = 0.82</b>——外层用来排名的那个数和真实质量<b>统计上完全无关</b>。另外发现一个反直觉结构：两条<b>无反馈</b>臂缩水最少（46% / 48%），重评之后反而排在最前。机制假说：看反馈就是在追那个 ρ = 0.04 的数。</p>
+<p><b>2026-08-25 00:20</b>：把 1024 次评估按 decoy mass 分箱，<b>测到伤害拐点在 0.30，而均匀随机恰好是 0.294</b>——第二环那个「测不出差别」有了机械解释：<b>先验买的那段区间里，干净是免费的。</b>据此写下追加预注册并开跑第四环。</p>
+<p><b>2026-08-25 00:35</b>：<b>第四环的预测成立。</b>诱饵密度加倍（12/24，随机水平 0.500）后：random 2.05 → 0.99，evo 2.16 → 1.47，而<b>零反馈的纯先验 2.59 → 3.45</b>，全项目第一次出现不重叠区间。同时订正了我自己的推理：<b>拐点不是固定的 0.30，它跟着诱饵密度走，两次都正好等于该空间的随机水平</b>——这意味着「随机基线恰好压在损伤阈值下」不是巧合，是构造方式的必然。</p>
+<p><b>2026-08-25 00:45</b>：两条无反馈臂加跑种子 4–7（n 从 4 提到 8），重评队列在跑。七个子页全部写完。</p>
+<h1>一夜下来最该记住的三条</h1>
+<callout emoji="🎯" background-color="light-red"><p><b>1. 先量内层噪声底，否则外层的每一条曲线都读不懂。</b>好设计的种子间 std（1.17）比它的均值（0.85）还大；结果是 best-so-far 与真实质量的相关系数只有 0.043。<b>「演化让 best-so-far 更高」和「演化让循环多采几次样、于是 max-of-noise 更大」，靠单种子的 best-so-far 分不开。</b>解法很便宜：把最终精英用一批新种子重评再报，本项目里这一步只花了 20% 的预算，却把「谁赢了」的排序整个换掉。</p></callout>
+<callout emoji="🎯" background-color="light-red"><p><b>2. agent 贡献的是「懂」，不是「迭代」，而「懂」值多少钱取决于空间怎么造。</b>语义一步把 decoy mass 打到 0.000；反馈（无语义）三代只走完 60%；选择压力零贡献。但在标准密度的空间里，这份「懂」<b>换不来任何可测的适应度优势</b>——因为随机基线恰好压在损伤拐点下面。把诱饵密度加倍、让拐点挪到随机的另一侧，优势立刻出现（3.45 vs 0.99）。<b>所以「LLM 比随机搜索强多少」这个问题，答案很大程度上是被搜索空间的构造方式决定的，而不是被 LLM 决定的。</b></p></callout>
+<callout emoji="🎯" background-color="light-red"><p><b>3. 反馈能发现「无效项」，发现不了「有害项」。</b>匿名臂靠三个只差一个权重、适应度逐位相同的对照，认出了一个恒等于 0 的诱饵；但「这一项有害」和「这一次运气差」在 ρ = 0.04 的噪声里根本分不开。这正好解释了为什么匿名臂的 decoy mass 停在 0.14 而不是 0。<b>推论：要让反馈真的顶用，得让它带「受控对比」的结构，而不是继续加统计量的种类。</b></p></callout>
+<h1>效果提升路线（按投入产出排，带本仓库证据）</h1>
+<table><colgroup><col width="240"/><col width="380"/><col width="180"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>杠杆</p></th><th background-color="light-gray"><p>本仓库证据</p></th><th background-color="light-gray"><p>状态</p></th></tr></thead>
+<tbody>
+<tr><td><p>① <b>精英重评再报数</b></p></td><td><p>只花 20% 预算，把排序整个换掉；ρ 从 0.04 变成可用的信号</p></td><td><p>已做，应设为默认</p></td></tr>
+<tr><td><p>② <b>预算从「多提设计」挪到「同设计多种子」</b></p></td><td><p>σ = 1.17 时，32 个单种子样本的 max 几乎全是噪声；8 个设计 × 4 种子大概率更划算</p></td><td><p><b>未做，最该做的下一件</b></p></td></tr>
+<tr><td><p>③ <b>让反馈带受控对比</b></p></td><td><p>匿名臂靠「只差一项、其余不变」认出了无效诱饵；纯统计量做不到</p></td><td><p>已有个案，未系统化</p></td></tr>
+<tr><td><p>④ 把无反馈臂的种子提到 16+</p></td><td><p>「无反馈臂重评更好」目前只有方向（1.43 vs 0.59），区间重叠</p></td><td><p>进行中</p></td></tr>
+<tr><td><p>⑤ 每个种子换独立会话答 LLM 请求</p></td><td><p>现在四个种子是我一个人答的，有反馈臂被向上污染（对当前结论是保守方向）</p></td><td><p>未做</p></td></tr>
+<tr><td><p>⑥ 换更难的任务 / 更强的内层</p></td><td><p>ARS + 线性策略天花板低；PPO + MLP 会把「设计好坏」的差距拉开，但内层噪声可能更大</p></td><td><p>未做</p></td></tr>
+<tr><td><p>⑦ 自由形式代码空间做交叉验证</p></td><td><p>本项目的离散空间买到了「随机下限」，代价是外部效度；两边都做才完整</p></td><td><p>未做</p></td></tr>
+</tbody></table>

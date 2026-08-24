@@ -1,0 +1,41 @@
+init runs/random_s0 {'arm': 'random', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/random_s0 8/32 best=0.201
+runs/random_s0 16/32 best=0.420
+runs/random_s0 24/32 best=0.420
+runs/random_s0 32/32 best=1.194
+init runs/evo_s0 {'arm': 'evo', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/evo_s0 8/32 best=0.201
+runs/evo_s0 16/32 best=0.201
+runs/evo_s0 24/32 best=3.447
+runs/evo_s0 32/32 best=3.447
+init runs/random_s1 {'arm': 'random', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/random_s1 8/32 best=0.511
+runs/random_s1 16/32 best=1.547
+runs/random_s1 24/32 best=1.547
+runs/random_s1 32/32 best=1.547
+init runs/evo_s1 {'arm': 'evo', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/evo_s1 8/32 best=0.511
+runs/evo_s1 16/32 best=0.511
+runs/evo_s1 24/32 best=2.760
+runs/evo_s1 32/32 best=2.760
+init runs/random_s2 {'arm': 'random', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/random_s2 8/32 best=0.156
+runs/random_s2 16/32 best=0.172
+runs/random_s2 24/32 best=0.792
+runs/random_s2 32/32 best=3.262
+init runs/evo_s2 {'arm': 'evo', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/evo_s2 8/32 best=0.156
+runs/evo_s2 16/32 best=0.220
+runs/evo_s2 24/32 best=0.229
+runs/evo_s2 32/32 best=0.662
+init runs/random_s3 {'arm': 'random', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/random_s3 8/32 best=0.039
+runs/random_s3 16/32 best=0.350
+runs/random_s3 24/32 best=1.845
+runs/random_s3 32/32 best=1.845
+init runs/evo_s3 {'arm': 'evo', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/evo_s3 8/32 best=0.039
+runs/evo_s3 16/32 best=0.068
+runs/evo_s3 24/32 best=0.096
+runs/evo_s3 32/32 best=0.100
+ALL_AUTO_DONE

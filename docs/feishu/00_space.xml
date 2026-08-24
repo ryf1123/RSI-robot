@@ -1,0 +1,43 @@
+<h1>为什么要把搜索空间做成离散的</h1>
+<p>Eureka 那一路让 LLM 写<b>自由形式的奖励代码</b>。这很强，但它有一个方法学后果：<b>「随机提议」在这个空间里没法定义</b>——你没法均匀采样一段合法的 Python。没有随机下限，「agent 比什么强」这句话就没有分母。</p>
+<p>所以这里把空间收成离散的：<b>17 个奖励项 × 6 档权重 + 4 个超参数</b>。空间大小约 6¹⁷ × 144 ≈ <b>2.8 × 10¹⁶</b>，随机采样穷举不动，但「均匀随机」是一个可以真跑的严格下限。</p>
+<pre lang="python" caption="reward = Σ w_k · term_k(state)，w_k ∈ {0, 0.25, 0.5, 1, 2, 4}"><code>W_LEVELS = [0.0, 0.25, 0.5, 1.0, 2.0, 4.0]
+HP_LEVELS = {
+    "step_size":   [0.005, 0.01, 0.02, 0.05],   # 内层 ARS 步长
+    "noise_std":   [0.01, 0.02, 0.05, 0.1],     # 内层 ARS 探索噪声
+    "top_frac":    [0.25, 0.5, 1.0],            # 精英方向比例
+    "term_height": [0.6, 0.7, 0.8],             # 训练时的摔倒判定高度（课程）
+}</code></pre>
+<h1>17 个奖励项，其中 5 个是我埋的</h1>
+<p>每一项都写成「正权重 = 多做名字说的那件事」。这样「把某项权重设成 0」就是一个明确的动作。</p>
+<table><colgroup><col width="120"/><col width="90"/><col width="330"/><col width="240"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>项</p></th><th background-color="light-gray"><p>类别</p></th><th background-color="light-gray"><p>是什么</p></th><th background-color="light-gray"><p>为什么这么设</p></th></tr></thead>
+<tbody>
+<tr><td><p>fwd_vel</p></td><td><p>有用</p></td><td><p>clip(dx, ±3) / 2</p></td><td><p>任务本身。唯一直接指向目标的项</p></td></tr>
+<tr><td><p>alive</p></td><td><p>有用</p></td><td><p>常数 1.0</p></td><td><p>活着奖励，抑制自杀式早停</p></td></tr>
+<tr><td><p>height</p></td><td><p>有用</p></td><td><p>clip(z−0.7, 0, 0.6) / 0.6</p></td><td><p>实测里<b>驱动跳跃的关键项</b>，见第二环</p></td></tr>
+<tr><td><p>upright</p></td><td><p>有用</p></td><td><p>1 − |pitch| / 0.2</p></td><td><p>姿态。权重大了会把策略压成「站着不动」</p></td></tr>
+<tr><td><p>ctrl_cost / smooth / energy / joint_lim / pitch_rate</p></td><td><p>有用</p></td><td><p>各类正则项</p></td><td><p>常规做法，单个作用都不大</p></td></tr>
+<tr><td><p>foot_clear / hop</p></td><td><p>有用</p></td><td><p>抬脚高度 / 腾空奖励</p></td><td><p>步态塑形</p></td></tr>
+<tr><td><p>progress</p></td><td><p>有用</p></td><td><p>x / 5</p></td><td><p>位置型奖励，和 fwd_vel 冗余</p></td></tr>
+<tr><td><p><b>back_vel</b></p></td><td><p><b>有害</b></p></td><td><p>−clip(dx, ±3) / 2</p></td><td><p>奖励往后走，和任务直接对着干</p></td></tr>
+<tr><td><p><b>stand_still</b></p></td><td><p><b>有害</b></p></td><td><p>exp(−dx²)</p></td><td><p>奖励速度为零。最像「合理正则项」的一个陷阱</p></td></tr>
+<tr><td><p><b>foot_press</b></p></td><td><p><b>有害</b></p></td><td><p>−clip(foot_z, 0, 0.3) / 0.3</p></td><td><p>奖励脚贴地。听起来像「求稳」，实际上禁掉了跳跃</p></td></tr>
+<tr><td><p><b>y_drift</b></p></td><td><p><b>无关</b></p></td><td><p>−|y| ≡ 0</p></td><td><p>平面模型上没有 y 自由度，恒等于 0</p></td></tr>
+<tr><td><p><b>clock</b></p></td><td><p><b>无关</b></p></td><td><p>sin(2πt / 50)</p></td><td><p>与状态无关的周期信号，期望贡献为 0</p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>decoy mass = 5 个诱饵项的权重绝对值 / 全部权重绝对值之和。</b></p><p>下限 <b>0.000</b>（完美）；均匀随机水平 <b>5/17 = 0.294</b>。</p><p>这是本项目的主诊断量。它测的不是「找到多好的解」，而是<b>「提议者到底懂不懂它在改什么」</b>；而且它<b>不含内层训练噪声</b>——直接读设计本身就能算，信噪比比任务适应度高一个量级。</p></callout>
+<h1>诱饵不是装饰：它们真的会毁掉任务</h1>
+<p>下面四路用的是<b>同一个基础设计</b>（fwd_vel=4, height=2, alive=0.25, upright=0.25），只在后三路各加一个权重为 4 的诱饵项。左起：干净 / +stand_still / +back_vel / +foot_press。</p>
+<img path="@./docs/figs/decoys.gif" caption="同一个奖励设计，只加一个诱饵项（权重 4）。干净的那路 2.01 m；三个诱饵分别把它压到 0.13 / 0.03 / 0.07 m。"/>
+<p>数字：<b>2.01 m → 0.13 / 0.03 / 0.07 m</b>。注意后三路都<b>不摔</b>——它们不是失稳，是被奖励说服了「站着别动才对」。这正是奖励设计出错时最难看出来的那种失败：训练曲线好看，机器人什么也不干。</p>
+<h1>匿名化协议：怎么把「语义」这一路关掉</h1>
+<p>要问「LLM 的先验值多少钱」，就得有一个把先验拿走、别的都不变的对照。做法是把 17 个项名换成 <code>t00 … t16</code>，任务描述换成「一个未知的控制任务」，其余（权重档位、超参、诊断信息、历史）完全一样。</p>
+<callout emoji="⚠️" background-color="light-yellow"><p><b>置换是必须的。</b>如果所有种子都用同一张 <code>t00=fwd_vel</code> 的表，我答第二个种子时就已经知道答案了。所以每个 run 用<b>由种子决定的随机置换</b>，置换表存在 run 的 config 里，回答匿名请求时只看 <code>req_*.json</code>，不看代码、不看置换表。</p></callout>
+<p>协议本身也要有对照：<b>匿名 · 无反馈</b>这条臂在信息上等价于随机。它实测的 decoy mass 是 <b>0.31（chance = 0.294）</b>，落在随机水平上——<b>说明我没有从匿名化里泄漏信息，整组实验的地基是干净的。</b>如果这条臂显著好于随机，整个第二环就该作废。</p>
+<h1>内层是什么</h1>
+<p>每一次「评估」= 用这个设计的奖励，从零训一个策略。内层用 <b>ARS-V2</b>（线性策略 3×11，60 个参数，观测做在线归一化），120 次迭代 × 6 个方向 × 2（±），单次评估在 M4 上约 <b>10–12 秒</b>（6 路并行摊薄后）。</p>
+<callout emoji="📌" background-color="light-blue"><p><b>内层只看被设计的奖励；外层只看任务指标（2.4 秒内前进的米数）。</b>设计者改不动任务指标——这是整个实验能成立的前提，也是「奖励作弊」能被看见的原因。</p></callout>
+<h1>一次踩坑：物理比想的贵 7 倍</h1>
+<p>第一版 <code>env.step</code> 只跑 <b>3,442 控制步/秒</b>，而裸 <code>mj_step</code> 的基准是 238k 物理步/秒。查下来两个原因：<b>每一步都在做 <code>mj_name2id</code> 字符串查找</b>拿脚的 geom id，以及每一步 <code>qpos.copy()</code>。缓存 id、去掉拷贝、改用 <code>mj_step(nstep=k)</code> 之后到 6,276；再把积分器换成 <code>timestep=0.004 + Euler + PGS + iterations=10</code>（终态逐位一致，z=0.291 两边一样）后到 <b>22k 控制步/秒，总共快 6.4 倍</b>。</p>
+<p>另外记一笔<b>没成的优化</b>：我写过一版「只计算非零权重的项」的快路径，改完计时没变——回头查才发现那次 <code>str.replace</code> 一个都没匹配上，<b>整组实验实际上一直在算全部 17 项</b>。结果不受影响（<code>w @ rv</code> 和「只加非零项」在数学上等价），但这提醒一件事：<b>只用「跑得快不快」来验证优化生效，会把「没生效」和「生效但没用」混成一个。</b></p>
