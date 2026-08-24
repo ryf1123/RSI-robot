@@ -1,0 +1,56 @@
+<h1>要验的是我自己写下的一句推论</h1>
+<p>第二环里我给了一个机制解释：<b>反馈能发现「无效项」，发现不了「有害项」</b>。证据是匿名臂的一个片段——三个只差一个权重的设计，回来的适应度<b>逐位相同</b>，于是那一项被认出是无效的。基于此我在第二环末尾写了一句推论：</p>
+<blockquote><p>要让反馈真的顶用，得让它带「受控对比」的结构，而不是继续加统计量的种类。</p></blockquote>
+<p>这一环把这句推论做成一条<b>自动的、不需要语义、不需要我参与</b>的臂来验。</p>
+<h1><code>contrast</code> 臂：把受控对比做成机械流程</h1>
+<p>每一代从当前精英出发，提 8 个<b>只改一项</b>的设计（关掉一个当前非零项，或打开一个当前为零的项），<b>内层种子固定不变</b>。规则：</p>
+<ul>
+<li>关掉某项后适应度<b>逐位不变</b>（|Δ| &lt; 10⁻⁹）→ 该项无效，<b>永久置零</b>。这一步是精确的，不含噪声；</li>
+<li>关掉后适应度<b>明显变好</b>（Δ &gt; 0.3）→ 置零。这一步是有噪声的；</li>
+<li>否则保留。</li>
+</ul>
+<p>预注册的预测：decoy mass 会明显低于 evo，但<b>到不了 0</b>，落在 <b>0.18–0.22</b>；适应度上仍然测不出差别。</p>
+<h1>结果一：机制成立，量在预测的边上</h1>
+<table><colgroup><col width="200"/><col width="110"/><col width="110"/><col width="110"/><col width="110"/><col width="150"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂（n = 8）</p></th><th background-color="light-gray"><p>第 1 代</p></th><th background-color="light-gray"><p>第 2 代</p></th><th background-color="light-gray"><p>第 3 代</p></th><th background-color="light-gray"><p>第 4 代</p></th><th background-color="light-gray"><p>怎么读</p></th></tr></thead>
+<tbody>
+<tr><td><p>random</p></td><td><p>0.288</p></td><td><p>0.306</p></td><td><p>0.307</p></td><td><p>0.274</p></td><td><p>随机水平 0.294，不动</p></td></tr>
+<tr><td><p>evo（只有适应度选择）</p></td><td><p>0.288</p></td><td><p>0.278</p></td><td><p>0.279</p></td><td><p>0.280</p></td><td><p><b>纹丝不动</b></p></td></tr>
+<tr><td><p><b>contrast（受控对比，无语义）</b></p></td><td><p>0.288</p></td><td><p>0.268</p></td><td><p><b>0.222</b></p></td><td><p><b>0.223</b></p></td><td><p><b>动了，落在预测的 0.18–0.22 边上</b></p></td></tr>
+<tr><td><p>匿名 · 有反馈（我本人）</p></td><td><p>0.330</p></td><td><p>0.205</p></td><td><p>0.138</p></td><td><p><b>0.140</b></p></td><td><p><b>比机械版还好一截</b></p></td></tr>
+<tr><td><p>命名 · 无反馈（语义）</p></td><td><p>0.013</p></td><td><p>0.013</p></td><td><p>0.013</p></td><td><p>0.015</p></td><td><p>一步到位</p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>推论成立：同样没有语义，只把反馈从「一个标量」换成「受控对比」，decoy mass 就从纹丝不动（evo 0.280）变成会往下走（0.223）。</b></p><p>但它离语义（0.000）还差得远，而且<b>比我手工做对比时（0.140）还差</b>——后面会说为什么。</p></callout>
+<h1>结果二：直接查它到底杀掉了哪几项</h1>
+<p>这一环最有说服力的不是曲线，是<b>杀名单</b>。8 个 run 里，<code>contrast</code> 一共只永久置零过<b>一个</b>项：</p>
+<pre lang="text"><code>contrast_s1  killed: ['y_drift']
+contrast_s4  killed: ['y_drift']
+其余 6 个 run  killed: []
+
+按类别：  无关项 2 次 / 词表里 2 项       有害项 0 次 / 3 项      有用项 0 次 / 12 项</code></pre>
+<callout emoji="💡" background-color="light-orange"><p><b>精确率 100%（2 杀 2 中），假阳性 0。</b>12 个有用项一个都没被误杀，3 个有害项一个都没抓到。</p><p><b>这比我原来的说法更精确：受控对比能认出来的不是「与任务无关的项」，是「逐位无效的项」。</b></p></callout>
+<p>词表里两个无关诱饵，只有 <code>y_drift</code>（平面模型上恒等于 0）被抓到；<code>clock</code>（sin(2πt/50)）一次都没有。原因很干净：<b><code>clock</code> 虽然和任务无关，但它不是无效的</b>——它每一步都在给奖励加一个随时间摆动的量，改变了 ARS 对 12 条采样方向的排序，于是关掉它<b>会</b>让轨迹变化。它是<b>任务无关的噪声源</b>，不是常数。</p>
+<p>而 3 个有害项一个都没抓到，正是第二环预言的：<b>关掉一个有害项会让适应度变好，但在 σ = 1.17 的噪声里，「变好 0.4 米」和「这次运气好」分不开</b>，而阈值 0.3 又不敢放太松（放松就会误杀有用项）。</p>
+<h1>结果三：适应度上仍然什么都测不出来</h1>
+<table><colgroup><col width="160"/><col width="220"/><col width="220"/><col width="200"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂（n = 8）</p></th><th background-color="light-gray"><p>best-so-far</p></th><th background-color="light-gray"><p>精英重评</p></th><th background-color="light-gray"><p>精英 decoy mass</p></th></tr></thead>
+<tbody>
+<tr><td><p>random</p></td><td><p>2.05 [1.40, 2.73]</p></td><td><p>0.59 [0.19, 1.06]</p></td><td><p>0.224 [0.161, 0.286]</p></td></tr>
+<tr><td><p>evo</p></td><td><p>2.17 [1.21, 3.07]</p></td><td><p>0.75 [0.33, 1.22]</p></td><td><p>0.288 [0.241, 0.330]</p></td></tr>
+<tr><td><p>contrast</p></td><td><p>2.18 [1.11, 3.19]</p></td><td><p><b>1.26 [0.55, 2.12]</b></p></td><td><p>0.215 [0.136, 0.307]</p></td></tr>
+</tbody></table>
+<p>best-so-far 完全打平（p = 0.48）；重评 1.26 vs 0.59 方向明显但 p = 0.065、区间大幅重叠；<b>精英</b>的 decoy mass 也没分开（0.215 vs 0.224，p = 0.38）。预测二成立。</p>
+<callout emoji="⚠️" background-color="light-yellow"><p>注意<b>「每一代的平均 decoy mass」下降了（0.288 → 0.223），而「精英的 decoy mass」没有</b>（0.215 vs 0.224）。</p><p>因为精英是<b>按适应度</b>选出来的，而适应度和 decoy mass 的关系在 0.30 以下是平的（子页 04）。<b>提议端的改善被选择端重新洗掉了。</b>这是第三环那条结论的又一个实例：提议质量的改善传导不到最终结果。</p></callout>
+<h1>为什么我手工做比机械版好</h1>
+<p>同样没有语义，我在 <code>匿名 · 有反馈</code> 里到了 0.140，机械版到 0.223。差别在于我用的规则更宽：</p>
+<ul>
+<li>机械版只认<b>逐位相等</b>；我会认「三个设计只差这一项，适应度分别是 1.206 / 1.206 / 1.206」这种<b>成组的模式</b>，也会认「这一项在所有高分设计里都不出现」这种<b>跨设计的统计</b>；</li>
+<li>我还会顺手把<b>看起来没被任何证据支持的项</b>删掉——这不是从反馈里推出来的，这是<b>结构先验</b>（少写几项），也就是子页 02「结果四」里那个真正带来重评优势的东西。</li>
+</ul>
+<callout emoji="📌" background-color="light-blue"><p>所以「我比机械版好 0.08」这件事，<b>不能全记在「更聪明地读反馈」头上</b>；其中有一部分只是稀疏先验。要把这两半分开，还需要一条「机械版 + 稀疏正则」的臂。<b>这一条没做，列在效果提升路线里。</b></p></callout>
+<h1>这一环给出的操作建议</h1>
+<ol seq="auto">
+<li><b>受控对比值得加，但要知道它只买得到「逐位无效的项」。</b>成本极低（对比就是正常的候选，不额外花预算），精确率 100%，不会误杀。</li>
+<li><b>要抓「有害项」，光靠单种子对比不够，必须配多种子。</b>按第五环的数，k = 4 就能让报数不再撒谎；阈值判断也应该建立在 k ≥ 4 的对比上。<b>这是第五环和第六环合起来才给得出的建议。</b></li>
+<li><b>不要指望它替代语义。</b>0.223 vs 0.000，差了一个数量级的距离。语义先验是免费的、一步到位的，而受控对比要花掉整个搜索预算去换一小段。</li>
+</ol>

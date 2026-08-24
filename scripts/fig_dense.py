@@ -4,7 +4,7 @@ plt.rcParams["font.sans-serif"]=["PingFang SC","Heiti SC","Arial Unicode MS"]; p
 from rsi.report import boot
 def stats(root, arm, key="fitness"):
     v=[]
-    for r in sorted(glob.glob(f"{root}/{arm}_s*")):
+    for r in sorted(p for p in glob.glob(f"{root}/{arm}_s*") if __import__("os").path.isdir(p)):
         try: h=[json.loads(l) for l in open(f"{r}/history.jsonl")]
         except FileNotFoundError: continue
         if h: v.append(max(x["fitness"] for x in h))
@@ -16,7 +16,8 @@ def dmass(w):
     return sum(abs(v) for k,v in w.items() if k in DEC)/tot if tot else float("nan")
 def dm_curve(root, hist_glob, bins):
     A=[]
-    for r in sorted(glob.glob(hist_glob)):
+    import os as _os
+    for r in sorted(p for p in glob.glob(hist_glob) if _os.path.isdir(p)):
         try: h=[json.loads(l) for l in open(f"{r}/history.jsonl")]
         except FileNotFoundError: continue
         for x in h:

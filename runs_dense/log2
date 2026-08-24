@@ -38,3 +38,12 @@ runs_dense/random_s7 24/32 best=0.183
 runs_dense/random_s7 32/32 best=0.183
 init runs_dense/evo_s7 {'arm': 'evo', 'seed': 7, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
 runs_dense/evo_s7 8/32 best=0.183
+runs_dense/evo_s7 16/32 best=0.198
+runs_dense/evo_s7 24/32 best=0.211
+runs_dense/evo_s7 32/32 best=0.218
+init runs_dense/llm_named_nofb_s7 {'arm': 'llm', 'seed': 7, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+runs_dense/llm_named_nofb_s4 32/32 best=3.834
+runs_dense/llm_named_nofb_s5 32/32 best=3.743
+runs_dense/llm_named_nofb_s6 32/32 best=3.978
+runs_dense/llm_named_nofb_s7 32/32 best=3.461
+DENSE2_DONE

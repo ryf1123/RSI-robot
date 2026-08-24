@@ -1,0 +1,41 @@
+init runs/contrast_s0 {'arm': 'contrast', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/contrast_s0 8/32 best=0.201
+runs/contrast_s0 16/32 best=2.582
+runs/contrast_s0 24/32 best=3.426
+runs/contrast_s0 32/32 best=3.781
+init runs/contrast_s1 {'arm': 'contrast', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/contrast_s1 8/32 best=0.511
+runs/contrast_s1 16/32 best=3.065
+runs/contrast_s1 24/32 best=3.065
+runs/contrast_s1 32/32 best=3.424
+init runs/contrast_s2 {'arm': 'contrast', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/contrast_s2 8/32 best=0.156
+runs/contrast_s2 16/32 best=0.582
+runs/contrast_s2 24/32 best=1.212
+runs/contrast_s2 32/32 best=2.004
+init runs/contrast_s3 {'arm': 'contrast', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/contrast_s3 8/32 best=0.039
+runs/contrast_s3 16/32 best=0.094
+runs/contrast_s3 24/32 best=0.239
+runs/contrast_s3 32/32 best=0.242
+init runs/contrast_s4 {'arm': 'contrast', 'seed': 4, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/contrast_s4 8/32 best=0.487
+runs/contrast_s4 16/32 best=0.487
+runs/contrast_s4 24/32 best=0.487
+runs/contrast_s4 32/32 best=0.487
+init runs/contrast_s5 {'arm': 'contrast', 'seed': 5, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/contrast_s5 8/32 best=0.125
+runs/contrast_s5 16/32 best=0.208
+runs/contrast_s5 24/32 best=0.493
+runs/contrast_s5 32/32 best=0.493
+init runs/contrast_s6 {'arm': 'contrast', 'seed': 6, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/contrast_s6 8/32 best=3.426
+runs/contrast_s6 16/32 best=3.903
+runs/contrast_s6 24/32 best=4.012
+runs/contrast_s6 32/32 best=4.066
+init runs/contrast_s7 {'arm': 'contrast', 'seed': 7, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/contrast_s7 8/32 best=0.564
+runs/contrast_s7 16/32 best=1.906
+runs/contrast_s7 24/32 best=2.930
+runs/contrast_s7 32/32 best=2.930
+CONTRAST_DONE
