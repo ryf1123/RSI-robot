@@ -1,0 +1,25 @@
+144 jobs
+runs_k4/llm_named_nofb_s0        reported=2.76 re-eval=2.78±1.15
+runs_k4/llm_named_nofb_s1        reported=1.31 re-eval=2.09±1.27
+runs_k4/llm_named_nofb_s10       reported=1.35 re-eval=0.50±0.79
+runs_k4/llm_named_nofb_s11       reported=2.04 re-eval=0.84±1.46
+runs_k4/llm_named_nofb_s2        reported=1.51 re-eval=0.92±1.75
+runs_k4/llm_named_nofb_s3        reported=2.40 re-eval=0.70±0.59
+runs_k4/llm_named_nofb_s4        reported=1.41 re-eval=0.62±0.62
+runs_k4/llm_named_nofb_s5        reported=2.09 re-eval=0.90±1.67
+runs_k4/llm_named_nofb_s6        reported=1.63 re-eval=1.36±1.83
+runs_k4/llm_named_nofb_s7        reported=2.65 re-eval=0.35±0.34
+runs_k4/llm_named_nofb_s8        reported=1.55 re-eval=2.00±1.94
+runs_k4/llm_named_nofb_s9        reported=1.52 re-eval=1.06±1.51
+runs_k4/random_s0                reported=1.73 re-eval=0.55±1.09
+runs_k4/random_s1                reported=0.78 re-eval=0.49±0.43
+runs_k4/random_s10               reported=1.12 re-eval=1.09±0.62
+runs_k4/random_s11               reported=0.71 re-eval=0.07±0.13
+runs_k4/random_s2                reported=0.31 re-eval=0.62±1.01
+runs_k4/random_s3                reported=0.20 re-eval=0.12±0.15
+runs_k4/random_s4                reported=0.48 re-eval=0.35±0.62
+runs_k4/random_s5                reported=1.02 re-eval=0.47±0.70
+runs_k4/random_s6                reported=1.09 re-eval=1.38±1.81
+runs_k4/random_s7                reported=0.44 re-eval=0.51±0.60
+runs_k4/random_s8                reported=0.07 re-eval=-0.05±0.07
+runs_k4/random_s9                reported=1.52 re-eval=0.64±0.74

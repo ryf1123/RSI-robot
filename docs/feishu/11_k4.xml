@@ -1,0 +1,35 @@
+<h1>对主结论最大的威胁</h1>
+<p>前面几环给出的主结论是：<b>把 LLM 放进循环，涨的是「报出来的数」，不是「拿到的设计」</b>（稀疏空间真实质量 1.04 vs 0.97，p = 1.00）。</p>
+<p>对它最大的威胁很直接：<b>这个分离会不会只是 k = 1 评估的产物？</b>第五环已经证明 k ≥ 4 时报数就无偏了。那就把整个外层循环改成 k = 4 评估，而且<b>总算力保持不变</b>——8 个设计 × 4 个内层种子 = 32 次训练，和原来 32 个设计 × 1 个种子完全一样。</p>
+<p>两条臂：<code>random</code> 和 <code>命名 · 无反馈</code>（纯语义先验，零反馈），各 12 个种子。</p>
+<p><b>预注册的预测</b>：① 赢家诅咒会大幅缩小；② <b>两条臂在真实质量上仍然测不出差别</b>；③ 因此报出来的数上的差异也会消失。</p>
+<h1>结果：① 成立，②③ 被推翻</h1>
+<table><colgroup><col width="200"/><col width="210"/><col width="210"/><col width="140"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>k = 4 循环（各 n = 12）</p></th><th background-color="light-gray"><p>命名 · 无反馈</p></th><th background-color="light-gray"><p>random</p></th><th background-color="light-gray"><p>单侧 MWU</p></th></tr></thead>
+<tbody>
+<tr><td><p>best-so-far</p></td><td><p>1.85 [1.59, 2.15]</p></td><td><p>0.79 [0.52, 1.08]</p></td><td><p><b>0.0003</b></p></td></tr>
+<tr><td><p><b>精英重评（真实质量）</b></p></td><td><p><b>1.18 [0.80, 1.61]</b></p></td><td><p><b>0.52 [0.31, 0.75]</b></p></td><td><p><b>0.0083</b></p></td></tr>
+<tr><td><p>精英 decoy mass</p></td><td><p>0.02 [0.00, 0.03]</p></td><td><p>0.20 [0.16, 0.24]</p></td><td><p>&lt; 0.0001</p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>在同算力的 k = 4 循环里，纯语义先验交付的设计真实质量是随机的 2.3 倍（1.18 vs 0.52，p = 0.008）。</b></p><p>而在 k = 1 循环里，同样两条臂是 <b>1.04 vs 0.97，p = 1.00</b>。</p><p><b>所以「只涨报出来的数」不是先验的性质，是 k = 1 循环的性质。</b></p></callout>
+<p>赢家诅咒也如预测缩小了：k = 4 下 1.32 → 0.85（−36%，k = 1 时是 −53%），ρ(报出来的, 重评) 从 <b>0.29 升到 0.51</b>（p = 0.011）。报数变诚实了。</p>
+<h1>机制：先验买到的是「候选数可以少很多」</h1>
+<p>把两条臂在两种预算切法下的真实质量并排放，机制立刻看得见：</p>
+<table><colgroup><col width="200"/><col width="200"/><col width="200"/><col width="180"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>精英重评</p></th><th background-color="light-gray"><p>32 个设计 × 1 种子</p></th><th background-color="light-gray"><p>8 个设计 × 4 种子</p></th><th background-color="light-gray"><p>变化</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>命名 · 无反馈</b></p></td><td><p>1.04 [0.74, 1.38]</p></td><td><p>1.18 [0.80, 1.61]</p></td><td><p><b>几乎不变</b></p></td></tr>
+<tr><td><p><b>random</b></p></td><td><p>0.97 [0.66, 1.30]</p></td><td><p>0.52 [0.31, 0.75]</p></td><td><p><b>腰斩</b></p></td></tr>
+</tbody></table>
+<callout emoji="💡" background-color="light-orange"><p><b>变的不是先验，是随机。</b>先验对预算怎么切几乎不敏感（1.04 → 1.18）；随机一旦候选数从 32 掉到 8 就垮了（0.97 → 0.52）。</p><p>原因不难：<b>随机提议里「好设计」的密度很低，它靠的是量</b>——32 次抽奖里总能中一次，哪怕选得不准（第三环：random 的 best-so-far 有 1.95 米，其中 1.95 − 0.10 全来自在噪声上取 max）。<b>先验提议里好设计的密度很高，它不需要量，它需要的是选得准。</b></p><p>所以：<b>先验真正买到的不是「更好的单个设计」，是「候选数可以少一个数量级」</b>——而省下来的算力正好可以换成更准的评估，那又正好是先验的优势显形的地方。</p></callout>
+<h1>这一环把主结论改成什么样</h1>
+<callout emoji="📌" background-color="light-blue"><p><b>旧版（错）：</b>把 LLM 放进循环，只会让报出来的数好看。</p><p><b>新版：</b>LLM 的先验是真的——但<b>它值多少钱，取决于外层循环怎么花预算</b>。</p><p>• <b>k = 1、多候选</b>（Eureka 式循环的标准做法）：先验的优势<b>被噪声吃掉</b>，真实质量 1.04 vs 0.97，p = 1.00；只有报出来的数涨了。<br/>• <b>k = 4、少候选</b>（同算力）：先验兑现成 <b>2.3 倍</b>，p = 0.008。</p><p><b>换句话说：这一路工作最通行的那个循环配置，恰好是让 LLM 的先验最不值钱的那一种。</b></p></callout>
+<h1>和第五环的关系：不矛盾，是一个交互</h1>
+<p>第五环用<b>随机提议</b>做过同一个对比，结论是「32×1 / 16×2 / 8×4 / 4×8 找到的设计一样好（配对 p &gt; 0.5）」。这一环用<b>先验提议</b>做，结论变了。两者不矛盾——它们合起来是一个<b>交互效应</b>：</p>
+<table><colgroup><col width="220"/><col width="250"/><col width="250"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>提议分布</p></th><th background-color="light-gray"><p>预算该怎么切</p></th><th background-color="light-gray"><p>证据</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>差</b>（随机）</p></td><td><p>无所谓；靠量取胜，k = 1 也行</p></td><td><p>第五环：四种切法配对 p &gt; 0.5；本环 random 从 0.97 掉到 0.52，说明<b>候选少了会痛</b></p></td></tr>
+<tr><td><p><b>好</b>（语义先验）</p></td><td><p><b>把预算挪去把评估做准</b></p></td><td><p>本环：k = 4 下 1.18 vs 0.52，p = 0.008</p></td></tr>
+</tbody></table>
+<callout emoji="⚠️" background-color="light-yellow"><p>要说清楚的边界：本环只测了 <code>random</code> 和 <code>命名 · 无反馈</code> 两条臂、一个 k 值、一个空间。<b>「k = 4 是最优点」没有被测过</b>（k = 2 或 k = 8 可能更好），<b>有反馈的臂在 k = 4 下会怎样也没测</b>。这两条排在效果提升路线里。</p><p>另外注意，这一环把第五环那条操作建议的适用范围收窄了：<b>「搜索时用 k = 1，把预算全花在候选数上」只在提议分布很差的时候成立。</b></p></callout>

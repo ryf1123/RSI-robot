@@ -1,0 +1,60 @@
+{
+ "run": "runs_k4/llm_named_nofb_s11",
+ "gen": 0,
+ "k": 8,
+ "anon": false,
+ "feedback": false,
+ "terms": [
+  "fwd_vel",
+  "alive",
+  "height",
+  "upright",
+  "ctrl_cost",
+  "smooth",
+  "joint_lim",
+  "foot_clear",
+  "hop",
+  "energy",
+  "pitch_rate",
+  "progress",
+  "back_vel",
+  "stand_still",
+  "foot_press",
+  "y_drift",
+  "clock"
+ ],
+ "weight_levels": [
+  0.0,
+  0.25,
+  0.5,
+  1.0,
+  2.0,
+  4.0
+ ],
+ "hp_levels": {
+  "step_size": [
+   0.005,
+   0.01,
+   0.02,
+   0.05
+  ],
+  "noise_std": [
+   0.01,
+   0.02,
+   0.05,
+   0.1
+  ],
+  "top_frac": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "term_height": [
+   0.6,
+   0.7,
+   0.8
+  ]
+ },
+ "task": "planar one-legged hopper; fitness = metres travelled in 2.4 s before falling",
+ "history": []
+}

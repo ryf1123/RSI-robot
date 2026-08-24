@@ -27,3 +27,35 @@ runs_k4/random_s6 4/8 best=0.195
 runs_k4/random_s6 8/8 best=1.091
 init runs_k4/llm_named_nofb_s6 {'arm': 'llm', 'seed': 6, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
 init runs_k4/random_s7 {'arm': 'random', 'seed': 7, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s7 4/8 best=0.441
+runs_k4/random_s7 8/8 best=0.441
+init runs_k4/llm_named_nofb_s7 {'arm': 'llm', 'seed': 7, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s8 {'arm': 'random', 'seed': 8, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s8 4/8 best=0.066
+runs_k4/random_s8 8/8 best=0.069
+init runs_k4/llm_named_nofb_s8 {'arm': 'llm', 'seed': 8, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s9 {'arm': 'random', 'seed': 9, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s9 4/8 best=1.522
+runs_k4/random_s9 8/8 best=1.522
+init runs_k4/llm_named_nofb_s9 {'arm': 'llm', 'seed': 9, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s10 {'arm': 'random', 'seed': 10, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s10 4/8 best=1.117
+runs_k4/random_s10 8/8 best=1.117
+init runs_k4/llm_named_nofb_s10 {'arm': 'llm', 'seed': 10, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s11 {'arm': 'random', 'seed': 11, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s11 4/8 best=0.713
+runs_k4/random_s11 8/8 best=0.713
+init runs_k4/llm_named_nofb_s11 {'arm': 'llm', 'seed': 11, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+runs_k4/llm_named_nofb_s0 8/8 best=2.758
+runs_k4/llm_named_nofb_s1 8/8 best=1.309
+runs_k4/llm_named_nofb_s2 8/8 best=1.512
+runs_k4/llm_named_nofb_s3 8/8 best=2.399
+runs_k4/llm_named_nofb_s4 8/8 best=1.411
+runs_k4/llm_named_nofb_s5 8/8 best=2.090
+runs_k4/llm_named_nofb_s6 8/8 best=1.633
+runs_k4/llm_named_nofb_s7 8/8 best=2.654
+runs_k4/llm_named_nofb_s8 8/8 best=1.549
+runs_k4/llm_named_nofb_s9 8/8 best=1.522
+runs_k4/llm_named_nofb_s10 8/8 best=1.350
+runs_k4/llm_named_nofb_s11 8/8 best=2.039
+K4_DONE
