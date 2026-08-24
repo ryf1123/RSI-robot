@@ -238,3 +238,4 @@ runs/sparse14_s7 8/32 best=1.088
 runs/sparse14_s7 16/32 best=3.504
 runs/sparse14_s7 24/32 best=3.504
 runs/sparse14_s7 32/32 best=3.504
+SPARSE_DONE

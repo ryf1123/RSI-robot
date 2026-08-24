@@ -1,0 +1,17 @@
+init runs/sparseclean3_s0 {'arm': 'sparseclean3', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean3_s0 8/32 best=0.974
+runs/sparseclean3_s0 16/32 best=0.974
+runs/sparseclean3_s0 24/32 best=1.373
+runs/sparseclean3_s0 32/32 best=1.373
+init runs/sparseclean5_s0 {'arm': 'sparseclean5', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean5_s0 8/32 best=0.519
+runs/sparseclean5_s0 16/32 best=0.712
+runs/sparseclean5_s0 24/32 best=2.798
+runs/sparseclean5_s0 32/32 best=2.798
+init runs/sparseclean8_s0 {'arm': 'sparseclean8', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean8_s0 8/32 best=0.510
+runs/sparseclean8_s0 16/32 best=1.193
+runs/sparseclean8_s0 24/32 best=1.193
+runs/sparseclean8_s0 32/32 best=1.193
+init runs/sparseclean12_s0 {'arm': 'sparseclean12', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean12_s0 8/32 best=3.154

@@ -1,0 +1,39 @@
+<h1>要验的是子页 02 里那条「结果四」</h1>
+<p>第二环末尾有一个<b>事后</b>发现：四条 LLM 臂合并起来，精英重评显著优于基线（1.10 vs 0.67，p = 0.022），但拆成 2×2 之后<b>语义和反馈两个主效应都不显著，语义方向还是反的</b>。当时能想到的解释是四条臂<b>共有</b>的东西——<b>结构先验：只激活 3–6 项，而随机平均激活 14 项</b>。佐证是跨全部评估的 spearman(适应度, 激活项数) = −0.215（p = 4×10⁻¹²）。</p>
+<p>这一环把它单独拎出来测。做法是一条<b>只差稀疏度</b>的阶梯：</p>
+<callout emoji="🎯" background-color="light-blue"><p><code>sparse_k</code>：均匀随机采样，但<b>恰好激活 k 项</b>（从 17 项里等概率选 k 个，权重从 {0.25, 0.5, 1, 2, 4} 等概率取），超参和 <code>random</code> 一样均匀采样。k ∈ {2, 3, 5, 8, 12, 14}，各 8 个种子。</p><p><b>除了稀疏度，和 <code>random</code> 没有任何区别</b>——<code>random</code> 每项独立地从 6 档（含 0）取值，期望激活 17 × 5/6 ≈ <b>14.2</b> 项，所以 <code>sparse14</code> ≈ <code>random</code> 是这一环的协议对照。</p></callout>
+<p><b>预注册的预测</b>：重评质量在 k = 3–5 达到峰值，向 k = 12+ 单调下降；<code>sparse4</code> 左右一条臂单独就能达到 <code>匿名 · 无反馈</code> 的水平（1.30）。</p>
+<h1>结果：又一条被推翻的预测</h1>
+<img path="@./docs/figs/sparse.png" caption="左：稀疏度阶梯的 best-so-far 和精英重评，横线是三条参照臂的重评水平。右：精英的 decoy mass。"/>
+<table><colgroup><col width="140"/><col width="200"/><col width="200"/><col width="200"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>臂（n = 8）</p></th><th background-color="light-gray"><p>best-so-far</p></th><th background-color="light-gray"><p><b>精英重评（主指标）</b></p></th><th background-color="light-gray"><p>精英 decoy mass</p></th></tr></thead>
+<tbody>
+<tr><td><p>sparse2</p></td><td><p>1.66 [1.36, 2.07]</p></td><td><p>0.91 [0.46, 1.35]</p></td><td><p>0.246</p></td></tr>
+<tr><td><p>sparse3</p></td><td><p>1.70 [1.35, 2.04]</p></td><td><p>1.05 [0.62, 1.43]</p></td><td><p>0.093</p></td></tr>
+<tr><td><p><b>sparse5</b></p></td><td><p>1.91 [1.10, 2.82]</p></td><td><p><b>1.33 [0.80, 1.84]</b></p></td><td><p>0.221</p></td></tr>
+<tr><td><p>sparse8</p></td><td><p>1.44 [0.85, 2.16]</p></td><td><p>0.76 [0.39, 1.29]</p></td><td><p>0.287</p></td></tr>
+<tr><td><p>sparse12</p></td><td><p>1.28 [1.09, 1.47]</p></td><td><p>1.23 [0.74, 1.75]</p></td><td><p>0.214</p></td></tr>
+<tr><td><p>sparse14（≈ random）</p></td><td><p>1.82 [1.16, 2.51]</p></td><td><p>1.02 [0.65, 1.41]</p></td><td><p>0.226</p></td></tr>
+<tr><td><p><b>random</b></p></td><td><p>2.05 [1.40, 2.73]</p></td><td><p>0.59 [0.19, 1.06]</p></td><td><p>0.224</p></td></tr>
+<tr><td><p>匿名 · 无反馈</p></td><td><p>2.81 [2.31, 3.27]</p></td><td><p>1.30 [0.81, 1.76]</p></td><td><p>0.235</p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>k 和重评质量之间没有任何趋势：spearman(k, 重评) = 0.011，p = 0.94。</b></p><p>不是「峰值位置猜错了」，是<b>压根没有单调结构</b>：0.91 / 1.05 / <b>1.33</b> / 0.76 / 1.23 / 1.02，上上下下，六个区间互相重叠，六条臂对 <code>random</code> 的检验 Holm 校正后<b>全部不显著</b>（最好的 sparse5 校正后 p = 0.195）。</p><p><b>所以「结构先验 = 少写几项」这个解释不成立。</b>子页 02「结果四」那条事后假设，被它自己的对照实验否掉了。</p></callout>
+<h1>但阶梯上掉出来一件更有用的事</h1>
+<p>把 48 个 sparse run 放在一起，问「精英的 decoy mass 能不能预测它的真实质量」：</p>
+<table><colgroup><col width="360"/><col width="150"/><col width="150"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>相关（跨 48 个 sparse run）</p></th><th background-color="light-gray"><p>Spearman ρ</p></th><th background-color="light-gray"><p>p</p></th></tr></thead>
+<tbody>
+<tr><td><p>k ~ 精英重评</p></td><td><p>+0.011</p></td><td><p>0.94</p></td></tr>
+<tr><td><p>k ~ 精英 decoy mass</p></td><td><p>+0.223</p></td><td><p>0.13</p></td></tr>
+<tr><td><p><b>精英 decoy mass ~ 精英重评</b></p></td><td><p><b>−0.367</b></p></td><td><p><b>0.010</b></p></td></tr>
+</tbody></table>
+<callout emoji="💡" background-color="light-orange"><p><b>decoy mass 作为一个指标，在这里第一次被独立验证了。</b>在一组<b>提议者完全相同、只有稀疏度不同</b>的臂里，「精英里诱饵占比越低，它的真实质量越高」（ρ = −0.37，p = 0.010），而稀疏度本身与质量无关。</p><p>这补上了第二环留下的那个洞：decoy mass 不只是一个「测懂不懂」的漂亮指标，<b>它确实指向结果</b>——只是它指向结果的那条路，和「少写几项」无关。</p></callout>
+<h1>一处必须自己指出来的统计陷阱</h1>
+<p>把六条 sparse 臂合并（n = 48）和 <code>random</code>（n = 8）比，重评 <b>1.05 [0.86, 1.25] vs 0.59 [0.19, 1.06]，MWU p = 0.045</b>，看起来很像「稀疏总体上有用」。</p>
+<callout emoji="⚠️" background-color="light-yellow"><p><b>这个比较不能信，原因是分母。</b><code>random</code> 只有 n = 8，自助区间 [0.19, 1.06] 比大多数被比较的效应还宽。而 <code>sparse14</code>（构造上几乎等于 <code>random</code>）测出来是 <b>1.02</b>——如果连「和自己一样的臂」都差 0.43，那 0.59 这个点估计本身就不可信。</p><p>换句话说：<b>合并 48 个 run 只压窄了分子的区间，分母还是那 8 个点。</b>这是本项目里最容易犯、也最难看出来的一种自欺。</p><p>已把 <code>random</code> 加跑到 <b>n = 24</b>，重跑后所有涉及 random 的比较都会刷新。<b>这一步本该在第一环就做。</b></p></callout>
+<h1>还没做完的两条对照</h1>
+<p>阶梯还留下一个混杂和一个候选解释，都已经在跑：</p>
+<ol seq="auto">
+<li><b>混杂</b>：在提议层面稀疏不改变诱饵比例（sparse4 抽出来是 0.298，random 0.303），但在<b>精英</b>层面可能会——项越少，「一个诱饵都没有」的概率越高。补一条 oracle 臂 <code>sparseclean_k</code>：<b>只告诉它哪些项是诱饵，别的语义一概不给</b>，从 12 个有用项里抽 k 个。</li>
+<li><b>候选解释</b>：<code>匿名 · 无反馈</code> 的结构先验其实有<b>两半</b>——稀疏，以及<b>超参不走极端</b>（step_size 只取 {0.01, 0.02}、noise_std 只取 {0.02, 0.05}、top_frac 只取 {0.25, 0.5}、term_height 只取 {0.6, 0.7}）。阶梯只控了第一半。补 <code>midhp</code>（随机权重 + 中档超参）和 <code>sparse5mid</code>，与 <code>random</code>、<code>sparse5</code> 凑成 2×2。</li>
+</ol>

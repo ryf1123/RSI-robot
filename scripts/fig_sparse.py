@@ -32,6 +32,6 @@ ax[1].errorbar(K,[q[0] for q in m],yerr=[[q[0]-q[1] for q in m],[q[2]-q[0] for q
 ax[1].axhline(0.294,color="r",ls=":",lw=1.4); ax[1].text(8,0.30,"随机水平 0.294",color="r",fontsize=8.5)
 v=boot(el("random","decoy")); ax[1].axhline(v[0],color="#888",ls="--",lw=1.5,label="random 精英")
 ax[1].set_xlabel("恰好激活几项"); ax[1].set_ylabel("精英的 decoy mass"); ax[1].set_xticks(K)
-ax[1].set_title("② 稀疏不改变诱饵比例——所以它是一条独立的机制")
+ax[1].set_title("② 精英的诱饵比例和 k 没有明显关系（ρ = 0.22, p = 0.13）")
 ax[1].legend(fontsize=8.5); ax[1].grid(alpha=.25)
 plt.tight_layout(); plt.savefig("docs/figs/sparse.png",dpi=150); print("ok")

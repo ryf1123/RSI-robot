@@ -39,6 +39,24 @@ class Run:
         arm = self.cfg["arm"]
         if arm == "random":
             return [Design.random(rng) for _ in range(k)]
+        if arm in ("midhp", "sparse5mid"):
+            # isolates the OTHER half of the structural prior: mid-range
+            # hyper-parameters. `midhp` keeps random's weight distribution,
+            # `sparse5mid` keeps sparse5's. Together with `random` and `sparse5`
+            # this is a 2x2 on {sparse, dense} x {mid hp, uniform hp}.
+            out = []
+            for _ in range(k):
+                if arm == "midhp":
+                    d = Design(w={n: float(rng.choice(W_LEVELS)) for n in TERM_NAMES}, hp={})
+                else:
+                    d = Design.zeros()
+                    for name in rng.choice(TERM_NAMES, size=5, replace=False):
+                        d["w"][name] = float(rng.choice([0.25, 0.5, 1.0, 2.0, 4.0]))
+                for key, lv in HP_LEVELS.items():
+                    mid = lv[max(0, len(lv) // 2 - 1):len(lv) // 2 + 1]
+                    d["hp"][key] = float(rng.choice(mid))
+                out.append(d)
+            return out
         if arm.startswith("sparseclean"):
             # oracle arm: told ONLY which terms are decoys, nothing else semantic.
             # Isolates "zero decoys" from "few terms" and from "which useful term".
