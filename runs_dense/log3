@@ -37,3 +37,61 @@ init runs_dense/random_s15 {'arm': 'random', 'seed': 15, 'budget': 32, 'gen': 8,
 runs_dense/random_s15 8/32 best=0.164
 runs_dense/random_s15 16/32 best=0.198
 runs_dense/random_s15 24/32 best=0.198
+runs_dense/random_s15 32/32 best=0.973
+init runs_dense/random_s16 {'arm': 'random', 'seed': 16, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s16 8/32 best=2.330
+runs_dense/random_s16 16/32 best=2.330
+runs_dense/random_s16 24/32 best=2.330
+runs_dense/random_s16 32/32 best=2.330
+init runs_dense/random_s17 {'arm': 'random', 'seed': 17, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s17 8/32 best=0.215
+runs_dense/random_s17 16/32 best=0.260
+runs_dense/random_s17 24/32 best=0.739
+runs_dense/random_s17 32/32 best=1.149
+init runs_dense/random_s18 {'arm': 'random', 'seed': 18, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s18 8/32 best=0.376
+runs_dense/random_s18 16/32 best=0.541
+runs_dense/random_s18 24/32 best=3.162
+runs_dense/random_s18 32/32 best=3.162
+init runs_dense/random_s19 {'arm': 'random', 'seed': 19, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s19 8/32 best=0.244
+runs_dense/random_s19 16/32 best=0.244
+runs_dense/random_s19 24/32 best=0.772
+runs_dense/random_s19 32/32 best=0.783
+init runs_dense/random_s20 {'arm': 'random', 'seed': 20, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s20 8/32 best=1.131
+runs_dense/random_s20 16/32 best=1.612
+runs_dense/random_s20 24/32 best=1.612
+runs_dense/random_s20 32/32 best=1.612
+init runs_dense/random_s21 {'arm': 'random', 'seed': 21, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s21 8/32 best=0.326
+runs_dense/random_s21 16/32 best=1.470
+runs_dense/random_s21 24/32 best=1.470
+runs_dense/random_s21 32/32 best=1.470
+init runs_dense/random_s22 {'arm': 'random', 'seed': 22, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s22 8/32 best=0.058
+runs_dense/random_s22 16/32 best=0.311
+runs_dense/random_s22 24/32 best=0.311
+runs_dense/random_s22 32/32 best=0.311
+init runs_dense/random_s23 {'arm': 'random', 'seed': 23, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s23 8/32 best=0.178
+runs_dense/random_s23 16/32 best=1.213
+runs_dense/random_s23 24/32 best=1.213
+runs_dense/random_s23 32/32 best=1.213
+init runs_dense/llm_named_nofb_s8 {'arm': 'llm', 'seed': 8, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/llm_named_nofb_s9 {'arm': 'llm', 'seed': 9, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/llm_named_nofb_s10 {'arm': 'llm', 'seed': 10, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/llm_named_nofb_s11 {'arm': 'llm', 'seed': 11, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/llm_named_nofb_s12 {'arm': 'llm', 'seed': 12, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/llm_named_nofb_s13 {'arm': 'llm', 'seed': 13, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/llm_named_nofb_s14 {'arm': 'llm', 'seed': 14, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/llm_named_nofb_s15 {'arm': 'llm', 'seed': 15, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+runs_dense/llm_named_nofb_s8 32/32 best=3.756
+runs_dense/llm_named_nofb_s9 32/32 best=3.751
+runs_dense/llm_named_nofb_s10 32/32 best=4.012
+runs_dense/llm_named_nofb_s11 32/32 best=3.740
+runs_dense/llm_named_nofb_s12 32/32 best=3.907
+runs_dense/llm_named_nofb_s13 32/32 best=1.957
+runs_dense/llm_named_nofb_s14 32/32 best=3.698
+runs_dense/llm_named_nofb_s15 32/32 best=3.545
+DENSE3_DONE

@@ -1,0 +1,25 @@
+144 jobs
+runs_dense/llm_named_nofb_s10    reported=4.01 re-eval=0.51±0.58
+runs_dense/llm_named_nofb_s11    reported=3.74 re-eval=0.39±0.53
+runs_dense/llm_named_nofb_s12    reported=3.91 re-eval=0.93±1.65
+runs_dense/llm_named_nofb_s13    reported=1.96 re-eval=0.34±0.62
+runs_dense/llm_named_nofb_s14    reported=3.70 re-eval=1.85±0.90
+runs_dense/llm_named_nofb_s15    reported=3.54 re-eval=0.75±1.45
+runs_dense/llm_named_nofb_s8     reported=3.76 re-eval=0.92±1.55
+runs_dense/llm_named_nofb_s9     reported=3.75 re-eval=1.76±1.61
+runs_dense/random_s10            reported=3.32 re-eval=0.66±0.70
+runs_dense/random_s11            reported=0.65 re-eval=0.16±0.21
+runs_dense/random_s12            reported=0.74 re-eval=1.73±1.25
+runs_dense/random_s13            reported=0.59 re-eval=0.10±0.12
+runs_dense/random_s14            reported=0.48 re-eval=0.21±0.46
+runs_dense/random_s15            reported=0.97 re-eval=0.25±0.33
+runs_dense/random_s16            reported=2.33 re-eval=0.53±0.62
+runs_dense/random_s17            reported=1.15 re-eval=0.11±0.21
+runs_dense/random_s18            reported=3.16 re-eval=1.15±1.63
+runs_dense/random_s19            reported=0.78 re-eval=0.16±0.08
+runs_dense/random_s20            reported=1.61 re-eval=0.47±0.51
+runs_dense/random_s21            reported=1.47 re-eval=0.61±0.64
+runs_dense/random_s22            reported=0.31 re-eval=-0.02±0.12
+runs_dense/random_s23            reported=1.21 re-eval=0.21±0.21
+runs_dense/random_s8             reported=0.39 re-eval=0.63±0.62
+runs_dense/random_s9             reported=3.03 re-eval=0.79±1.28
