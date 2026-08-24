@@ -1,0 +1,17 @@
+96 jobs
+runs/random_s10                  reported=0.97 re-eval=1.09±0.62
+runs/random_s11                  reported=1.45 re-eval=0.47±0.99
+runs/random_s12                  reported=1.50 re-eval=0.86±1.52
+runs/random_s13                  reported=1.13 re-eval=1.53±1.05
+runs/random_s14                  reported=1.53 re-eval=1.52±0.33
+runs/random_s15                  reported=2.52 re-eval=0.70±1.46
+runs/random_s16                  reported=3.54 re-eval=1.61±1.71
+runs/random_s17                  reported=4.32 re-eval=3.09±1.01
+runs/random_s18                  reported=1.84 re-eval=-0.00±0.09
+runs/random_s19                  reported=3.59 re-eval=0.38±1.50
+runs/random_s20                  reported=1.30 re-eval=1.85±1.44
+runs/random_s21                  reported=1.20 re-eval=0.76±0.54
+runs/random_s22                  reported=0.52 re-eval=1.61±0.39
+runs/random_s23                  reported=0.33 re-eval=0.73±0.51
+runs/random_s8                   reported=3.25 re-eval=2.24±1.65
+runs/random_s9                   reported=1.36 re-eval=0.06±0.08

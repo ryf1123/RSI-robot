@@ -1,4 +1,4 @@
-import json,glob,numpy as np,matplotlib
+import json,glob,os,numpy as np,matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
 plt.rcParams["font.sans-serif"]=["PingFang SC","Heiti SC","Arial Unicode MS"]
 plt.rcParams["axes.unicode_minus"]=False
@@ -18,7 +18,18 @@ for i,n in enumerate(names):
 ax[0].set_xticks(range(len(names))); ax[0].set_xticklabels(["中等设计","好设计","带诱饵"],fontsize=10)
 ax[0].set_ylabel("任务适应度（米）"); ax[0].set_xlim(-.5,len(names)-.1)
 ax[0].set_title("① 噪声底：同一个设计，只换内层种子（各 6 个）"); ax[0].grid(alpha=.25,axis="y")
-# right: winner's curse
+# right: winner's curse -- every run, main arms coloured, the rest in grey
+import re as _re
+main=set()
+for a in ARMS:
+    for r in sorted(glob.glob(f"runs/{a}_s*")): main.add(r)
+ox,oy=[],[]
+for r in sorted(glob.glob("runs*/*_s*")):
+    if r in main or not os.path.isdir(r): continue
+    try: d=json.load(open(f"{r}/reeval.json"))
+    except FileNotFoundError: continue
+    ox.append(d["reported"]); oy.append(d["mean"])
+ax[1].scatter(ox,oy,s=26,color="#c9c9c9",alpha=.65,zorder=2,label=f"其它对照臂 (n={len(ox)})")
 for a in ARMS:
     r_,e_=[],[]
     for r in sorted(glob.glob(f"runs/{a}_s*")):
@@ -27,7 +38,7 @@ for a in ARMS:
         r_.append(d["reported"]); e_.append(d["mean"])
     if r_: ax[1].scatter(r_,e_,s=55,color=C[a],label=f"{LBL[a]} (n={len(r_)})",alpha=.85,zorder=3)
 lim=[-0.1,4.5]; ax[1].plot(lim,lim,"k--",lw=1,label="y = x（没有赢家诅咒）")
-ax[1].set_xlim(lim); ax[1].set_ylim(-0.2,3.0)
+ax[1].set_xlim(lim); ax[1].set_ylim(-0.3,3.0)
 ax[1].set_xlabel("外层报出来的 best-so-far（1 个内层种子）"); ax[1].set_ylabel("同一设计重评（6 个新种子）")
-ax[1].set_title("② 赢家诅咒：48 个 run 里 43 个在对角线下方；ρ = 0.17（p = 0.24）"); ax[1].legend(fontsize=7.5); ax[1].grid(alpha=.25)
+ax[1].set_title("② 赢家诅咒：192 个 run 里 162 个在对角线下方；ρ = 0.29（p < 0.001）"); ax[1].legend(fontsize=6.8,loc="upper right"); ax[1].grid(alpha=.25)
 plt.tight_layout(); plt.savefig("docs/figs/noise_curse.png",dpi=150); print("ok")
