@@ -11,7 +11,7 @@ VIS = _XML_SRC.replace("<worldbody>", """<asset>
 </asset><worldbody>
  <light pos="0 -2 4" dir="0 .4 -1" diffuse=".95 .95 .95"/>
  <light pos="3 -1 3" dir="-.5 .3 -1" diffuse=".35 .35 .4"/>""").replace(
- 'rgba="0.8 0.9 0.8 1"','material="gridm"').replace('rgba="0.6 0.7 0.9 1"','rgba="0.85 0.35 0.30 1"')
+ 'rgba="0.8 0.9 0.8 1"','material="gridm" rgba="1 1 1 1"').replace('rgba="0.6 0.7 0.9 1"','rgba="0.85 0.35 0.30 1"')
 
 def panel(design, seed, W=420, H=340, n_iters=120):
     M,norm,w,_ = train_policy(design, seed, n_iters)

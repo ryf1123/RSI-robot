@@ -37,7 +37,7 @@ def record(design, seed, out, n_iters=120, fps=40):
     </asset><worldbody>
       <light pos="0 -2 4" dir="0 .4 -1" diffuse=".9 .9 .9" specular=".2 .2 .2"/>
       <light pos="3 -1 3" dir="-.5 .3 -1" diffuse=".35 .35 .4"/>""")
-    vis=vis.replace('rgba="0.8 0.9 0.8 1"','material="gridm"')
+    vis=vis.replace('rgba="0.8 0.9 0.8 1"','material="gridm" rgba="1 1 1 1"')
     vis=vis.replace('rgba="0.6 0.7 0.9 1"','rgba="0.85 0.35 0.30 1"')
     vm=mujoco.MjModel.from_xml_string(vis); vd=mujoco.MjData(vm)
     r=mujoco.Renderer(vm, 360, 640)
