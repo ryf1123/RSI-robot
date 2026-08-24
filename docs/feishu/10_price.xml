@@ -1,0 +1,41 @@
+<h1>把问题反过来问一次</h1>
+<p>前面七环量的都是「语义先验值多少」。这一环反着问：<b>如果不给语义，纯靠实验把这份知识买回来，要花多少次训练？</b></p>
+<p>这不是一条臂，是一次测量。固定一个基础设计（<code>fwd_vel=2, alive=0.5, height=1.0</code>，中档超参），对 17 个项<b>逐个</b>做配对 A/B：「基础设计」vs「基础设计 + 该项权重 2.0」，两边用<b>同一批种子</b>，按配对差值的单侧 Wilcoxon 判「这一项有害」。k ∈ {1, 2, 4, 8, 16} 的阶梯用嵌套子集算，总成本 <b>240 次训练</b>。</p>
+<p><b>预注册的预测</b>：① k = 1 几乎判不出来且有假阳性；② <b>k ≥ 8 能把 3 个有害项全部识别出来且零假阳性</b>（≈ 272 次训练，外层预算的 8.5 倍）；③ 2 个无关项在任何 k 上都不会被判成有害。</p>
+<h1>结果：①③ 成立，②<b>被推翻，而且是往更贵的方向</b></h1>
+<table><colgroup><col width="80"/><col width="230"/><col width="90"/><col width="90"/><col width="110"/><col width="140"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>k（配对种子数）</p></th><th background-color="light-gray"><p>被判为有害的项</p></th><th background-color="light-gray"><p>真阳性</p></th><th background-color="light-gray"><p>假阳性</p></th><th background-color="light-gray"><p>召回</p></th><th background-color="light-gray"><p>总训练次数</p></th></tr></thead>
+<tbody>
+<tr><td><p>1</p></td><td><p><code>hop</code>（<b>有用项，误杀</b>）</p></td><td><p>0</p></td><td><p><b>1</b></p></td><td><p>0.00</p></td><td><p>15</p></td></tr>
+<tr><td><p>2</p></td><td><p>—</p></td><td><p>0</p></td><td><p>0</p></td><td><p>0.00</p></td><td><p>30</p></td></tr>
+<tr><td><p>4</p></td><td><p>—</p></td><td><p>0</p></td><td><p>0</p></td><td><p>0.00</p></td><td><p>60</p></td></tr>
+<tr><td><p>8</p></td><td><p><code>stand_still</code></p></td><td><p>1</p></td><td><p>0</p></td><td><p>0.33</p></td><td><p>120</p></td></tr>
+<tr><td><p><b>16</b></p></td><td><p><code>back_vel</code>, <code>stand_still</code></p></td><td><p><b>2</b></p></td><td><p>0</p></td><td><p><b>0.67</b></p></td><td><p><b>240</b></p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>花掉 240 次训练——整个外层循环预算（32 次）的 7.5 倍——只买到 3 个有害项里的 2 个。</b>第三个（<code>foot_press</code>）到 k = 16 还是判不出来（Δ = −0.38，p = 0.13）。</p><p>而<b>命名臂在第 1 代、零反馈、零成本的情况下，把这三个全都置零了。</b></p></callout>
+<h1>第三个要多少钱：做一次功效分析</h1>
+<table><colgroup><col width="150"/><col width="100"/><col width="90"/><col width="170"/><col width="150"/><col width="130"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>有害项</p></th><th background-color="light-gray"><p>Δ（米）</p></th><th background-color="light-gray"><p>σ</p></th><th background-color="light-gray"><p>需要的配对种子数</p></th><th background-color="light-gray"><p>该项的训练次数</p></th><th background-color="light-gray"><p>= 外层预算的</p></th></tr></thead>
+<tbody>
+<tr><td><p><code>back_vel</code></p></td><td><p>−1.13</p></td><td><p>1.35</p></td><td><p>9</p></td><td><p>18</p></td><td><p>0.6×</p></td></tr>
+<tr><td><p><code>stand_still</code></p></td><td><p>−0.86</p></td><td><p>1.14</p></td><td><p>11</p></td><td><p>22</p></td><td><p>0.7×</p></td></tr>
+<tr><td><p><b><code>foot_press</code></b></p></td><td><p><b>−0.38</b></p></td><td><p>1.34</p></td><td><p><b>78</b></p></td><td><p><b>156</b></p></td><td><p><b>4.9×</b></p></td></tr>
+</tbody></table>
+<callout emoji="📌" background-color="light-orange"><p>要让筛查<b>对全部 17 项</b>都有 80% 的功效（单侧 α = 0.05），每项需要 <b>78</b> 个配对种子，合计 <b>1404 次训练 —— 外层循环预算的 44 倍</b>。</p><p>而这买到的仅仅是「哪 5 项不该写」。<b>语义先验在第 0 次评估之前就把它给了，成本是零。</b></p></callout>
+<h1>三处旁证，都落在预期的位置上</h1>
+<ul>
+<li><b>无关项一次都没被误判</b>（<code>clock</code> p = 0.78）。预测③成立。</li>
+<li><b><code>y_drift</code> 的配对差值是 0.00 ± 0.00，逐位为零</b>，Wilcoxon 直接返回 nan。这是第六环那个「逐位无效」签名的第三次出现——<b>它是这套方法唯一能零成本、零假阳性识别的一类项</b>。</li>
+<li><b>k = 1 时唯一被判为有害的是 <code>hop</code>，一个有用项。</b>单种子对比不只是没用，它是<b>反着用</b>的：在 σ ≈ 1.3 的噪声里，17 次独立比较里出现一两个方向完全相反的假阳性是必然的。</li>
+</ul>
+<h1>这一环把整个项目的账算完了</h1>
+<table><colgroup><col width="230"/><col width="230"/><col width="270"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>获得「哪些项不该写」的途径</p></th><th background-color="light-gray"><p>成本</p></th><th background-color="light-gray"><p>效果</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>语义先验</b>（读项名）</p></td><td><p><b>0 次训练</b></p></td><td><p>decoy mass <b>0.000</b>，第 1 代就到（子页 02）</p></td></tr>
+<tr><td><p>受控对比（单种子）</p></td><td><p>整个外层预算</p></td><td><p>只抓得到逐位无效项，0.288 → 0.223（子页 07）</p></td></tr>
+<tr><td><p>适应度选择（evo）</p></td><td><p>整个外层预算</p></td><td><p><b>零贡献</b>，0.295 → 0.280（子页 02）</p></td></tr>
+<tr><td><p>逐项配对筛查，k = 16</p></td><td><p>240 次训练（<b>7.5×</b>）</p></td><td><p>3 个有害项抓到 2 个</p></td></tr>
+<tr><td><p>逐项配对筛查，80% 功效</p></td><td><p>1404 次训练（<b>44×</b>）</p></td><td><p>全部抓到</p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>所以「agent 值不值」这个问题，在这个空间里有一个非常具体的答案：它免费提供的那份知识，用实验买要多花 44 倍的算力。</b></p><p><b>但（子页 04）在随机基线本来就压在损伤拐点之下的空间里，这份知识买回来也不改变最终拿到的设计质量（1.04 vs 0.97，p = 1.00）。</b></p><p>两句话合起来才是完整的：<b>agent 提供的是一份极其便宜、而且实验上极其昂贵的知识——但这份知识只有在你的搜索空间足够危险时才兑现成结果。</b></p></callout>
