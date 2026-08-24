@@ -15,3 +15,147 @@ runs/sparseclean8_s0 24/32 best=1.193
 runs/sparseclean8_s0 32/32 best=1.193
 init runs/sparseclean12_s0 {'arm': 'sparseclean12', 'seed': 0, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
 runs/sparseclean12_s0 8/32 best=3.154
+runs/sparseclean12_s0 16/32 best=3.607
+runs/sparseclean12_s0 24/32 best=3.607
+runs/sparseclean12_s0 32/32 best=3.607
+init runs/sparseclean3_s1 {'arm': 'sparseclean3', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean3_s1 8/32 best=1.057
+runs/sparseclean3_s1 16/32 best=1.057
+runs/sparseclean3_s1 24/32 best=1.057
+runs/sparseclean3_s1 32/32 best=1.057
+init runs/sparseclean5_s1 {'arm': 'sparseclean5', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean5_s1 8/32 best=0.220
+runs/sparseclean5_s1 16/32 best=0.227
+runs/sparseclean5_s1 24/32 best=3.609
+runs/sparseclean5_s1 32/32 best=3.609
+init runs/sparseclean8_s1 {'arm': 'sparseclean8', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean8_s1 8/32 best=0.311
+runs/sparseclean8_s1 16/32 best=0.311
+runs/sparseclean8_s1 24/32 best=2.133
+runs/sparseclean8_s1 32/32 best=2.133
+init runs/sparseclean12_s1 {'arm': 'sparseclean12', 'seed': 1, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean12_s1 8/32 best=0.294
+runs/sparseclean12_s1 16/32 best=1.630
+runs/sparseclean12_s1 24/32 best=1.630
+runs/sparseclean12_s1 32/32 best=1.630
+init runs/sparseclean3_s2 {'arm': 'sparseclean3', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean3_s2 8/32 best=0.186
+runs/sparseclean3_s2 16/32 best=0.186
+runs/sparseclean3_s2 24/32 best=3.353
+runs/sparseclean3_s2 32/32 best=3.353
+init runs/sparseclean5_s2 {'arm': 'sparseclean5', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean5_s2 8/32 best=1.088
+runs/sparseclean5_s2 16/32 best=1.485
+runs/sparseclean5_s2 24/32 best=1.926
+runs/sparseclean5_s2 32/32 best=1.926
+init runs/sparseclean8_s2 {'arm': 'sparseclean8', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean8_s2 8/32 best=2.923
+runs/sparseclean8_s2 16/32 best=2.923
+runs/sparseclean8_s2 24/32 best=2.923
+runs/sparseclean8_s2 32/32 best=2.923
+init runs/sparseclean12_s2 {'arm': 'sparseclean12', 'seed': 2, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean12_s2 8/32 best=1.554
+runs/sparseclean12_s2 16/32 best=1.554
+runs/sparseclean12_s2 24/32 best=1.554
+runs/sparseclean12_s2 32/32 best=1.554
+init runs/sparseclean3_s3 {'arm': 'sparseclean3', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean3_s3 8/32 best=2.711
+runs/sparseclean3_s3 16/32 best=4.265
+runs/sparseclean3_s3 24/32 best=4.265
+runs/sparseclean3_s3 32/32 best=4.265
+init runs/sparseclean5_s3 {'arm': 'sparseclean5', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean5_s3 8/32 best=1.483
+runs/sparseclean5_s3 16/32 best=1.483
+runs/sparseclean5_s3 24/32 best=1.483
+runs/sparseclean5_s3 32/32 best=1.483
+init runs/sparseclean8_s3 {'arm': 'sparseclean8', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean8_s3 8/32 best=1.646
+runs/sparseclean8_s3 16/32 best=1.646
+runs/sparseclean8_s3 24/32 best=2.433
+runs/sparseclean8_s3 32/32 best=2.433
+init runs/sparseclean12_s3 {'arm': 'sparseclean12', 'seed': 3, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean12_s3 8/32 best=1.457
+runs/sparseclean12_s3 16/32 best=3.123
+runs/sparseclean12_s3 24/32 best=3.123
+runs/sparseclean12_s3 32/32 best=3.123
+init runs/sparseclean3_s4 {'arm': 'sparseclean3', 'seed': 4, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean3_s4 8/32 best=1.616
+runs/sparseclean3_s4 16/32 best=1.616
+runs/sparseclean3_s4 24/32 best=1.616
+runs/sparseclean3_s4 32/32 best=1.616
+init runs/sparseclean5_s4 {'arm': 'sparseclean5', 'seed': 4, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean5_s4 8/32 best=0.179
+runs/sparseclean5_s4 16/32 best=1.366
+runs/sparseclean5_s4 24/32 best=1.366
+runs/sparseclean5_s4 32/32 best=1.366
+init runs/sparseclean8_s4 {'arm': 'sparseclean8', 'seed': 4, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean8_s4 8/32 best=0.324
+runs/sparseclean8_s4 16/32 best=3.719
+runs/sparseclean8_s4 24/32 best=3.719
+runs/sparseclean8_s4 32/32 best=3.719
+init runs/sparseclean12_s4 {'arm': 'sparseclean12', 'seed': 4, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean12_s4 8/32 best=1.263
+runs/sparseclean12_s4 16/32 best=3.596
+runs/sparseclean12_s4 24/32 best=3.596
+runs/sparseclean12_s4 32/32 best=3.596
+init runs/sparseclean3_s5 {'arm': 'sparseclean3', 'seed': 5, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean3_s5 8/32 best=2.047
+runs/sparseclean3_s5 16/32 best=2.235
+runs/sparseclean3_s5 24/32 best=2.235
+runs/sparseclean3_s5 32/32 best=2.235
+init runs/sparseclean5_s5 {'arm': 'sparseclean5', 'seed': 5, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean5_s5 8/32 best=4.321
+runs/sparseclean5_s5 16/32 best=4.321
+runs/sparseclean5_s5 24/32 best=4.321
+runs/sparseclean5_s5 32/32 best=4.321
+init runs/sparseclean8_s5 {'arm': 'sparseclean8', 'seed': 5, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean8_s5 8/32 best=1.402
+runs/sparseclean8_s5 16/32 best=1.521
+runs/sparseclean8_s5 24/32 best=1.521
+runs/sparseclean8_s5 32/32 best=1.521
+init runs/sparseclean12_s5 {'arm': 'sparseclean12', 'seed': 5, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean12_s5 8/32 best=0.148
+runs/sparseclean12_s5 16/32 best=0.167
+runs/sparseclean12_s5 24/32 best=1.412
+runs/sparseclean12_s5 32/32 best=2.566
+init runs/sparseclean3_s6 {'arm': 'sparseclean3', 'seed': 6, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean3_s6 8/32 best=0.619
+runs/sparseclean3_s6 16/32 best=0.971
+runs/sparseclean3_s6 24/32 best=2.436
+runs/sparseclean3_s6 32/32 best=3.161
+init runs/sparseclean5_s6 {'arm': 'sparseclean5', 'seed': 6, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean5_s6 8/32 best=2.416
+runs/sparseclean5_s6 16/32 best=2.416
+runs/sparseclean5_s6 24/32 best=2.416
+runs/sparseclean5_s6 32/32 best=2.416
+init runs/sparseclean8_s6 {'arm': 'sparseclean8', 'seed': 6, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean8_s6 8/32 best=1.743
+runs/sparseclean8_s6 16/32 best=3.521
+runs/sparseclean8_s6 24/32 best=3.521
+runs/sparseclean8_s6 32/32 best=3.521
+init runs/sparseclean12_s6 {'arm': 'sparseclean12', 'seed': 6, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean12_s6 8/32 best=1.862
+runs/sparseclean12_s6 16/32 best=1.862
+runs/sparseclean12_s6 24/32 best=2.841
+runs/sparseclean12_s6 32/32 best=2.841
+init runs/sparseclean3_s7 {'arm': 'sparseclean3', 'seed': 7, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean3_s7 8/32 best=3.733
+runs/sparseclean3_s7 16/32 best=3.990
+runs/sparseclean3_s7 24/32 best=3.990
+runs/sparseclean3_s7 32/32 best=3.990
+init runs/sparseclean5_s7 {'arm': 'sparseclean5', 'seed': 7, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean5_s7 8/32 best=0.379
+runs/sparseclean5_s7 16/32 best=0.379
+runs/sparseclean5_s7 24/32 best=1.592
+runs/sparseclean5_s7 32/32 best=3.400
+init runs/sparseclean8_s7 {'arm': 'sparseclean8', 'seed': 7, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean8_s7 8/32 best=1.527
+runs/sparseclean8_s7 16/32 best=1.578
+runs/sparseclean8_s7 24/32 best=1.578
+runs/sparseclean8_s7 32/32 best=1.578
+init runs/sparseclean12_s7 {'arm': 'sparseclean12', 'seed': 7, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs/sparseclean12_s7 8/32 best=1.129
+runs/sparseclean12_s7 16/32 best=1.129
+runs/sparseclean12_s7 24/32 best=1.405
+runs/sparseclean12_s7 32/32 best=1.405
+SPARSECLEAN_DONE

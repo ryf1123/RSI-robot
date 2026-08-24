@@ -1,0 +1,9 @@
+{
+ "arm": "sparseclean8",
+ "seed": 3,
+ "budget": 32,
+ "gen": 8,
+ "n_iters": 120,
+ "anon": false,
+ "feedback": true
+}

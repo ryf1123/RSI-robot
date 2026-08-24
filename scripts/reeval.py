@@ -12,6 +12,14 @@ if __name__ == "__main__":
         except FileNotFoundError: continue
         if not hist: continue
         b = max(hist, key=lambda h: h["fitness"]); elite[r] = b
+        rp = f"{r}/reeval.json"
+        if os.path.exists(rp):
+            try:
+                prev = json.load(open(rp))
+                if prev.get("elite_i") == b["i"] and len(prev.get("vals", [])) == len(SEEDS):
+                    continue          # already re-evaluated this exact elite
+            except Exception:
+                pass
         jobs += [(r, b["design"], s) for s in SEEDS]
     print(len(jobs), "jobs", flush=True)
     out = {}
@@ -20,5 +28,6 @@ if __name__ == "__main__":
             out.setdefault(tag, []).append(f)
     for r, v in out.items():
         json.dump(dict(mean=float(np.mean(v)), std=float(np.std(v, ddof=1)), vals=v,
-                       reported=elite[r]["fitness"]), open(f"{r}/reeval.json", "w"), indent=1)
+                       reported=elite[r]["fitness"], elite_i=elite[r]["i"]),
+                  open(f"{r}/reeval.json", "w"), indent=1)
         print(f"{r:32s} reported={elite[r]['fitness']:.2f} re-eval={np.mean(v):.2f}±{np.std(v,ddof=1):.2f}")
