@@ -12,9 +12,16 @@ N_ITERS_DEFAULT = 120
 
 
 def _work(a):
-    design, seed, n_iters = a
+    design, seed, n_iters = a[:3]
+    k = a[3] if len(a) > 3 else 1
     t = time.time()
-    r = train_and_eval(design, seed=seed, n_iters=n_iters)
+    rs = [train_and_eval(design, seed=seed + 1000 * j, n_iters=n_iters) for j in range(k)]
+    r = rs[0]
+    if k > 1:                       # average the fitness over k inner seeds
+        fits = [x["fitness"] for x in rs]
+        r["fitness"] = round(float(np.mean(fits)), 3)
+        r["fitness_seeds"] = fits
+        r["fitness_std"] = round(float(np.std(fits, ddof=1)), 3)
     r["wall_s"] = round(time.time() - t, 1)
     return r
 
@@ -131,7 +138,8 @@ class Run:
 
     def evaluate(self, designs, pool=None):
         seed, ni = self.cfg["seed"], self.cfg["n_iters"]
-        args = [(dict(d), seed, ni) for d in designs]
+        k = int(self.cfg.get("inner_seeds", 1))
+        args = [(dict(d), seed, ni, k) for d in designs]
         res = pool.map(_work, args) if pool else [_work(a) for a in args]
         with open(f"{self.path}/history.jsonl", "a") as f:
             for d, r in zip(designs, res):
@@ -203,11 +211,13 @@ if __name__ == "__main__":
     ap.add_argument("--anon", action="store_true")
     ap.add_argument("--nofb", action="store_true")
     ap.add_argument("--procs", type=int, default=8)
+    ap.add_argument("--inner-seeds", type=int, default=1)
     a = ap.parse_args()
 
     if a.cmd == "init":
         r = Run.init(a.run, a.arm, a.seed, a.budget, a.gen, a.iters)
         r.cfg["anon"] = a.anon; r.cfg["feedback"] = not a.nofb
+        r.cfg["inner_seeds"] = a.inner_seeds
         json.dump(r.cfg, open(f"{a.run}/config.json", "w"), indent=1)
         print("init", a.run, r.cfg)
 

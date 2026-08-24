@@ -1,0 +1,29 @@
+init runs_k4/random_s0 {'arm': 'random', 'seed': 0, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s0 4/8 best=0.177
+runs_k4/random_s0 8/8 best=1.734
+init runs_k4/llm_named_nofb_s0 {'arm': 'llm', 'seed': 0, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s1 {'arm': 'random', 'seed': 1, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s1 4/8 best=0.777
+runs_k4/random_s1 8/8 best=0.777
+init runs_k4/llm_named_nofb_s1 {'arm': 'llm', 'seed': 1, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s2 {'arm': 'random', 'seed': 2, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s2 4/8 best=0.040
+runs_k4/random_s2 8/8 best=0.312
+init runs_k4/llm_named_nofb_s2 {'arm': 'llm', 'seed': 2, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s3 {'arm': 'random', 'seed': 3, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s3 4/8 best=0.051
+runs_k4/random_s3 8/8 best=0.200
+init runs_k4/llm_named_nofb_s3 {'arm': 'llm', 'seed': 3, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s4 {'arm': 'random', 'seed': 4, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s4 4/8 best=0.370
+runs_k4/random_s4 8/8 best=0.484
+init runs_k4/llm_named_nofb_s4 {'arm': 'llm', 'seed': 4, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s5 {'arm': 'random', 'seed': 5, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s5 4/8 best=0.005
+runs_k4/random_s5 8/8 best=1.022
+init runs_k4/llm_named_nofb_s5 {'arm': 'llm', 'seed': 5, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s6 {'arm': 'random', 'seed': 6, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+runs_k4/random_s6 4/8 best=0.195
+runs_k4/random_s6 8/8 best=1.091
+init runs_k4/llm_named_nofb_s6 {'arm': 'llm', 'seed': 6, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': False, 'inner_seeds': 4}
+init runs_k4/random_s7 {'arm': 'random', 'seed': 7, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
