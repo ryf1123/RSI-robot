@@ -39,11 +39,48 @@ class Run:
         arm = self.cfg["arm"]
         if arm == "random":
             return [Design.random(rng) for _ in range(k)]
+        if arm == "contrast":
+            return self._contrast(k, rng)
         if arm == "evo":
             if not self.hist: return [Design.random(rng) for _ in range(k)]
             best = Design(self.best()["design"])
             return [best.mutate(rng, n_changes=int(rng.choice([1, 2, 3]))) for _ in range(k)]
         raise RuntimeError(f"arm {arm} is answered out of band; use request/respond")
+
+    def _contrast(self, k, rng):
+        """Coordinate-wise controlled contrasts: change exactly one term against a
+        fixed baseline, with the inner seed held constant, so that an inert term
+        shows up as a byte-identical fitness. See notes/00_preregistration.md."""
+        if not self.hist:
+            return [Design.random(rng) for _ in range(k)]
+        base_rec = self.best()
+        base = Design(base_rec["design"])
+        base_fit = base_rec["fitness"]
+        # digest what earlier contrasts already told us
+        killed = set(self.cfg.get("killed", []))
+        for h in self.hist:
+            d = Design(h["design"])
+            diff = [n for n in TERM_NAMES if d["w"][n] != base["w"][n]]
+            if len(diff) == 1 and d["w"][diff[0]] == 0.0 and base["w"][diff[0]] > 0:
+                delta = h["fitness"] - base_fit
+                if abs(delta) < 1e-9 or delta > 0.3:
+                    killed.add(diff[0])
+        self.cfg["killed"] = sorted(killed)
+        json.dump(self.cfg, open(f"{self.path}/config.json", "w"), indent=1)
+        for n in killed:
+            base["w"][n] = 0.0
+        active = [n for n in TERM_NAMES if base["w"][n] > 0 and n not in killed]
+        inactive = [n for n in TERM_NAMES if base["w"][n] == 0 and n not in killed]
+        out = []
+        rng.shuffle(active); rng.shuffle(inactive)
+        for n in active[:k]:                       # knock one active term out
+            d = Design(w=dict(base["w"]), hp=dict(base["hp"])); d["w"][n] = 0.0; out.append(d)
+        for n in inactive:                         # or switch one dormant term on
+            if len(out) >= k: break
+            d = Design(w=dict(base["w"]), hp=dict(base["hp"])); d["w"][n] = 1.0; out.append(d)
+        while len(out) < k:
+            out.append(base.mutate(rng, n_changes=1))
+        return out
 
     def best(self):
         return max(self.hist, key=lambda h: h["fitness"]) if self.hist else None

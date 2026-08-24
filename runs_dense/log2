@@ -1,0 +1,40 @@
+init runs_dense/random_s4 {'arm': 'random', 'seed': 4, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s4 8/32 best=1.430
+runs_dense/random_s4 16/32 best=1.430
+runs_dense/random_s4 24/32 best=1.430
+runs_dense/random_s4 32/32 best=1.430
+init runs_dense/evo_s4 {'arm': 'evo', 'seed': 4, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/evo_s4 8/32 best=1.430
+runs_dense/evo_s4 16/32 best=1.849
+runs_dense/evo_s4 24/32 best=2.450
+runs_dense/evo_s4 32/32 best=2.587
+init runs_dense/llm_named_nofb_s4 {'arm': 'llm', 'seed': 4, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/random_s5 {'arm': 'random', 'seed': 5, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s5 8/32 best=0.197
+runs_dense/random_s5 16/32 best=0.524
+runs_dense/random_s5 24/32 best=0.524
+runs_dense/random_s5 32/32 best=0.524
+init runs_dense/evo_s5 {'arm': 'evo', 'seed': 5, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/evo_s5 8/32 best=0.197
+runs_dense/evo_s5 16/32 best=0.204
+runs_dense/evo_s5 24/32 best=0.204
+runs_dense/evo_s5 32/32 best=0.213
+init runs_dense/llm_named_nofb_s5 {'arm': 'llm', 'seed': 5, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/random_s6 {'arm': 'random', 'seed': 6, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s6 8/32 best=0.003
+runs_dense/random_s6 16/32 best=1.637
+runs_dense/random_s6 24/32 best=1.637
+runs_dense/random_s6 32/32 best=1.637
+init runs_dense/evo_s6 {'arm': 'evo', 'seed': 6, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/evo_s6 8/32 best=0.003
+runs_dense/evo_s6 16/32 best=0.003
+runs_dense/evo_s6 24/32 best=0.201
+runs_dense/evo_s6 32/32 best=0.617
+init runs_dense/llm_named_nofb_s6 {'arm': 'llm', 'seed': 6, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': False}
+init runs_dense/random_s7 {'arm': 'random', 'seed': 7, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/random_s7 8/32 best=0.183
+runs_dense/random_s7 16/32 best=0.183
+runs_dense/random_s7 24/32 best=0.183
+runs_dense/random_s7 32/32 best=0.183
+init runs_dense/evo_s7 {'arm': 'evo', 'seed': 7, 'budget': 32, 'gen': 8, 'n_iters': 120, 'anon': False, 'feedback': True}
+runs_dense/evo_s7 8/32 best=0.183

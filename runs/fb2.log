@@ -1,0 +1,9 @@
+runs/llm_named_fb_s4 32/32 best=4.625
+runs/llm_anon_fb_s4 32/32 best=0.985
+runs/llm_named_fb_s5 32/32 best=1.213
+runs/llm_anon_fb_s5 32/32 best=3.637
+runs/llm_named_fb_s6 32/32 best=3.375
+runs/llm_anon_fb_s6 32/32 best=4.319
+runs/llm_named_fb_s7 32/32 best=2.291
+runs/llm_anon_fb_s7 32/32 best=1.435
+FB2_GEN_DONE

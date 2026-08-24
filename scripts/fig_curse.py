@@ -29,5 +29,5 @@ for a in ARMS:
 lim=[-0.1,4.5]; ax[1].plot(lim,lim,"k--",lw=1,label="y = x（没有赢家诅咒）")
 ax[1].set_xlim(lim); ax[1].set_ylim(-0.2,3.0)
 ax[1].set_xlabel("外层报出来的 best-so-far（1 个内层种子）"); ax[1].set_ylabel("同一设计重评（6 个新种子）")
-ax[1].set_title("② 赢家诅咒：32 个 run 里 28 个在对角线下方；ρ = 0.04（p = 0.82）"); ax[1].legend(fontsize=7.5); ax[1].grid(alpha=.25)
+ax[1].set_title("② 赢家诅咒：48 个 run 里 43 个在对角线下方；ρ = 0.17（p = 0.24）"); ax[1].legend(fontsize=7.5); ax[1].grid(alpha=.25)
 plt.tight_layout(); plt.savefig("docs/figs/noise_curse.png",dpi=150); print("ok")

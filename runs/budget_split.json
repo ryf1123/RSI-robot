@@ -1,0 +1,1766 @@
+[
+ {
+  "k1": {
+   "reported": 1.581,
+   "reeval": 1.9433333333333334,
+   "design": {
+    "w": {
+     "fwd_vel": 1.0,
+     "alive": 0.25,
+     "height": 0.25,
+     "upright": 0.0,
+     "ctrl_cost": 1.0,
+     "smooth": 0.5,
+     "joint_lim": 2.0,
+     "foot_clear": 4.0,
+     "hop": 2.0,
+     "energy": 4.0,
+     "pitch_rate": 4.0,
+     "progress": 0.25,
+     "back_vel": 0.0,
+     "stand_still": 0.5,
+     "foot_press": 0.25,
+     "y_drift": 0.5,
+     "clock": 0.25
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.02,
+     "top_frac": 1.0,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k2": {
+   "reported": 0.271,
+   "reeval": 0.129,
+   "design": {
+    "w": {
+     "fwd_vel": 0.0,
+     "alive": 0.5,
+     "height": 2.0,
+     "upright": 0.5,
+     "ctrl_cost": 1.0,
+     "smooth": 0.5,
+     "joint_lim": 4.0,
+     "foot_clear": 0.0,
+     "hop": 0.25,
+     "energy": 0.5,
+     "pitch_rate": 2.0,
+     "progress": 0.0,
+     "back_vel": 0.0,
+     "stand_still": 2.0,
+     "foot_press": 1.0,
+     "y_drift": 0.0,
+     "clock": 4.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k4": {
+   "reported": 1.45225,
+   "reeval": 1.2185,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.25,
+     "height": 2.0,
+     "upright": 0.5,
+     "ctrl_cost": 1.0,
+     "smooth": 0.25,
+     "joint_lim": 2.0,
+     "foot_clear": 0.25,
+     "hop": 4.0,
+     "energy": 0.25,
+     "pitch_rate": 0.25,
+     "progress": 0.5,
+     "back_vel": 0.5,
+     "stand_still": 0.25,
+     "foot_press": 2.0,
+     "y_drift": 0.5,
+     "clock": 0.25
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.01,
+     "top_frac": 0.25,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.4875,
+   "reeval": 0.7108333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.25,
+     "height": 1.0,
+     "upright": 0.25,
+     "ctrl_cost": 4.0,
+     "smooth": 2.0,
+     "joint_lim": 0.25,
+     "foot_clear": 0.0,
+     "hop": 2.0,
+     "energy": 0.0,
+     "pitch_rate": 0.5,
+     "progress": 1.0,
+     "back_vel": 0.5,
+     "stand_still": 1.0,
+     "foot_press": 0.25,
+     "y_drift": 0.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.05,
+     "top_frac": 0.25,
+     "term_height": 0.6
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 1.298,
+   "reeval": 1.6523333333333337,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.5,
+     "height": 0.0,
+     "upright": 0.25,
+     "ctrl_cost": 4.0,
+     "smooth": 0.5,
+     "joint_lim": 1.0,
+     "foot_clear": 4.0,
+     "hop": 4.0,
+     "energy": 4.0,
+     "pitch_rate": 4.0,
+     "progress": 2.0,
+     "back_vel": 1.0,
+     "stand_still": 0.25,
+     "foot_press": 0.25,
+     "y_drift": 0.5,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k2": {
+   "reported": 0.082,
+   "reeval": 0.018333333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 0.5,
+     "alive": 4.0,
+     "height": 4.0,
+     "upright": 4.0,
+     "ctrl_cost": 1.0,
+     "smooth": 2.0,
+     "joint_lim": 0.0,
+     "foot_clear": 1.0,
+     "hop": 0.0,
+     "energy": 0.0,
+     "pitch_rate": 0.25,
+     "progress": 2.0,
+     "back_vel": 1.0,
+     "stand_still": 4.0,
+     "foot_press": 0.5,
+     "y_drift": 2.0,
+     "clock": 0.5
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.01,
+     "top_frac": 0.5,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.779,
+   "reeval": 0.13266666666666668,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.0,
+     "height": 4.0,
+     "upright": 0.5,
+     "ctrl_cost": 0.5,
+     "smooth": 4.0,
+     "joint_lim": 1.0,
+     "foot_clear": 0.0,
+     "hop": 1.0,
+     "energy": 0.0,
+     "pitch_rate": 0.0,
+     "progress": 1.0,
+     "back_vel": 1.0,
+     "stand_still": 0.5,
+     "foot_press": 4.0,
+     "y_drift": 0.5,
+     "clock": 0.25
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.05,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.0925,
+   "reeval": 0.11549999999999999,
+   "design": {
+    "w": {
+     "fwd_vel": 0.0,
+     "alive": 0.0,
+     "height": 4.0,
+     "upright": 2.0,
+     "ctrl_cost": 0.25,
+     "smooth": 0.0,
+     "joint_lim": 4.0,
+     "foot_clear": 0.25,
+     "hop": 0.25,
+     "energy": 4.0,
+     "pitch_rate": 4.0,
+     "progress": 0.25,
+     "back_vel": 2.0,
+     "stand_still": 1.0,
+     "foot_press": 2.0,
+     "y_drift": 4.0,
+     "clock": 2.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.6
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 1.538,
+   "reeval": 0.17133333333333334,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.5,
+     "height": 0.5,
+     "upright": 4.0,
+     "ctrl_cost": 0.0,
+     "smooth": 1.0,
+     "joint_lim": 0.5,
+     "foot_clear": 0.0,
+     "hop": 0.5,
+     "energy": 0.0,
+     "pitch_rate": 0.25,
+     "progress": 0.5,
+     "back_vel": 2.0,
+     "stand_still": 0.25,
+     "foot_press": 0.0,
+     "y_drift": 0.0,
+     "clock": 0.5
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k2": {
+   "reported": 2.3015,
+   "reeval": 0.7435,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 2.0,
+     "height": 1.0,
+     "upright": 0.25,
+     "ctrl_cost": 4.0,
+     "smooth": 0.25,
+     "joint_lim": 0.5,
+     "foot_clear": 1.0,
+     "hop": 0.0,
+     "energy": 0.5,
+     "pitch_rate": 1.0,
+     "progress": 4.0,
+     "back_vel": 1.0,
+     "stand_still": 0.5,
+     "foot_press": 0.0,
+     "y_drift": 0.25,
+     "clock": 4.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k4": {
+   "reported": 1.41625,
+   "reeval": 0.8953333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 0.5,
+     "alive": 0.5,
+     "height": 1.0,
+     "upright": 0.0,
+     "ctrl_cost": 2.0,
+     "smooth": 0.5,
+     "joint_lim": 1.0,
+     "foot_clear": 2.0,
+     "hop": 4.0,
+     "energy": 0.25,
+     "pitch_rate": 1.0,
+     "progress": 0.25,
+     "back_vel": 1.0,
+     "stand_still": 0.5,
+     "foot_press": 0.0,
+     "y_drift": 0.25,
+     "clock": 0.25
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.587,
+   "reeval": 0.5913333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 0.5,
+     "alive": 0.5,
+     "height": 0.0,
+     "upright": 4.0,
+     "ctrl_cost": 4.0,
+     "smooth": 2.0,
+     "joint_lim": 4.0,
+     "foot_clear": 1.0,
+     "hop": 1.0,
+     "energy": 4.0,
+     "pitch_rate": 1.0,
+     "progress": 0.5,
+     "back_vel": 0.0,
+     "stand_still": 0.0,
+     "foot_press": 0.5,
+     "y_drift": 2.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.01,
+     "top_frac": 0.25,
+     "term_height": 0.7
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 1.705,
+   "reeval": 0.18050000000000002,
+   "design": {
+    "w": {
+     "fwd_vel": 0.5,
+     "alive": 0.5,
+     "height": 4.0,
+     "upright": 2.0,
+     "ctrl_cost": 2.0,
+     "smooth": 1.0,
+     "joint_lim": 4.0,
+     "foot_clear": 0.0,
+     "hop": 1.0,
+     "energy": 0.5,
+     "pitch_rate": 0.5,
+     "progress": 2.0,
+     "back_vel": 1.0,
+     "stand_still": 0.5,
+     "foot_press": 2.0,
+     "y_drift": 0.5,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.01,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k2": {
+   "reported": 1.5225,
+   "reeval": 1.133333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 0.25,
+     "height": 0.5,
+     "upright": 0.0,
+     "ctrl_cost": 0.0,
+     "smooth": 0.5,
+     "joint_lim": 0.25,
+     "foot_clear": 4.0,
+     "hop": 4.0,
+     "energy": 0.25,
+     "pitch_rate": 0.25,
+     "progress": 1.0,
+     "back_vel": 0.25,
+     "stand_still": 0.5,
+     "foot_press": 1.0,
+     "y_drift": 4.0,
+     "clock": 4.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.55825,
+   "reeval": 0.7446666666666667,
+   "design": {
+    "w": {
+     "fwd_vel": 1.0,
+     "alive": 0.0,
+     "height": 0.25,
+     "upright": 0.0,
+     "ctrl_cost": 0.0,
+     "smooth": 4.0,
+     "joint_lim": 0.5,
+     "foot_clear": 0.25,
+     "hop": 4.0,
+     "energy": 4.0,
+     "pitch_rate": 2.0,
+     "progress": 0.0,
+     "back_vel": 0.5,
+     "stand_still": 0.25,
+     "foot_press": 0.25,
+     "y_drift": 0.0,
+     "clock": 2.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k8": {
+   "reported": 1.14525,
+   "reeval": 0.7010000000000001,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 2.0,
+     "height": 0.0,
+     "upright": 0.25,
+     "ctrl_cost": 1.0,
+     "smooth": 0.5,
+     "joint_lim": 0.25,
+     "foot_clear": 2.0,
+     "hop": 4.0,
+     "energy": 4.0,
+     "pitch_rate": 2.0,
+     "progress": 0.25,
+     "back_vel": 0.5,
+     "stand_still": 0.0,
+     "foot_press": 0.5,
+     "y_drift": 1.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.05,
+     "top_frac": 1.0,
+     "term_height": 0.7
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 1.021,
+   "reeval": 0.7813333333333334,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 1.0,
+     "height": 1.0,
+     "upright": 1.0,
+     "ctrl_cost": 0.5,
+     "smooth": 0.25,
+     "joint_lim": 4.0,
+     "foot_clear": 0.0,
+     "hop": 2.0,
+     "energy": 1.0,
+     "pitch_rate": 4.0,
+     "progress": 2.0,
+     "back_vel": 1.0,
+     "stand_still": 1.0,
+     "foot_press": 1.0,
+     "y_drift": 4.0,
+     "clock": 0.25
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.02,
+     "top_frac": 0.25,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k2": {
+   "reported": 0.6665000000000001,
+   "reeval": 0.25433333333333336,
+   "design": {
+    "w": {
+     "fwd_vel": 0.0,
+     "alive": 2.0,
+     "height": 0.5,
+     "upright": 0.5,
+     "ctrl_cost": 0.25,
+     "smooth": 1.0,
+     "joint_lim": 0.25,
+     "foot_clear": 2.0,
+     "hop": 0.25,
+     "energy": 1.0,
+     "pitch_rate": 0.0,
+     "progress": 4.0,
+     "back_vel": 0.25,
+     "stand_still": 0.5,
+     "foot_press": 0.5,
+     "y_drift": 4.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k4": {
+   "reported": 1.6484999999999999,
+   "reeval": 1.015,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.5,
+     "height": 1.0,
+     "upright": 2.0,
+     "ctrl_cost": 4.0,
+     "smooth": 1.0,
+     "joint_lim": 4.0,
+     "foot_clear": 0.25,
+     "hop": 0.25,
+     "energy": 0.0,
+     "pitch_rate": 2.0,
+     "progress": 0.5,
+     "back_vel": 0.5,
+     "stand_still": 0.25,
+     "foot_press": 0.0,
+     "y_drift": 0.0,
+     "clock": 4.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k8": {
+   "reported": 1.0425,
+   "reeval": 0.793,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 0.0,
+     "height": 0.5,
+     "upright": 0.25,
+     "ctrl_cost": 0.0,
+     "smooth": 0.0,
+     "joint_lim": 1.0,
+     "foot_clear": 0.0,
+     "hop": 2.0,
+     "energy": 0.25,
+     "pitch_rate": 0.25,
+     "progress": 0.25,
+     "back_vel": 0.0,
+     "stand_still": 0.5,
+     "foot_press": 0.25,
+     "y_drift": 0.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 1.0,
+     "term_height": 0.7
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 0.965,
+   "reeval": 0.0009999999999999998,
+   "design": {
+    "w": {
+     "fwd_vel": 0.0,
+     "alive": 2.0,
+     "height": 2.0,
+     "upright": 0.0,
+     "ctrl_cost": 0.25,
+     "smooth": 0.5,
+     "joint_lim": 1.0,
+     "foot_clear": 1.0,
+     "hop": 0.5,
+     "energy": 0.25,
+     "pitch_rate": 2.0,
+     "progress": 2.0,
+     "back_vel": 0.0,
+     "stand_still": 0.25,
+     "foot_press": 0.25,
+     "y_drift": 4.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.05,
+     "top_frac": 1.0,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k2": {
+   "reported": 1.506,
+   "reeval": 0.30350000000000005,
+   "design": {
+    "w": {
+     "fwd_vel": 0.5,
+     "alive": 0.25,
+     "height": 0.25,
+     "upright": 0.0,
+     "ctrl_cost": 0.5,
+     "smooth": 0.0,
+     "joint_lim": 0.5,
+     "foot_clear": 4.0,
+     "hop": 2.0,
+     "energy": 0.25,
+     "pitch_rate": 0.0,
+     "progress": 1.0,
+     "back_vel": 0.25,
+     "stand_still": 0.0,
+     "foot_press": 1.0,
+     "y_drift": 0.25,
+     "clock": 0.5
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.01,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.36774999999999997,
+   "reeval": 1.0689999999999997,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.5,
+     "height": 0.0,
+     "upright": 0.5,
+     "ctrl_cost": 0.25,
+     "smooth": 4.0,
+     "joint_lim": 0.0,
+     "foot_clear": 0.25,
+     "hop": 1.0,
+     "energy": 0.25,
+     "pitch_rate": 1.0,
+     "progress": 0.25,
+     "back_vel": 0.25,
+     "stand_still": 0.0,
+     "foot_press": 2.0,
+     "y_drift": 4.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k8": {
+   "reported": 1.4455,
+   "reeval": 1.9766666666666668,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 2.0,
+     "height": 0.0,
+     "upright": 0.5,
+     "ctrl_cost": 0.0,
+     "smooth": 4.0,
+     "joint_lim": 4.0,
+     "foot_clear": 2.0,
+     "hop": 0.25,
+     "energy": 2.0,
+     "pitch_rate": 4.0,
+     "progress": 4.0,
+     "back_vel": 1.0,
+     "stand_still": 1.0,
+     "foot_press": 1.0,
+     "y_drift": 0.25,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 2.351,
+   "reeval": 0.3758333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 4.0,
+     "height": 0.0,
+     "upright": 2.0,
+     "ctrl_cost": 4.0,
+     "smooth": 0.5,
+     "joint_lim": 2.0,
+     "foot_clear": 0.25,
+     "hop": 4.0,
+     "energy": 0.25,
+     "pitch_rate": 0.0,
+     "progress": 0.0,
+     "back_vel": 0.0,
+     "stand_still": 0.5,
+     "foot_press": 0.5,
+     "y_drift": 4.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.01,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k2": {
+   "reported": 2.84,
+   "reeval": 2.548,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 0.0,
+     "height": 0.25,
+     "upright": 0.0,
+     "ctrl_cost": 1.0,
+     "smooth": 0.25,
+     "joint_lim": 4.0,
+     "foot_clear": 2.0,
+     "hop": 4.0,
+     "energy": 0.25,
+     "pitch_rate": 0.25,
+     "progress": 2.0,
+     "back_vel": 0.0,
+     "stand_still": 0.0,
+     "foot_press": 2.0,
+     "y_drift": 0.25,
+     "clock": 0.5
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.1,
+     "top_frac": 0.25,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k4": {
+   "reported": 1.9747499999999998,
+   "reeval": 2.2595,
+   "design": {
+    "w": {
+     "fwd_vel": 1.0,
+     "alive": 0.0,
+     "height": 0.0,
+     "upright": 1.0,
+     "ctrl_cost": 4.0,
+     "smooth": 0.0,
+     "joint_lim": 4.0,
+     "foot_clear": 2.0,
+     "hop": 4.0,
+     "energy": 0.0,
+     "pitch_rate": 2.0,
+     "progress": 1.0,
+     "back_vel": 0.0,
+     "stand_still": 0.0,
+     "foot_press": 0.25,
+     "y_drift": 0.5,
+     "clock": 2.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.1,
+     "top_frac": 0.25,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.6503749999999999,
+   "reeval": 0.7808333333333334,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.25,
+     "height": 1.0,
+     "upright": 2.0,
+     "ctrl_cost": 0.5,
+     "smooth": 0.5,
+     "joint_lim": 2.0,
+     "foot_clear": 0.25,
+     "hop": 1.0,
+     "energy": 1.0,
+     "pitch_rate": 2.0,
+     "progress": 2.0,
+     "back_vel": 0.0,
+     "stand_still": 0.0,
+     "foot_press": 4.0,
+     "y_drift": 0.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.6
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 1.5,
+   "reeval": 0.6228333333333335,
+   "design": {
+    "w": {
+     "fwd_vel": 0.25,
+     "alive": 0.0,
+     "height": 1.0,
+     "upright": 0.25,
+     "ctrl_cost": 2.0,
+     "smooth": 0.5,
+     "joint_lim": 2.0,
+     "foot_clear": 4.0,
+     "hop": 1.0,
+     "energy": 0.25,
+     "pitch_rate": 4.0,
+     "progress": 1.0,
+     "back_vel": 0.5,
+     "stand_still": 0.25,
+     "foot_press": 0.0,
+     "y_drift": 0.0,
+     "clock": 2.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.02,
+     "top_frac": 0.25,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k2": {
+   "reported": 1.6224999999999998,
+   "reeval": 0.11916666666666668,
+   "design": {
+    "w": {
+     "fwd_vel": 0.25,
+     "alive": 4.0,
+     "height": 0.5,
+     "upright": 0.25,
+     "ctrl_cost": 4.0,
+     "smooth": 2.0,
+     "joint_lim": 2.0,
+     "foot_clear": 4.0,
+     "hop": 2.0,
+     "energy": 0.5,
+     "pitch_rate": 0.25,
+     "progress": 1.0,
+     "back_vel": 0.25,
+     "stand_still": 0.25,
+     "foot_press": 2.0,
+     "y_drift": 0.5,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.02,
+     "top_frac": 0.25,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.17125,
+   "reeval": 0.08900000000000001,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 2.0,
+     "height": 2.0,
+     "upright": 0.25,
+     "ctrl_cost": 0.25,
+     "smooth": 0.25,
+     "joint_lim": 4.0,
+     "foot_clear": 0.5,
+     "hop": 4.0,
+     "energy": 0.5,
+     "pitch_rate": 4.0,
+     "progress": 0.25,
+     "back_vel": 2.0,
+     "stand_still": 4.0,
+     "foot_press": 0.0,
+     "y_drift": 4.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k8": {
+   "reported": 1.17125,
+   "reeval": 0.9248333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 2.0,
+     "height": 0.25,
+     "upright": 0.0,
+     "ctrl_cost": 0.25,
+     "smooth": 4.0,
+     "joint_lim": 2.0,
+     "foot_clear": 0.5,
+     "hop": 2.0,
+     "energy": 2.0,
+     "pitch_rate": 0.0,
+     "progress": 1.0,
+     "back_vel": 0.5,
+     "stand_still": 1.0,
+     "foot_press": 2.0,
+     "y_drift": 0.25,
+     "clock": 2.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.6
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 3.666,
+   "reeval": 0.016000000000000004,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 1.0,
+     "height": 0.0,
+     "upright": 1.0,
+     "ctrl_cost": 0.25,
+     "smooth": 0.0,
+     "joint_lim": 0.25,
+     "foot_clear": 0.5,
+     "hop": 0.0,
+     "energy": 0.5,
+     "pitch_rate": 0.25,
+     "progress": 1.0,
+     "back_vel": 1.0,
+     "stand_still": 0.5,
+     "foot_press": 0.25,
+     "y_drift": 0.5,
+     "clock": 0.25
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.02,
+     "top_frac": 1.0,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k2": {
+   "reported": 0.547,
+   "reeval": 0.9756666666666667,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.25,
+     "height": 0.25,
+     "upright": 0.5,
+     "ctrl_cost": 2.0,
+     "smooth": 0.25,
+     "joint_lim": 0.0,
+     "foot_clear": 1.0,
+     "hop": 0.0,
+     "energy": 0.0,
+     "pitch_rate": 2.0,
+     "progress": 0.5,
+     "back_vel": 0.0,
+     "stand_still": 0.0,
+     "foot_press": 4.0,
+     "y_drift": 2.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.6532500000000001,
+   "reeval": 0.814,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.25,
+     "height": 0.0,
+     "upright": 2.0,
+     "ctrl_cost": 4.0,
+     "smooth": 0.5,
+     "joint_lim": 2.0,
+     "foot_clear": 0.5,
+     "hop": 2.0,
+     "energy": 0.0,
+     "pitch_rate": 2.0,
+     "progress": 0.0,
+     "back_vel": 0.25,
+     "stand_still": 0.0,
+     "foot_press": 2.0,
+     "y_drift": 1.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.01,
+     "top_frac": 0.5,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.41875,
+   "reeval": 0.07433333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 1.0,
+     "alive": 0.5,
+     "height": 2.0,
+     "upright": 4.0,
+     "ctrl_cost": 0.5,
+     "smooth": 2.0,
+     "joint_lim": 4.0,
+     "foot_clear": 0.5,
+     "hop": 4.0,
+     "energy": 2.0,
+     "pitch_rate": 1.0,
+     "progress": 2.0,
+     "back_vel": 0.5,
+     "stand_still": 0.25,
+     "foot_press": 0.25,
+     "y_drift": 1.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.1,
+     "top_frac": 1.0,
+     "term_height": 0.8
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 3.307,
+   "reeval": 0.6048333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.0,
+     "height": 4.0,
+     "upright": 0.5,
+     "ctrl_cost": 0.25,
+     "smooth": 0.0,
+     "joint_lim": 0.25,
+     "foot_clear": 2.0,
+     "hop": 0.5,
+     "energy": 4.0,
+     "pitch_rate": 2.0,
+     "progress": 0.0,
+     "back_vel": 0.25,
+     "stand_still": 2.0,
+     "foot_press": 0.0,
+     "y_drift": 4.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.05,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k2": {
+   "reported": 0.5565000000000001,
+   "reeval": 0.23616666666666666,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 1.0,
+     "height": 2.0,
+     "upright": 0.0,
+     "ctrl_cost": 1.0,
+     "smooth": 1.0,
+     "joint_lim": 2.0,
+     "foot_clear": 4.0,
+     "hop": 0.5,
+     "energy": 1.0,
+     "pitch_rate": 0.5,
+     "progress": 4.0,
+     "back_vel": 1.0,
+     "stand_still": 4.0,
+     "foot_press": 0.0,
+     "y_drift": 4.0,
+     "clock": 2.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.01,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.11224999999999999,
+   "reeval": 0.11749999999999998,
+   "design": {
+    "w": {
+     "fwd_vel": 0.0,
+     "alive": 4.0,
+     "height": 0.5,
+     "upright": 0.5,
+     "ctrl_cost": 0.5,
+     "smooth": 2.0,
+     "joint_lim": 0.25,
+     "foot_clear": 0.25,
+     "hop": 0.0,
+     "energy": 1.0,
+     "pitch_rate": 4.0,
+     "progress": 1.0,
+     "back_vel": 1.0,
+     "stand_still": 0.5,
+     "foot_press": 0.0,
+     "y_drift": 2.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.524,
+   "reeval": 0.4123333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.5,
+     "height": 0.25,
+     "upright": 0.5,
+     "ctrl_cost": 0.0,
+     "smooth": 4.0,
+     "joint_lim": 2.0,
+     "foot_clear": 4.0,
+     "hop": 1.0,
+     "energy": 0.25,
+     "pitch_rate": 4.0,
+     "progress": 2.0,
+     "back_vel": 2.0,
+     "stand_still": 4.0,
+     "foot_press": 4.0,
+     "y_drift": 2.0,
+     "clock": 2.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.7
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 1.065,
+   "reeval": 0.6571666666666667,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 0.0,
+     "height": 0.25,
+     "upright": 0.25,
+     "ctrl_cost": 0.0,
+     "smooth": 1.0,
+     "joint_lim": 4.0,
+     "foot_clear": 1.0,
+     "hop": 2.0,
+     "energy": 0.0,
+     "pitch_rate": 4.0,
+     "progress": 2.0,
+     "back_vel": 2.0,
+     "stand_still": 1.0,
+     "foot_press": 0.0,
+     "y_drift": 0.5,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.05,
+     "top_frac": 0.25,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k2": {
+   "reported": 1.471,
+   "reeval": 1.4976666666666667,
+   "design": {
+    "w": {
+     "fwd_vel": 0.25,
+     "alive": 0.0,
+     "height": 0.25,
+     "upright": 0.0,
+     "ctrl_cost": 0.0,
+     "smooth": 0.25,
+     "joint_lim": 0.5,
+     "foot_clear": 4.0,
+     "hop": 0.25,
+     "energy": 2.0,
+     "pitch_rate": 0.5,
+     "progress": 4.0,
+     "back_vel": 1.0,
+     "stand_still": 0.0,
+     "foot_press": 0.25,
+     "y_drift": 0.0,
+     "clock": 0.25
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.01,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.306,
+   "reeval": 0.30133333333333334,
+   "design": {
+    "w": {
+     "fwd_vel": 0.0,
+     "alive": 0.0,
+     "height": 0.0,
+     "upright": 0.25,
+     "ctrl_cost": 1.0,
+     "smooth": 4.0,
+     "joint_lim": 0.25,
+     "foot_clear": 4.0,
+     "hop": 4.0,
+     "energy": 0.5,
+     "pitch_rate": 1.0,
+     "progress": 2.0,
+     "back_vel": 1.0,
+     "stand_still": 0.25,
+     "foot_press": 4.0,
+     "y_drift": 4.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.05,
+     "top_frac": 0.25,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.096875,
+   "reeval": 0.1185,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 4.0,
+     "height": 0.25,
+     "upright": 0.25,
+     "ctrl_cost": 1.0,
+     "smooth": 2.0,
+     "joint_lim": 1.0,
+     "foot_clear": 2.0,
+     "hop": 0.25,
+     "energy": 2.0,
+     "pitch_rate": 0.5,
+     "progress": 0.5,
+     "back_vel": 0.25,
+     "stand_still": 4.0,
+     "foot_press": 4.0,
+     "y_drift": 2.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.05,
+     "top_frac": 0.25,
+     "term_height": 0.7
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 1.547,
+   "reeval": 1.0911666666666668,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 4.0,
+     "height": 0.5,
+     "upright": 0.25,
+     "ctrl_cost": 0.5,
+     "smooth": 0.5,
+     "joint_lim": 4.0,
+     "foot_clear": 2.0,
+     "hop": 1.0,
+     "energy": 2.0,
+     "pitch_rate": 0.25,
+     "progress": 0.5,
+     "back_vel": 2.0,
+     "stand_still": 0.0,
+     "foot_press": 2.0,
+     "y_drift": 0.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.01,
+     "top_frac": 0.25,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k2": {
+   "reported": 0.9575,
+   "reeval": 0.6823333333333332,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 1.0,
+     "height": 1.0,
+     "upright": 0.25,
+     "ctrl_cost": 4.0,
+     "smooth": 0.0,
+     "joint_lim": 2.0,
+     "foot_clear": 1.0,
+     "hop": 2.0,
+     "energy": 0.5,
+     "pitch_rate": 0.0,
+     "progress": 0.5,
+     "back_vel": 0.5,
+     "stand_still": 0.5,
+     "foot_press": 2.0,
+     "y_drift": 1.0,
+     "clock": 0.5
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.01,
+     "top_frac": 0.25,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.5175000000000001,
+   "reeval": 0.9243333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 4.0,
+     "height": 0.0,
+     "upright": 0.0,
+     "ctrl_cost": 4.0,
+     "smooth": 1.0,
+     "joint_lim": 2.0,
+     "foot_clear": 4.0,
+     "hop": 1.0,
+     "energy": 1.0,
+     "pitch_rate": 4.0,
+     "progress": 2.0,
+     "back_vel": 0.25,
+     "stand_still": 0.5,
+     "foot_press": 1.0,
+     "y_drift": 4.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.09025,
+   "reeval": 0.2816666666666667,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.25,
+     "height": 0.0,
+     "upright": 2.0,
+     "ctrl_cost": 4.0,
+     "smooth": 0.25,
+     "joint_lim": 1.0,
+     "foot_clear": 0.0,
+     "hop": 1.0,
+     "energy": 0.25,
+     "pitch_rate": 0.25,
+     "progress": 0.25,
+     "back_vel": 0.25,
+     "stand_still": 0.5,
+     "foot_press": 4.0,
+     "y_drift": 0.0,
+     "clock": 0.25
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.05,
+     "top_frac": 1.0,
+     "term_height": 0.7
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 2.43,
+   "reeval": 2.526333333333333,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.25,
+     "height": 0.25,
+     "upright": 0.5,
+     "ctrl_cost": 0.25,
+     "smooth": 1.0,
+     "joint_lim": 2.0,
+     "foot_clear": 0.0,
+     "hop": 0.5,
+     "energy": 0.25,
+     "pitch_rate": 0.0,
+     "progress": 0.25,
+     "back_vel": 0.25,
+     "stand_still": 1.0,
+     "foot_press": 0.5,
+     "y_drift": 0.5,
+     "clock": 4.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.02,
+     "top_frac": 0.25,
+     "term_height": 0.7
+    }
+   }
+  },
+  "k2": {
+   "reported": 0.4235,
+   "reeval": 0.20333333333333334,
+   "design": {
+    "w": {
+     "fwd_vel": 1.0,
+     "alive": 4.0,
+     "height": 1.0,
+     "upright": 2.0,
+     "ctrl_cost": 2.0,
+     "smooth": 0.5,
+     "joint_lim": 4.0,
+     "foot_clear": 4.0,
+     "hop": 4.0,
+     "energy": 1.0,
+     "pitch_rate": 0.0,
+     "progress": 0.25,
+     "back_vel": 1.0,
+     "stand_still": 2.0,
+     "foot_press": 0.5,
+     "y_drift": 1.0,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.02,
+     "top_frac": 0.25,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.55675,
+   "reeval": 0.61,
+   "design": {
+    "w": {
+     "fwd_vel": 0.0,
+     "alive": 2.0,
+     "height": 1.0,
+     "upright": 0.5,
+     "ctrl_cost": 0.25,
+     "smooth": 0.0,
+     "joint_lim": 4.0,
+     "foot_clear": 4.0,
+     "hop": 4.0,
+     "energy": 2.0,
+     "pitch_rate": 4.0,
+     "progress": 0.5,
+     "back_vel": 0.5,
+     "stand_still": 0.25,
+     "foot_press": 0.25,
+     "y_drift": 0.5,
+     "clock": 0.25
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.25,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.105125,
+   "reeval": 0.11449999999999999,
+   "design": {
+    "w": {
+     "fwd_vel": 0.5,
+     "alive": 0.5,
+     "height": 0.5,
+     "upright": 1.0,
+     "ctrl_cost": 2.0,
+     "smooth": 1.0,
+     "joint_lim": 0.25,
+     "foot_clear": 0.5,
+     "hop": 0.25,
+     "energy": 4.0,
+     "pitch_rate": 4.0,
+     "progress": 4.0,
+     "back_vel": 1.0,
+     "stand_still": 0.25,
+     "foot_press": 0.5,
+     "y_drift": 0.25,
+     "clock": 1.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.25,
+     "term_height": 0.8
+    }
+   }
+  }
+ },
+ {
+  "k1": {
+   "reported": 1.274,
+   "reeval": 0.23250000000000004,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 0.25,
+     "height": 0.0,
+     "upright": 1.0,
+     "ctrl_cost": 0.5,
+     "smooth": 4.0,
+     "joint_lim": 2.0,
+     "foot_clear": 1.0,
+     "hop": 0.0,
+     "energy": 4.0,
+     "pitch_rate": 1.0,
+     "progress": 0.25,
+     "back_vel": 1.0,
+     "stand_still": 0.0,
+     "foot_press": 0.5,
+     "y_drift": 0.5,
+     "clock": 2.0
+    },
+    "hp": {
+     "step_size": 0.05,
+     "noise_std": 0.1,
+     "top_frac": 0.25,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k2": {
+   "reported": 1.3555,
+   "reeval": 0.8916666666666666,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 0.25,
+     "height": 4.0,
+     "upright": 0.5,
+     "ctrl_cost": 0.0,
+     "smooth": 2.0,
+     "joint_lim": 0.0,
+     "foot_clear": 0.5,
+     "hop": 1.0,
+     "energy": 0.5,
+     "pitch_rate": 0.5,
+     "progress": 4.0,
+     "back_vel": 0.25,
+     "stand_still": 0.0,
+     "foot_press": 0.5,
+     "y_drift": 0.5,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.01,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  },
+  "k4": {
+   "reported": 0.16775,
+   "reeval": 0.26500000000000007,
+   "design": {
+    "w": {
+     "fwd_vel": 0.25,
+     "alive": 0.5,
+     "height": 2.0,
+     "upright": 1.0,
+     "ctrl_cost": 1.0,
+     "smooth": 0.5,
+     "joint_lim": 4.0,
+     "foot_clear": 0.0,
+     "hop": 0.25,
+     "energy": 1.0,
+     "pitch_rate": 1.0,
+     "progress": 0.5,
+     "back_vel": 0.25,
+     "stand_still": 0.25,
+     "foot_press": 4.0,
+     "y_drift": 2.0,
+     "clock": 2.0
+    },
+    "hp": {
+     "step_size": 0.005,
+     "noise_std": 0.01,
+     "top_frac": 1.0,
+     "term_height": 0.6
+    }
+   }
+  },
+  "k8": {
+   "reported": 0.11150000000000002,
+   "reeval": 0.03966666666666666,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 0.25,
+     "height": 0.25,
+     "upright": 0.25,
+     "ctrl_cost": 0.25,
+     "smooth": 0.0,
+     "joint_lim": 2.0,
+     "foot_clear": 2.0,
+     "hop": 0.25,
+     "energy": 0.0,
+     "pitch_rate": 4.0,
+     "progress": 0.5,
+     "back_vel": 2.0,
+     "stand_still": 0.5,
+     "foot_press": 4.0,
+     "y_drift": 0.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.8
+    }
+   }
+  }
+ }
+]

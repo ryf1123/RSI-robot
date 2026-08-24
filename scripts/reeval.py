@@ -7,7 +7,7 @@ def work(a):
     tag, d, s = a; return tag, s, train_and_eval(d, seed=s, n_iters=120)["fitness"]
 if __name__ == "__main__":
     jobs, elite = [], {}
-    for r in sorted(glob.glob(os.environ.get("RSI_ROOT","runs")+"/*_s*")):
+    for r in sorted(p for p in glob.glob(os.environ.get("RSI_ROOT","runs")+"/*_s*") if os.path.isdir(p)):
         try: hist = [json.loads(l) for l in open(f"{r}/history.jsonl")]
         except FileNotFoundError: continue
         if not hist: continue
@@ -15,7 +15,7 @@ if __name__ == "__main__":
         jobs += [(r, b["design"], s) for s in SEEDS]
     print(len(jobs), "jobs", flush=True)
     out = {}
-    with mp.Pool(6) as p:
+    with mp.Pool(int(os.environ.get("RSI_PROCS","6"))) as p:
         for tag, s, f in p.imap_unordered(work, jobs):
             out.setdefault(tag, []).append(f)
     for r, v in out.items():
