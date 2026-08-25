@@ -29,10 +29,10 @@
   "p_raw": 0.23705,
   "min_detectable_diff": 0.592,
   "intervals_overlap": true,
-  "p_adj": 0.9482,
+  "p_adj": 1.0,
   "family": "pr1_bullseye",
   "family_size": 5,
-  "checked": "2026-08-25T09:36:43"
+  "checked": "2026-08-25T10:02:14"
  },
  "history": [],
  "cited_in": [],

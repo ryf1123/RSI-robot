@@ -1,23 +1,27 @@
 {
- "n_a": 8,
- "n_b": 24,
- "mean_a": 0.235,
+ "n_a": 27,
+ "n_b": 32,
+ "mean_a": 0.156,
  "ci_a": [
-  0.085,
-  0.406
+  0.1,
+  0.223
  ],
- "mean_b": 0.209,
+ "mean_b": 0.148,
  "ci_b": [
-  0.178,
-  0.24
+  0.092,
+  0.209
  ],
- "diff": 0.026,
- "cliffs_delta": -0.073,
- "p_raw": 0.38863,
- "min_detectable_diff": 0.188,
+ "diff": 0.008,
+ "cliffs_delta": 0.069,
+ "p_raw": 0.68039,
+ "min_detectable_diff": 0.11,
  "intervals_overlap": true,
  "ok": true,
  "control": "llm_anon_nofb",
- "baseline": "random",
- "metric": "decoy"
+ "baseline": [
+  "sparse3",
+  "sparse5"
+ ],
+ "metric": "decoy",
+ "note": "baseline is sparsity-matched; comparing against uniform random measures sparsity, not leakage"
 }

@@ -191,6 +191,9 @@ def verify_batch(plan_path="research/last_plan.json"):
 
 
 def save_plan(tasks, path="research/last_plan.json"):
+    """Record only what the batch will actually execute -- otherwise verify_batch
+    flags deferred tasks as 'spent compute, gained nothing', which is a false alarm."""
+    tasks = [t for t in tasks if not t.get("deferred")]
     import json, os
     for t in tasks:
         if t.get("kind") == "add_seeds":

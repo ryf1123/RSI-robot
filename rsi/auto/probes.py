@@ -64,13 +64,26 @@ def instrument(n=4000, seed=0):
     return res
 
 
-def protocol(root="runs", control="llm_anon_nofb", baseline="random", metric="decoy"):
-    """The control arm must be indistinguishable from random. If it beats random,
-    the anonymisation leaked and every downstream comparison is void."""
-    a, b = data.series(root, control, metric), data.series(root, baseline, metric)
+def protocol(root="runs", control="llm_anon_nofb", baseline=("sparse3", "sparse5"),
+             metric="decoy"):
+    """The information-equivalent-to-random control arm must be indistinguishable
+    from its baseline. If it beats it, the anonymisation leaked and every
+    downstream comparison is void.
+
+    The baseline must be SPARSITY-MATCHED, not uniform random. Elite decoy mass
+    falls with the number of active terms all by itself (fewer terms -> higher
+    chance of carrying no decoy at all, and fitness selection then picks those),
+    so comparing a sparse control against uniform random measures the confound,
+    not the leak. Learned the hard way: at n=8 this probe passed against uniform
+    random; at n=27 it "failed" -- and the failure was entirely sparsity."""
+    import numpy as _np
+    if isinstance(baseline, str): baseline = (baseline,)
+    a = data.series(root, control, metric)
+    b = _np.concatenate([data.series(root, x, metric) for x in baseline])
     c = S.compare(a, b, alt="less")
     c["ok"] = bool(c.get("intervals_overlap", False))
-    c["control"], c["baseline"], c["metric"] = control, baseline, metric
+    c["control"], c["baseline"], c["metric"] = control, list(baseline), metric
+    c["note"] = "baseline is sparsity-matched; comparing against uniform random measures sparsity, not leakage"
     os.makedirs(PROBE_DIR, exist_ok=True)
     json.dump(c, open(f"{PROBE_DIR}/protocol.json", "w"), indent=1)
     return c

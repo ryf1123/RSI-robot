@@ -1,6 +1,6 @@
 {
  "id": "d_anon_nofb",
- "statement": "匿名·无反馈的精英诱饵占比低于随机（协议对照：应当不显著）",
+ "statement": "匿名·无反馈的精英诱饵占比低于随机（协议对照：应当不显著）（★ 该比较被稀疏度混杂：已由 d_anon_nofb_matched 取代）",
  "test": {
   "kind": "mwu_less",
   "arm": "llm_anon_nofb",
@@ -10,31 +10,58 @@
   "alpha": 0.05
  },
  "prereg": "pr1_decoy",
- "status": "underpowered",
+ "status": "supported",
  "evidence": {
-  "n_a": 8,
+  "n_a": 27,
   "n_b": 24,
-  "mean_a": 0.235,
+  "mean_a": 0.156,
   "ci_a": [
-   0.085,
-   0.406
+   0.1,
+   0.223
   ],
   "mean_b": 0.209,
   "ci_b": [
    0.178,
    0.24
   ],
-  "diff": 0.026,
-  "cliffs_delta": -0.073,
-  "p_raw": 0.38863,
-  "min_detectable_diff": 0.188,
+  "diff": -0.053,
+  "cliffs_delta": -0.401,
+  "p_raw": 0.0072,
+  "min_detectable_diff": 0.09,
   "intervals_overlap": true,
-  "p_adj": 0.77726,
+  "p_adj": 0.0288,
   "family": "pr1_decoy",
-  "family_size": 5,
-  "checked": "2026-08-25T09:36:43"
+  "family_size": 6,
+  "checked": "2026-08-25T10:02:14"
  },
- "history": [],
+ "history": [
+  {
+   "status": "underpowered",
+   "evidence": {
+    "n_a": 8,
+    "n_b": 24,
+    "mean_a": 0.235,
+    "ci_a": [
+     0.085,
+     0.406
+    ],
+    "mean_b": 0.209,
+    "ci_b": [
+     0.178,
+     0.24
+    ],
+    "diff": 0.026,
+    "cliffs_delta": -0.073,
+    "p_raw": 0.38863,
+    "min_detectable_diff": 0.188,
+    "intervals_overlap": true,
+    "p_adj": 0.77726,
+    "family": "pr1_decoy",
+    "family_size": 5,
+    "checked": "2026-08-25T09:36:43"
+   }
+  }
+ ],
  "cited_in": [],
- "superseded_by": ""
+ "superseded_by": "d_anon_nofb_matched"
 }
