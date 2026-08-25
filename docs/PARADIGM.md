@@ -199,3 +199,52 @@ mechanise the three that produced the actual insight: inventing the decoy probe,
 inventing anonymisation as a semantic off-switch, and suspecting `loop_config`.
 
 All four it takes over are discipline. None of the three it cannot are.
+
+---
+
+## Operating record
+
+Two cycles the system chose, ran and judged on its own, plus one alarm it raised
+against itself.
+
+**Cycle 1 — 352 trainings spent to retract a published number.** The driver
+ranks by *distance to decidable*, not cost. Top of the queue was
+`runs_k4/llm_anon_nofb` at `promise = 0.85` — observed 0.48 m against a
+0.56 m detection floor, 15% short, 352 trainings to close. It generated the
+batch, answered its own code-written prior, ran 11 seeds, re-evaluated and swept:
+
+```
+n = 12   mean 1.00   Holm p = 0.061    (already published as "marginal")
+n = 23   mean 0.86   Holm p = 0.21
+```
+
+The effect shrank with data. What the system bought was a retraction — and the
+reason it ranked first is exactly the reason it was dangerous: *closest to
+decidable* is also *most likely to be written up as a result*.
+
+**Cycle 2 — same pattern again.** `runs/llm_anon_nofb`, n = 8 → 27:
+mean 1.30 → 1.10, `p_adj = 1.00`. Two cycles, two shrinking effects. This is the
+"don't report a mechanism below n = 8" rule, running without anyone remembering it.
+
+**The alarm.** Cycle 2's sweep flipped the *protocol control* — the arm that must
+stay indistinguishable from its baseline or the whole ablation is void:
+
+```
+d_anon_nofb   n =  8    0.235 vs 0.209   p_adj = 0.78   passes
+              n = 27    0.156 vs 0.209   p_adj = 0.022  ALARM: it "beats" random
+```
+
+Resolving it needed a better control, not more data. Elite decoy mass falls with
+the number of active terms on its own — fewer terms, higher chance of carrying no
+decoy, and fitness selection then picks those. The control arm averages 4.4
+active terms; uniform random averages 13.4. Against **sparsity-matched**
+baselines the alarm vanishes: 0.156 vs 0.166 (`sparse5`, p = 0.51), 0.156 vs
+0.093 (`sparse3`, p = 0.88).
+
+No leak — a confound. The old claim is marked `superseded_by`, a matched-baseline
+claim replaces it, `probes.protocol()` now defaults to a sparsity-matched
+baseline, and the lesson is in its docstring.
+
+That episode is the clearest statement of the division of labour: **the system
+noticed the control had flipped and escalated it; it could not invent the
+matched baseline.** Discipline is mechanisable. Judgement is not.
