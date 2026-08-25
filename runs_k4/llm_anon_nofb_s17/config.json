@@ -1,0 +1,10 @@
+{
+ "arm": "llm",
+ "seed": 17,
+ "budget": 8,
+ "gen": 4,
+ "n_iters": 120,
+ "anon": true,
+ "feedback": false,
+ "inner_seeds": 4
+}

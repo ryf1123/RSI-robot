@@ -1,0 +1,6 @@
+30 jobs
+runs/llm_named_nofb_s10          reported=3.89 re-eval=2.05±1.61
+runs/llm_named_nofb_s11          reported=3.81 re-eval=0.40±0.67
+runs/llm_named_nofb_s12          reported=3.91 re-eval=1.27±0.91
+runs/llm_named_nofb_s8           reported=3.93 re-eval=1.49±1.21
+runs/llm_named_nofb_s9           reported=4.18 re-eval=0.73±0.64

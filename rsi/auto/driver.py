@@ -62,9 +62,15 @@ def next_tasks(delta=0.5, budget_trainings=4000):
         sd = PL.observed_sd(root, arm, c.test["metric"])
         need = PL.seeds_for(delta, sd)
         have = len(data.series(root, arm, c.test["metric"]))
+        d, mdd = abs(c.evidence.get("diff", 0.0)), c.evidence.get("min_detectable_diff", 1e9)
+        # how close is this comparison to being decidable? seeds spent on a
+        # claim at promise~1 are likely to flip a verdict; at promise~0 they buy
+        # a more precise zero. This is the closest thing here to expected
+        # information gain, and it is what should rank the queue -- not cost.
+        promise = round(float(d / mdd) if mdd else 0.0, 3)
         tasks.append(dict(priority=3, kind="add_seeds", what=f"{root}/{arm}", claim=c.id,
-                          why=f"能测到的最小差是 {c.evidence.get('min_detectable_diff','?')}m，"
-                              f"观测差只有 {c.evidence.get('diff','?')}m；n={have}→{need}",
+                          promise=promise,
+                          why=f"离可判还差 {1-promise:.0%}（观测差 {d:.2f}m / 能测到 {mdd:.2f}m）；n={have}→{need}",
                           **_cost(max(0, need - have) * 32)))
 
     # 4. unregistered claims
@@ -85,7 +91,7 @@ def next_tasks(delta=0.5, budget_trainings=4000):
         k = (t["kind"], t["what"])
         if k not in dedup or t["trainings"] > dedup[k]["trainings"]: dedup[k] = t
     tasks = list(dedup.values())
-    tasks.sort(key=lambda t: (t["priority"], -t["trainings"]))
+    tasks.sort(key=lambda t: (t["priority"], -t.get("promise", 0.0), t["trainings"]))
     spent, plan = 0, []
     for t in tasks:
         if spent + t["trainings"] > budget_trainings and t["priority"] > 1:
@@ -147,12 +153,50 @@ def script(tasks, out="research/next_batch.sh"):
             if arm.startswith("llm_"):
                 anon = " --anon" if "anon" in arm else ""
                 lines += [f'{env}python -m rsi.loop init --run {d} --arm llm --seed {s} {extra} --nofb{anon} >/dev/null',
-                          f'{env}python -m rsi.loop request --run {d} >/dev/null']
+                          f'{env}python -m rsi.loop request --run {d} >/dev/null',
+                          f'{env}python scripts/answer_prior.py >/dev/null',
+                          f'{env}python -m rsi.loop step --run {d} --procs 6']
             else:
                 lines.append(f'{env}python -m rsi.loop init --run {d} --arm {arm} --seed {s} {extra} >/dev/null')
                 lines.append(f'{env}python -m rsi.loop run --run {d} --procs 6')
-    lines += ["python scripts/reeval.py > research/reeval.log 2>&1",
-              "python -m rsi.auto sweep", "echo BATCH_DONE"]
+    # re-evaluate EVERY root the batch touched. Getting this wrong once cost a
+    # whole batch: the elites were retrained but never re-scored, so the claim
+    # the batch was aimed at did not move and the compute bought nothing.
+    for root in sorted({t["root"] for t in tasks}):
+        env = "RSI_SPACE=dense " if root == "runs_dense" else ""
+        lines.append(f'{env}RSI_ROOT={root} python scripts/reeval.py >> research/reeval.log 2>&1')
+    lines += ["python -m rsi.auto verify-batch", "python -m rsi.auto sweep", "echo BATCH_DONE"]
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, "w").write("\n".join(lines) + "\n"); os.chmod(out, 0o755)
     return out
+
+
+def verify_batch(plan_path="research/last_plan.json"):
+    """After a batch: did the claims it targeted actually gain sample size?
+
+    A batch that runs to completion and changes no `n` has bought nothing, and
+    that failure is silent unless something checks for it."""
+    import json, os
+    if not os.path.exists(plan_path): return []
+    prev = json.load(open(plan_path))
+    bad = []
+    for t in prev:
+        if t.get("kind") != "add_seeds": continue
+        root, arm = t["what"].split("/")
+        now = len(data.series(root, arm, "reeval"))
+        if now <= t.get("n_before", -1):
+            bad.append(dict(what=t["what"], n_before=t.get("n_before"), n_now=now,
+                            spent=t["trainings"]))
+    return bad
+
+
+def save_plan(tasks, path="research/last_plan.json"):
+    import json, os
+    for t in tasks:
+        if t.get("kind") == "add_seeds":
+            root, arm = t["what"].split("/")
+            t["n_before"] = len(data.series(root, arm, "reeval"))
+            t["root"], t["arm"] = root, arm
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    json.dump(tasks, open(path, "w"), ensure_ascii=False, indent=1)
+    return path

@@ -12,27 +12,27 @@
  "prereg": "pr1_decoy",
  "status": "supported",
  "evidence": {
-  "n_a": 8,
+  "n_a": 13,
   "n_b": 24,
-  "mean_a": 0.0,
+  "mean_a": 0.018,
   "ci_a": [
    0.0,
-   0.0
+   0.049
   ],
   "mean_b": 0.209,
   "ci_b": [
    0.178,
    0.24
   ],
-  "diff": -0.209,
-  "cliffs_delta": -1.0,
-  "p_raw": 1e-05,
-  "min_detectable_diff": 0.057,
+  "diff": -0.191,
+  "cliffs_delta": -0.923,
+  "p_raw": 0.0,
+  "min_detectable_diff": 0.058,
   "intervals_overlap": false,
-  "p_adj": 5e-05,
+  "p_adj": 0.0,
   "family": "pr1_decoy",
   "family_size": 5,
-  "checked": "2026-08-25T09:07:53"
+  "checked": "2026-08-25T09:36:43"
  },
  "history": [],
  "cited_in": [],

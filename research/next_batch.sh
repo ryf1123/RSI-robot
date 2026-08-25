@@ -3,76 +3,83 @@ set -e
 cd "$(dirname "$0")/.."
 source .venv/bin/activate
 export PYTHONPATH=.
-python -m rsi.loop init --run runs/sparse12_s8 --arm sparse12 --seed 8 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s8 --procs 6
-python -m rsi.loop init --run runs/sparse12_s9 --arm sparse12 --seed 9 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s9 --procs 6
-python -m rsi.loop init --run runs/sparse12_s10 --arm sparse12 --seed 10 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s10 --procs 6
-python -m rsi.loop init --run runs/sparse12_s11 --arm sparse12 --seed 11 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s11 --procs 6
-python -m rsi.loop init --run runs/sparse12_s12 --arm sparse12 --seed 12 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s12 --procs 6
-python -m rsi.loop init --run runs/sparse12_s13 --arm sparse12 --seed 13 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s13 --procs 6
-python -m rsi.loop init --run runs/sparse12_s14 --arm sparse12 --seed 14 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s14 --procs 6
-python -m rsi.loop init --run runs/sparse12_s15 --arm sparse12 --seed 15 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s15 --procs 6
-python -m rsi.loop init --run runs/sparse12_s16 --arm sparse12 --seed 16 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s16 --procs 6
-python -m rsi.loop init --run runs/sparse12_s17 --arm sparse12 --seed 17 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s17 --procs 6
-python -m rsi.loop init --run runs/sparse12_s18 --arm sparse12 --seed 18 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s18 --procs 6
-python -m rsi.loop init --run runs/sparse12_s19 --arm sparse12 --seed 19 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s19 --procs 6
-python -m rsi.loop init --run runs/sparse12_s20 --arm sparse12 --seed 20 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s20 --procs 6
-python -m rsi.loop init --run runs/sparse12_s21 --arm sparse12 --seed 21 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s21 --procs 6
-python -m rsi.loop init --run runs/sparse12_s22 --arm sparse12 --seed 22 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s22 --procs 6
-python -m rsi.loop init --run runs/sparse12_s23 --arm sparse12 --seed 23 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s23 --procs 6
-python -m rsi.loop init --run runs/sparse12_s24 --arm sparse12 --seed 24 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s24 --procs 6
-python -m rsi.loop init --run runs/sparse12_s25 --arm sparse12 --seed 25 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s25 --procs 6
-python -m rsi.loop init --run runs/sparse12_s26 --arm sparse12 --seed 26 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s26 --procs 6
-python -m rsi.loop init --run runs/sparse12_s27 --arm sparse12 --seed 27 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s27 --procs 6
-python -m rsi.loop init --run runs/sparse12_s28 --arm sparse12 --seed 28 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s28 --procs 6
-python -m rsi.loop init --run runs/sparse12_s29 --arm sparse12 --seed 29 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s29 --procs 6
-python -m rsi.loop init --run runs/sparse12_s30 --arm sparse12 --seed 30 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse12_s30 --procs 6
-python -m rsi.loop init --run runs/sparse3_s8 --arm sparse3 --seed 8 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s8 --procs 6
-python -m rsi.loop init --run runs/sparse3_s9 --arm sparse3 --seed 9 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s9 --procs 6
-python -m rsi.loop init --run runs/sparse3_s10 --arm sparse3 --seed 10 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s10 --procs 6
-python -m rsi.loop init --run runs/sparse3_s11 --arm sparse3 --seed 11 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s11 --procs 6
-python -m rsi.loop init --run runs/sparse3_s12 --arm sparse3 --seed 12 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s12 --procs 6
-python -m rsi.loop init --run runs/sparse3_s13 --arm sparse3 --seed 13 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s13 --procs 6
-python -m rsi.loop init --run runs/sparse3_s14 --arm sparse3 --seed 14 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s14 --procs 6
-python -m rsi.loop init --run runs/sparse3_s15 --arm sparse3 --seed 15 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s15 --procs 6
-python -m rsi.loop init --run runs/sparse3_s16 --arm sparse3 --seed 16 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s16 --procs 6
-python -m rsi.loop init --run runs/sparse3_s17 --arm sparse3 --seed 17 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s17 --procs 6
-python -m rsi.loop init --run runs/sparse3_s18 --arm sparse3 --seed 18 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s18 --procs 6
-python -m rsi.loop init --run runs/sparse3_s19 --arm sparse3 --seed 19 --budget 32 --gen 8 >/dev/null
-python -m rsi.loop run --run runs/sparse3_s19 --procs 6
-python scripts/reeval.py > research/reeval.log 2>&1
+python -m rsi.loop init --run runs/llm_anon_nofb_s8 --arm llm --seed 8 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s8 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s8 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s9 --arm llm --seed 9 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s9 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s9 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s10 --arm llm --seed 10 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s10 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s10 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s11 --arm llm --seed 11 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s11 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s11 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s12 --arm llm --seed 12 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s12 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s12 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s13 --arm llm --seed 13 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s13 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s13 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s14 --arm llm --seed 14 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s14 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s14 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s15 --arm llm --seed 15 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s15 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s15 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s16 --arm llm --seed 16 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s16 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s16 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s17 --arm llm --seed 17 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s17 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s17 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s18 --arm llm --seed 18 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s18 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s18 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s19 --arm llm --seed 19 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s19 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s19 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s20 --arm llm --seed 20 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s20 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s20 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s21 --arm llm --seed 21 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s21 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s21 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s22 --arm llm --seed 22 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s22 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s22 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s23 --arm llm --seed 23 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s23 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s23 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s24 --arm llm --seed 24 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s24 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s24 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s25 --arm llm --seed 25 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s25 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s25 --procs 6
+python -m rsi.loop init --run runs/llm_anon_nofb_s26 --arm llm --seed 26 --budget 32 --gen 8 --nofb --anon >/dev/null
+python -m rsi.loop request --run runs/llm_anon_nofb_s26 >/dev/null
+python scripts/answer_prior.py >/dev/null
+python -m rsi.loop step --run runs/llm_anon_nofb_s26 --procs 6
+RSI_ROOT=runs python scripts/reeval.py >> research/reeval.log 2>&1
+python -m rsi.auto verify-batch
 python -m rsi.auto sweep
 echo BATCH_DONE

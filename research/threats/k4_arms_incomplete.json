@@ -3,7 +3,7 @@
  "severity": "high",
  "threat": "k=4 的结论只在 random 和 命名·无反馈 两条臂上测过",
  "control": "6 条主臂全部在 k=4 下重跑",
- "status": "in_progress",
- "finding": "",
+ "status": "addressed",
+ "finding": "6 条臂全部在 k=4 下跑完；排序第一次与先验含量一致，且反馈两对同向为负",
  "updated": "2026-08-25T08:09:47"
 }
