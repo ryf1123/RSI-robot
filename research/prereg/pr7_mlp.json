@@ -1,0 +1,13 @@
+{
+ "id": "pr7_mlp",
+ "question": "把内层策略从线性换成 1 隐层 MLP，全项目唯一的正结论还成立吗？",
+ "prediction": "① 主结论复现（k=4 下语义先验 > 随机）；② 绝对水平更低、方差更大；③ decoy mass 仍是 0.000 vs ~0.21（接线检查）",
+ "decision_rule": "单侧 MWU，精英重评口径，family=2（适应度 + decoy mass）",
+ "family": [
+  "mlp_named_nofb",
+  "mlp_decoy"
+ ],
+ "created": "2026-08-25T10:20",
+ "outcome": "open",
+ "note": ""
+}

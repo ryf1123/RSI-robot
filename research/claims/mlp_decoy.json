@@ -1,0 +1,18 @@
+{
+ "id": "mlp_decoy",
+ "statement": "MLP 内层：命名臂的精英诱饵占比低于随机（接线检查，必须复现）",
+ "test": {
+  "kind": "mwu_less",
+  "arm": "llm_named_nofb",
+  "baseline": "random",
+  "metric": "decoy",
+  "root": "runs_mlp",
+  "alpha": 0.05
+ },
+ "prereg": "pr7_mlp",
+ "status": "untested",
+ "evidence": {},
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

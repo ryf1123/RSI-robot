@@ -1,0 +1,1 @@
+init runs_mlp/random_s0 {'arm': 'random', 'seed': 0, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}

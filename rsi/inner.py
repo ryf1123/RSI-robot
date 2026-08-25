@@ -4,12 +4,20 @@ evaluation that turns one design into (fitness, diagnostics).
 The inner optimiser only ever sees the DESIGNED reward. The fitness reported to
 the outer loop is the TASK metric (metres travelled before falling), which no
 design can rewrite. That separation is what makes reward hacking visible."""
+import os
 import numpy as np
 from .env import Hopper
 from .rewards import reward_vector, TERM_NAMES
 from .design import Design
 
 N_ITERS, N_DIRS, TOP_DEFAULT = 120, 6, 3
+# RSI_POLICY=mlp swaps the inner policy class for a 1-hidden-layer tanh net.
+# Everything outside this module -- the design space, the decoys, the task metric,
+# the outer loop -- is untouched, which is the point: it isolates the threat
+# `external_validity_inner` to exactly one variable.
+POLICY = os.environ.get("RSI_POLICY", "linear")
+HIDDEN = int(os.environ.get("RSI_HIDDEN", "8"))
+MLP_ITERS = int(os.environ.get("RSI_MLP_ITERS", "300"))
 EVAL_EPISODES = 8
 MAX_STEPS = 200  # 2.4 s at 83 Hz
 
@@ -26,13 +34,28 @@ class Normalizer:
         return (x - self.mean) / np.sqrt(np.maximum(self.m2 / np.maximum(self.n, 1), 1e-8))
 
 
+def act(M, x):
+    """Linear policy, or a 1-hidden-layer tanh MLP when M is a (W1, W2) pair.
+    Kept in one place so the outer-loop code never needs to know which is in use."""
+    if isinstance(M, tuple):
+        W1, W2 = M
+        return W2 @ np.tanh(W1 @ x)
+    return M @ x
+
+
+def _perturb(M, d, s):
+    if isinstance(M, tuple):
+        return (M[0] + s * d[0], M[1] + s * d[1])
+    return M + s * d
+
+
 def rollout(env, M, norm, weights, train=True, max_steps=MAX_STEPS):
     o = env.reset()
     R = 0.0; rvec = np.zeros(len(TERM_NAMES)); steps = 0
     diag = dict(air=0, sat=0, z=0.0, pitch=0.0)
     while True:
         if train: norm.observe(o)
-        u = M @ norm(o)
+        u = act(M, norm(o))
         o, s, done, fell = env.step(u)
         rv = reward_vector(s, env.t)
         rvec += rv
@@ -51,19 +74,33 @@ def train_and_eval(design, seed=0, n_iters=N_ITERS, n_dirs=N_DIRS):
     hp = design["hp"]
     rng = np.random.default_rng(seed)
     env = Hopper(term_height=hp["term_height"], max_steps=MAX_STEPS, seed=seed)
-    M = np.zeros((Hopper.act_dim, Hopper.obs_dim))
+    if POLICY == "mlp":
+        n_iters = MLP_ITERS if n_iters == N_ITERS else n_iters
+        M = (rng.standard_normal((HIDDEN, Hopper.obs_dim)) / np.sqrt(Hopper.obs_dim),
+             np.zeros((Hopper.act_dim, HIDDEN)))
+    else:
+        M = np.zeros((Hopper.act_dim, Hopper.obs_dim))
     norm = Normalizer(Hopper.obs_dim)
     top = max(1, int(round(hp["top_frac"] * n_dirs)))
     curve = []
     for it in range(n_iters):
-        deltas = rng.standard_normal((n_dirs, *M.shape))
+        if isinstance(M, tuple):
+            deltas = [(rng.standard_normal(M[0].shape), rng.standard_normal(M[1].shape))
+                      for _ in range(n_dirs)]
+        else:
+            deltas = rng.standard_normal((n_dirs, *M.shape))
         rp, rm = np.zeros(n_dirs), np.zeros(n_dirs)
         for i, dlt in enumerate(deltas):
-            rp[i] = rollout(env, M + hp["noise_std"] * dlt, norm, w)[0]
-            rm[i] = rollout(env, M - hp["noise_std"] * dlt, norm, w)[0]
+            rp[i] = rollout(env, _perturb(M, dlt, hp["noise_std"]), norm, w)[0]
+            rm[i] = rollout(env, _perturb(M, dlt, -hp["noise_std"]), norm, w)[0]
         order = np.argsort(-np.maximum(rp, rm))[:top]
         sr = np.concatenate([rp[order], rm[order]]).std() + 1e-6
-        M += hp["step_size"] / (top * sr) * np.einsum("i,ijk->jk", rp[order] - rm[order], deltas[order])
+        step = hp["step_size"] / (top * sr)
+        if isinstance(M, tuple):
+            M = (M[0] + step * sum((rp[i] - rm[i]) * deltas[i][0] for i in order),
+                 M[1] + step * sum((rp[i] - rm[i]) * deltas[i][1] for i in order))
+        else:
+            M += step * np.einsum("i,ijk->jk", rp[order] - rm[order], deltas[order])
         if (it + 1) % max(1, n_iters // 5) == 0:
             xs = [rollout(env, M, norm, w, train=False)[1]["x"] for _ in range(2)]
             curve.append(round(float(np.mean(xs)), 3))

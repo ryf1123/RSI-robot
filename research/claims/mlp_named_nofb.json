@@ -1,0 +1,18 @@
+{
+ "id": "mlp_named_nofb",
+ "statement": "MLP 内层 + k=4：纯语义先验交付的设计真实质量优于随机",
+ "test": {
+  "kind": "mwu_greater",
+  "arm": "llm_named_nofb",
+  "baseline": "random",
+  "metric": "reeval",
+  "root": "runs_mlp",
+  "alpha": 0.05
+ },
+ "prereg": "pr7_mlp",
+ "status": "untested",
+ "evidence": {},
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}
