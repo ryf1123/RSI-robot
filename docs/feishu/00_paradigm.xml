@@ -1,0 +1,106 @@
+<callout emoji="🎯" background-color="light-blue"><p><b>搜索框架回答的是「哪个设计最好」。研究系统回答的是「我现在相信什么、有多确信、还有什么可能是错的、下一步该跑什么」。</b></p><p>这一页是后者。它不是从设想里来的——它是把这个项目九个小时里<b>连续搞错四次</b>的过程，一条一条变成组件。</p></callout>
+<h1>控制回路</h1>
+<whiteboard type="mermaid">flowchart LR
+  A["PROBE<br/>噪声底 / 仪器 / 协议对照"] --> B["PREREG<br/>预注册 + 声明比较族"]
+  B --> C["EXECUTE<br/>跑臂"]
+  C --> D["VERIFY<br/>精英换新种子重评"]
+  D --> E["SWEEP<br/>重算全部 claim"]
+  E --> F["THREATS<br/>还有什么可能是错的"]
+  F --> G["DRIVER<br/>下一步跑什么，多少钱"]
+  G --> A
+  style A fill:#e8f0fb
+  style B fill:#e8f0fb
+  style D fill:#fbeaea
+  style E fill:#fbeaea
+  style G fill:#eef7ee</whiteboard>
+<p>六个阶段，其中<b>五个是闸门</b>——它们有权拒绝往下走。这就是全部设计意图：<b>在一个噪声这么大的领域里，昂贵的错误不是「跑了个坏实验」，而是「把一个好实验读得太自信」。</b></p>
+<h1>五层，以及每一层是为了挡住哪一次翻车</h1>
+<table><colgroup><col width="150"/><col width="260"/><col width="380"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>层</p></th><th background-color="light-gray"><p>它拒绝让你做的事</p></th><th background-color="light-gray"><p>因为本项目实测到</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>① 探针闸门</b></p></td><td><p>在没量噪声底之前做任何比较</p></td><td><p>好设计的种子间标准差 <b>1.17 m</b> 比它自己的均值 <b>0.85 m</b> 还大</p></td></tr>
+<tr><td><p><b>② 预注册闸门</b></p></td><td><p>在没声明比较族的情况下做比较</p></td><td><p>从 6 点阶梯上挑出来的 <code>p = 0.039</code>，换 16 个新种子后<b>完全消失</b>（0.78 vs 0.97，p = 0.71）</p></td></tr>
+<tr><td><p><b>③ 验证层</b></p></td><td><p>直接报 best-so-far</p></td><td><p>ρ(报出来的, 重评) = <b>0.34</b>（n = 256），平均缩水 <b>53%</b></p></td></tr>
+<tr><td><p><b>④ claim 登记 + 重扫</b></p></td><td><p>在 n 变大之后把旧数字留在文档里</p></td><td><p>同一个 ρ 先后被写成 <b>0.043 → 0.17 → 0.29 → 0.34</b></p></td></tr>
+<tr><td><p><b>⑤ 威胁登记 + 驱动器</b></p></td><td><p>把算力花在确认自己上</p></td><td><p><b>主结论一直是错的</b>，直到 <code>loop_config</code> 这条威胁被真的测了一次</p></td></tr>
+</tbody></table>
+<h1>改动最多结论的那一条规则</h1>
+<p><code>stats.verdict()</code> 是系统里<b>唯一被允许把数字变成一个词</b>的函数，而它有<b>三个</b>输出，不是两个：</p>
+<pre lang="python"><code>if p_adj &lt;= alpha:                            return "supported"
+if abs(observed_diff) &lt; min_detectable_diff:  return "underpowered"   # ← 关键
+                                              return "not_supported"</code></pre>
+<p>把它套回本项目自己登记的 21 条 claim：</p>
+<table><colgroup><col width="180"/><col width="90"/><col width="510"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>状态</p></th><th background-color="light-gray"><p>条数</p></th><th background-color="light-gray"><p>是哪些</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>supported</b></p></td><td><p><b>5</b></p></td><td><p>密集空间的先验（1.08 vs 0.50）、k=4 的先验（1.18 vs 0.52）、赢家诅咒、两条命名臂的 decoy mass</p></td></tr>
+<tr><td><p><b>underpowered</b></p></td><td><p><b>15</b></p></td><td><p>稀疏空间 k=1 下的<b>全部</b>臂比较、整条稀疏度阶梯、匿名臂的 decoy mass</p></td></tr>
+<tr><td><p>not_supported</p></td><td><p>1</p></td><td><p>「选择压力能降低诱饵占比」（evo 0.29 vs random 0.21，方向还反了）</p></td></tr>
+</tbody></table>
+<callout emoji="⚠️" background-color="light-yellow"><p><b>也就是说：我在文档里写「p = 1.00，测不出差别」的地方，几乎每一处正确的说法都是「这个比较根本看不到我关心的那个量级的差异」。</b></p><p>两者听起来像同义词，但它们导向完全相反的下一步动作——前者说「这条路没用，换一条」，后者说「加种子，别换」。<b>这是一个诚实的研究者最常见的自欺方式，而它可以被一个 if 语句挡掉。</b></p></callout>
+<h1>最容易跳过、也最贵的那一条：分母</h1>
+<p>基线是每一个比较的分母，所以它的误差进入<b>每一条</b>结论——而且是<b>系统性地偏向「处理组有效」</b>。所以规划器把它排在最前面，并且给它 2–3 倍的种子数。</p>
+<p>本项目把 <code>random</code> 从 n = 8 加到 n = 24 之后，<b>三条已发布的结论翻转，方向全部相同</b>：</p>
+<table><colgroup><col width="330"/><col width="180"/><col width="180"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>比较</p></th><th background-color="light-gray"><p>n = 8 时</p></th><th background-color="light-gray"><p>n = 24 之后</p></th></tr></thead>
+<tbody>
+<tr><td><p>4 条 LLM 臂合并 vs 基线</p></td><td><p>p = <del>0.022</del></p></td><td><p><b>0.128</b></p></td></tr>
+<tr><td><p>6 条 sparse 臂合并 vs random</p></td><td><p>p = <del>0.045</del></p></td><td><p><b>0.265</b></p></td></tr>
+<tr><td><p>各单臂 vs random（Holm 后最好的）</p></td><td><p>0.26</p></td><td><p><b>0.68</b></p></td></tr>
+</tbody></table>
+<h1>规划器：预算是一个决策，不是一个默认值</h1>
+<p>噪声底一量出来，两个数就定了。</p>
+<p><b>一、每条臂要几个种子。</b>σ = 1.17、关心 0.5 m 的效应：<b>每条臂 68 个，基线 170 个</b>。本项目实际跑的是 8–24——<b>欠功效大约 8 倍</b>，而这句话现在是系统自动打印出来的：</p>
+<pre lang="text"><code>space      arm               n_a n_b     sd    观测差   能测到的最小差   要测 0.5m 需要 n
+runs       llm_named_nofb      8  24   0.68     0.08          0.69              23   ← 看不见
+runs       llm_named_fb        8  24   0.82    -0.11          0.83              34   ← 看不见
+runs       evo                 8  24   0.76    -0.21          0.77              29   ← 看不见
+runs_dense llm_named_nofb     16  24   0.55     0.58          0.44              15   ← 够
+runs_k4    llm_named_nofb     12  12   0.60     0.66          0.61              18   ← 勉强够</code></pre>
+<p><b>两个「够」的比较，正好就是全项目仅有的两条正结论。</b>这不是巧合，这是功效分析该有的样子。</p>
+<p><b>二、预算怎么切</b>——候选数 × 内层种子数。这<b>不是常数</b>，它和提议者的质量有交互，这是本系统最锋利的一条经验结论：</p>
+<table><colgroup><col width="180"/><col width="180"/><col width="230"/><col width="180"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>提议者</p></th><th background-color="light-gray"><p>最优切法</p></th><th background-color="light-gray"><p>为什么</p></th><th background-color="light-gray"><p>证据</p></th></tr></thead>
+<tbody>
+<tr><td><p>弱（≈ 均匀随机）</p></td><td><p>多候选，<b>k = 1</b></p></td><td><p>好设计稀少，<b>买量</b></p></td><td><p>四种切法打平，配对 p &gt; 0.5</p></td></tr>
+<tr><td><p>强（语义先验）</p></td><td><p>少候选，<b>k = 4</b></p></td><td><p>好设计密集，<b>买选得准</b></p></td><td><p>1.18 vs 0.52，p = 0.008</p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>同一条先验臂、同样的总算力：<code>32 × 1</code> 下对随机是 p = 1.00，<code>8 × 4</code> 下是 2.3 倍。</b></p><p><b>搜索框架看不见这件事</b>，因为它把循环配置固定住、在里面搜。<b>研究系统把循环配置本身也当成研究对象。</b></p></callout>
+<h1>已知答案探针：没有它就只能测结果，测不到机制</h1>
+<p>系统要求被研究的设计空间<b>自带一个已知答案的探针</b>——这里是 17 项里埋的 5 个诱饵，于是 decoy mass 有已知的下限（0.000）和已知的随机水平（0.294），而 <code>probes.instrument()</code> 每次都会核对这两条线还在不在。</p>
+<p>它买到的是<b>「提议者到底懂不懂它在改什么」这件事可以脱离噪声目标单独测</b>。它是全项目<b>唯一一个在 n 每次翻倍之后都没变的指标</b>：语义先验第 1 代就贴在 0.000（p &lt; 0.001），而纯适应度选择四代下来一直在随机水平（0.295 → 0.280）。</p>
+<callout emoji="📌" background-color="light-orange"><p>要把这套系统指向另一个设计空间，<b>必须先造一个等价的探针</b>。没有它，你能测出「结果好没好」，但测不出「为什么」——而在这种噪声水平下，光靠结果信号是学不动的。</p></callout>
+<h1>怎么用</h1>
+<pre lang="bash"><code>python -m rsi.auto init                 # 登记预注册 / claim / 威胁
+python -m rsi.auto gate                 # 现在允许做比较了吗
+python -m rsi.auto probe                # 噪声底 / 仪器标定 / 协议对照
+python -m rsi.auto plan  --delta 0.5    # 每臂要几个种子 + 预算怎么切
+python -m rsi.auto sweep                # 用当前数据重算全部 claim，打印状态变化
+python -m rsi.auto threats              # 还有什么可能是错的
+python -m rsi.auto next --budget 3000   # 一份带价签、按优先级排好的计划
+python -m rsi.auto audit                # 以上全部</code></pre>
+<p><code>driver.script(driver.executable(plan))</code> 会生成 <code>research/next_batch.sh</code>——把计划里<b>不需要人</b>的那部分变成可直接执行的批处理。<b>它故意生成脚本而不是进程内直接跑</b>：计划要留得下审计痕迹，而且人应该能在烧掉两小时算力之前否掉某一行。</p>
+<p>全部状态都是 <code>research/</code> 下的平铺文件（<code>prereg/</code>、<code>claims/</code>、<code>threats/</code>、<code>probes/</code>）。没有数据库——<b>一条 claim 就是一个 JSON 文件，里面装着产生它的那个可执行的 test</b>，这正是「重扫」得以成立的原因。</p>
+<h1>驱动器的优先级，就是这个项目的教训排序</h1>
+<pre lang="text"><code>0  闸门没过        —— 没有噪声底就读不了曲线；没标定过的仪器不能用
+1  致命威胁未处理   —— 排在任何新测量之前
+2  分母太薄        —— 优先于处理组太薄（它的误差偏向「处理组有效」）
+3  欠功效的 claim   —— 优先于没测过的（算力已经花了，把比较做完）
+4  没有预注册的结论 —— 那是 bug，不是结果
+5  新问题</code></pre>
+<p>每个任务都带一个以「内层训练次数」计的价签，所以出来的是一份<b>有预算的计划</b>，不是一张愿望清单。</p>
+<h1>换一个领域要改什么</h1>
+<p>四件事是领域相关的，其余不是：</p>
+<ol seq="auto">
+<li><code>data.series()</code>——怎么把一个 run 目录变成一个数。</li>
+<li>一个<b>设计者改不动的任务指标</b>（这里是前进米数）。内层优化<b>被设计的</b>目标，外层只看<b>固定的</b>那个。<b>没有这条分离，奖励作弊是看不见的。</b></li>
+<li>一个<b>已知答案的探针</b>（这里是埋的诱饵）。</li>
+<li>一个<b>离散可枚举的设计空间</b>，好让「均匀随机」是一条真下限。<b>自由形式代码没法均匀采样，所以「agent 打过了搜索」这类说法在那里没有分母。</b></li>
+</ol>
+<h1>它做不到什么</h1>
+<ul>
+<li><b>它不会自己想问题。</b>威胁登记表是人写的种子，驱动器只在里面排序。</li>
+<li><code>proposer_strength</code> 这个输入只在一个空间的两个实测点上标定过。它给出的 k <b>是一个待检验的假设，不是一个设定值</b>。</li>
+<li><b>它检测不到没人写下来的威胁。</b><code>loop_config</code>——那条推翻了主结论的——是我在第八个小时手工加进去的。</li>
+</ul>
+<callout emoji="📌" background-color="light-blue"><p>最后这一条就是对整套系统最诚实的总结：<b>它把「纪律」机械化了，没有把「想象力」机械化。</b></p><p>而这恰好和项目本身的主结论是同一句话的两种说法——<b>agent 提供的是先验（想象力那一半），而循环的配置决定这份先验兑不兑现（纪律那一半）。两半各管各的，谁也替不了谁。</b></p></callout>

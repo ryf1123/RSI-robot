@@ -50,3 +50,7 @@ runs_k4/llm_anon_nofb_s0 8/8 best=1.607
 runs_k4/llm_anon_nofb_s1 8/8 best=0.660
 runs_k4/llm_anon_nofb_s2 8/8 best=1.135
 runs_k4/llm_anon_nofb_s3 8/8 best=1.575
+runs_k4/llm_anon_nofb_s4 8/8 best=2.193
+runs_k4/llm_anon_nofb_s5 8/8 best=1.601
+runs_k4/llm_anon_nofb_s6 8/8 best=1.677
+runs_k4/llm_anon_nofb_s7 8/8 best=1.508
