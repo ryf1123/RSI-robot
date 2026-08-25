@@ -1,0 +1,18 @@
+{
+ "id": "k4_named_nofb2",
+ "statement": "k=4 下命名·无反馈优于随机（第九环的重复）",
+ "test": {
+  "kind": "mwu_greater",
+  "arm": "llm_named_nofb",
+  "baseline": "random",
+  "metric": "reeval",
+  "root": "runs_k4",
+  "alpha": 0.05
+ },
+ "prereg": "pr6_k4_bullseye",
+ "status": "untested",
+ "evidence": {},
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

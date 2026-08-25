@@ -1,0 +1,112 @@
+{
+ "designs": [
+  {
+   "w": {
+    "fwd_vel": 2.0,
+    "alive": 0.25,
+    "height": 0.5,
+    "upright": 0.25,
+    "ctrl_cost": 0.25,
+    "smooth": 0.0,
+    "joint_lim": 0.0,
+    "foot_clear": 0.5,
+    "hop": 0.0,
+    "energy": 0.0,
+    "pitch_rate": 0.0,
+    "progress": 1.0,
+    "back_vel": 0.0,
+    "stand_still": 0.0,
+    "foot_press": 0.0,
+    "y_drift": 0.0,
+    "clock": 0.0
+   },
+   "hp": {
+    "step_size": 0.01,
+    "noise_std": 0.02,
+    "top_frac": 0.5,
+    "term_height": 0.6
+   }
+  },
+  {
+   "w": {
+    "fwd_vel": 2.0,
+    "alive": 0.25,
+    "height": 2.0,
+    "upright": 0.0,
+    "ctrl_cost": 0.0,
+    "smooth": 0.25,
+    "joint_lim": 0.0,
+    "foot_clear": 0.0,
+    "hop": 0.25,
+    "energy": 0.5,
+    "pitch_rate": 0.0,
+    "progress": 0.0,
+    "back_vel": 0.0,
+    "stand_still": 0.0,
+    "foot_press": 0.25,
+    "y_drift": 0.25,
+    "clock": 0.0
+   },
+   "hp": {
+    "step_size": 0.05,
+    "noise_std": 0.05,
+    "top_frac": 0.5,
+    "term_height": 0.7
+   }
+  },
+  {
+   "w": {
+    "fwd_vel": 1.0,
+    "alive": 1.0,
+    "height": 0.0,
+    "upright": 0.0,
+    "ctrl_cost": 0.25,
+    "smooth": 0.0,
+    "joint_lim": 0.25,
+    "foot_clear": 0.25,
+    "hop": 0.0,
+    "energy": 0.25,
+    "pitch_rate": 0.25,
+    "progress": 0.0,
+    "back_vel": 0.0,
+    "stand_still": 0.0,
+    "foot_press": 0.0,
+    "y_drift": 0.0,
+    "clock": 0.0
+   },
+   "hp": {
+    "step_size": 0.02,
+    "noise_std": 0.02,
+    "top_frac": 0.25,
+    "term_height": 0.7
+   }
+  },
+  {
+   "w": {
+    "fwd_vel": 2.0,
+    "alive": 0.0,
+    "height": 2.0,
+    "upright": 0.5,
+    "ctrl_cost": 0.5,
+    "smooth": 0.5,
+    "joint_lim": 0.25,
+    "foot_clear": 0.25,
+    "hop": 0.5,
+    "energy": 0.0,
+    "pitch_rate": 0.0,
+    "progress": 0.0,
+    "back_vel": 0.0,
+    "stand_still": 0.0,
+    "foot_press": 0.0,
+    "y_drift": 0.0,
+    "clock": 0.0
+   },
+   "hp": {
+    "step_size": 0.05,
+    "noise_std": 0.02,
+    "top_frac": 0.5,
+    "term_height": 0.7
+   }
+  }
+ ]
+}

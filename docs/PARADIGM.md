@@ -158,3 +158,44 @@ Four things are domain-specific; the rest is not.
 
 That last limitation is the honest summary of the whole thing: the system
 mechanises the discipline, not the imagination.
+
+---
+
+## Replaying this project through the system
+
+The most useful test of the system is the record it came from.
+
+| Gate / layer | Would have stopped | What actually happened |
+|-|-|-|
+| Probe gate | building arms before the noise floor is measured | measured it at hour 1 — *after* the harness was already written to a budget the noise floor invalidates |
+| **Planner** | the whole arm programme | it prints **68 seeds/arm, 170 for the baseline** at hour 1. I ran 4. The k=1 programme was knowably underpowered before it started |
+| Baseline-first | a thin denominator | `random` sat at n=8 for seven hours; deepening it to 24 flipped three published conclusions, all toward "the agent works" |
+| Pre-registration | picking `k=5` off a ladder and then testing it | that `p = 0.039` got published; only a hand-initiated replication killed it (`p = 0.71` on fresh seeds) |
+| `verdict()` | reading "no difference" off an underpowered test | 15 claims mislabelled — which sent effort into opening new rings instead of deepening old ones |
+| Threat register | **nothing** | `loop_config`, the threat that overturned the headline, was written by hand at hour 8 |
+
+### The uncomfortable number
+
+```
+one adequately-powered 2-arm comparison (68 + 170 seeds) =  7,616 inner trainings
+the 6-arm bullseye at that power                         = 16,320
+actually spent this session                              = 12,178
+```
+
+The planner's allocation is the opposite of mine: **two arms at 68 seeds, not six
+arms at eight.** And that is checkable — ring 9 *is* a two-arm comparison
+(prior vs random at k=4), and it is the only experiment in the project that was
+both adequately powered and changed the headline. The other twenty-odd arms
+produced 5 supported claims and 15 underpowered ones.
+
+The project's real output came from about a sixth of its compute. The planner
+could have said so in the first hour.
+
+### What it cannot take over
+
+Of the seven things that mattered this session, the system can mechanise four —
+thin baseline, underpowered verdicts, stale numbers, forking paths. It cannot
+mechanise the three that produced the actual insight: inventing the decoy probe,
+inventing anonymisation as a semantic off-switch, and suspecting `loop_config`.
+
+All four it takes over are discipline. None of the three it cannot are.

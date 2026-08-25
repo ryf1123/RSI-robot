@@ -55,3 +55,55 @@ runs_k4/llm_anon_nofb_s5 8/8 best=1.601
 runs_k4/llm_anon_nofb_s6 8/8 best=1.677
 runs_k4/llm_anon_nofb_s7 8/8 best=1.508
 runs_k4/llm_anon_nofb_s8 8/8 best=0.760
+runs_k4/llm_anon_nofb_s9 8/8 best=0.242
+runs_k4/llm_anon_nofb_s10 8/8 best=1.894
+runs_k4/llm_anon_nofb_s11 8/8 best=1.888
+init runs_k4/llm_named_fb_s0 {'arm': 'llm', 'seed': 0, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s0 {'arm': 'llm', 'seed': 0, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s1 {'arm': 'llm', 'seed': 1, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s1 {'arm': 'llm', 'seed': 1, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s2 {'arm': 'llm', 'seed': 2, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s2 {'arm': 'llm', 'seed': 2, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s3 {'arm': 'llm', 'seed': 3, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s3 {'arm': 'llm', 'seed': 3, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s4 {'arm': 'llm', 'seed': 4, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s4 {'arm': 'llm', 'seed': 4, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s5 {'arm': 'llm', 'seed': 5, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s5 {'arm': 'llm', 'seed': 5, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s6 {'arm': 'llm', 'seed': 6, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s6 {'arm': 'llm', 'seed': 6, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s7 {'arm': 'llm', 'seed': 7, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s7 {'arm': 'llm', 'seed': 7, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s8 {'arm': 'llm', 'seed': 8, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s8 {'arm': 'llm', 'seed': 8, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s9 {'arm': 'llm', 'seed': 9, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s9 {'arm': 'llm', 'seed': 9, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s10 {'arm': 'llm', 'seed': 10, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s10 {'arm': 'llm', 'seed': 10, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_named_fb_s11 {'arm': 'llm', 'seed': 11, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': False, 'feedback': True, 'inner_seeds': 4}
+init runs_k4/llm_anon_fb_s11 {'arm': 'llm', 'seed': 11, 'budget': 8, 'gen': 4, 'n_iters': 120, 'anon': True, 'feedback': True, 'inner_seeds': 4}
+runs_k4/llm_named_fb_s0 4/8 best=0.822
+runs_k4/llm_anon_fb_s0 4/8 best=0.390
+runs_k4/llm_named_fb_s1 4/8 best=0.720
+runs_k4/llm_anon_fb_s1 4/8 best=0.004
+runs_k4/llm_named_fb_s2 4/8 best=0.992
+runs_k4/llm_anon_fb_s2 4/8 best=0.530
+runs_k4/llm_named_fb_s3 4/8 best=0.791
+runs_k4/llm_anon_fb_s3 4/8 best=0.811
+runs_k4/llm_named_fb_s4 4/8 best=0.949
+runs_k4/llm_anon_fb_s4 4/8 best=1.468
+runs_k4/llm_named_fb_s5 4/8 best=1.735
+runs_k4/llm_anon_fb_s5 4/8 best=0.032
+runs_k4/llm_named_fb_s6 4/8 best=1.210
+runs_k4/llm_anon_fb_s6 4/8 best=1.096
+runs_k4/llm_named_fb_s7 4/8 best=2.316
+runs_k4/llm_anon_fb_s7 4/8 best=0.945
+runs_k4/llm_named_fb_s8 4/8 best=1.907
+runs_k4/llm_anon_fb_s8 4/8 best=1.549
+runs_k4/llm_named_fb_s9 4/8 best=1.684
+runs_k4/llm_anon_fb_s9 4/8 best=0.438
+runs_k4/llm_named_fb_s10 4/8 best=1.219
+runs_k4/llm_anon_fb_s10 4/8 best=1.327
+runs_k4/llm_named_fb_s11 4/8 best=1.877
+runs_k4/llm_anon_fb_s11 4/8 best=0.879
+K4B_GEN0_DONE

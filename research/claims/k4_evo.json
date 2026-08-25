@@ -1,0 +1,18 @@
+{
+ "id": "k4_evo",
+ "statement": "k=4 下变异精英优于随机",
+ "test": {
+  "kind": "mwu_greater",
+  "arm": "evo",
+  "baseline": "random",
+  "metric": "reeval",
+  "root": "runs_k4",
+  "alpha": 0.05
+ },
+ "prereg": "pr6_k4_bullseye",
+ "status": "untested",
+ "evidence": {},
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

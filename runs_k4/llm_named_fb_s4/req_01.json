@@ -1,0 +1,281 @@
+{
+ "run": "runs_k4/llm_named_fb_s4",
+ "gen": 1,
+ "k": 4,
+ "anon": false,
+ "feedback": true,
+ "terms": [
+  "fwd_vel",
+  "alive",
+  "height",
+  "upright",
+  "ctrl_cost",
+  "smooth",
+  "joint_lim",
+  "foot_clear",
+  "hop",
+  "energy",
+  "pitch_rate",
+  "progress",
+  "back_vel",
+  "stand_still",
+  "foot_press",
+  "y_drift",
+  "clock"
+ ],
+ "weight_levels": [
+  0.0,
+  0.25,
+  0.5,
+  1.0,
+  2.0,
+  4.0
+ ],
+ "hp_levels": {
+  "step_size": [
+   0.005,
+   0.01,
+   0.02,
+   0.05
+  ],
+  "noise_std": [
+   0.01,
+   0.02,
+   0.05,
+   0.1
+  ],
+  "top_frac": [
+   0.25,
+   0.5,
+   1.0
+  ],
+  "term_height": [
+   0.6,
+   0.7,
+   0.8
+  ]
+ },
+ "task": "planar one-legged hopper; fitness = metres travelled in 2.4 s before falling",
+ "history": [
+  {
+   "i": 0,
+   "design": {
+    "w": {
+     "fwd_vel": 1.0,
+     "alive": 1.0,
+     "height": 0.5,
+     "upright": 0.5,
+     "ctrl_cost": 0.25,
+     "smooth": 0.0,
+     "joint_lim": 0.25,
+     "foot_clear": 0.0,
+     "hop": 0.5,
+     "energy": 0.0,
+     "pitch_rate": 0.0,
+     "progress": 0.5,
+     "back_vel": 0.0,
+     "stand_still": 0.0,
+     "foot_press": 0.0,
+     "y_drift": 0.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.7
+    }
+   },
+   "fitness": 0.949,
+   "fall_rate": 0.0,
+   "ep_seconds": 2.4,
+   "speed_mps": 0.05,
+   "airborne_frac": 0.0,
+   "action_sat": 0.002,
+   "mean_height": 1.214,
+   "mean_abs_pitch": 0.002,
+   "task_curve": [
+    0.141,
+    0.128,
+    0.124,
+    0.115,
+    0.123
+   ],
+   "term_contrib": {
+    "fwd_vel": 0.0249,
+    "alive": 1.0,
+    "height": 0.4282,
+    "upright": 0.4962,
+    "ctrl_cost": -0.0028,
+    "joint_lim": -0.0896,
+    "progress": 0.0107
+   },
+   "failure_mode": "站着不动：不摔但也不前进"
+  },
+  {
+   "i": 1,
+   "design": {
+    "w": {
+     "fwd_vel": 4.0,
+     "alive": 0.0,
+     "height": 0.5,
+     "upright": 0.25,
+     "ctrl_cost": 0.0,
+     "smooth": 0.5,
+     "joint_lim": 0.25,
+     "foot_clear": 0.0,
+     "hop": 0.0,
+     "energy": 0.25,
+     "pitch_rate": 0.25,
+     "progress": 1.0,
+     "back_vel": 0.0,
+     "stand_still": 0.25,
+     "foot_press": 0.0,
+     "y_drift": 0.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.7
+    }
+   },
+   "fitness": 0.446,
+   "fall_rate": 0.0,
+   "ep_seconds": 2.4,
+   "speed_mps": 0.027,
+   "airborne_frac": 0.0,
+   "action_sat": 0.02,
+   "mean_height": 1.212,
+   "mean_abs_pitch": 0.026,
+   "task_curve": [
+    0.108,
+    0.13,
+    0.069,
+    0.092,
+    0.056
+   ],
+   "term_contrib": {
+    "fwd_vel": 0.0537,
+    "height": 0.4264,
+    "upright": 0.2174,
+    "smooth": -0.0059,
+    "joint_lim": -0.1679,
+    "energy": -0.0003,
+    "pitch_rate": -0.0012,
+    "progress": 0.0062,
+    "stand_still": 0.2498
+   },
+   "failure_mode": "站着不动：不摔但也不前进"
+  },
+  {
+   "i": 2,
+   "design": {
+    "w": {
+     "fwd_vel": 1.0,
+     "alive": 0.25,
+     "height": 2.0,
+     "upright": 1.0,
+     "ctrl_cost": 0.5,
+     "smooth": 0.0,
+     "joint_lim": 0.0,
+     "foot_clear": 0.0,
+     "hop": 0.0,
+     "energy": 0.0,
+     "pitch_rate": 0.5,
+     "progress": 0.0,
+     "back_vel": 0.0,
+     "stand_still": 0.25,
+     "foot_press": 0.0,
+     "y_drift": 0.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.01,
+     "noise_std": 0.02,
+     "top_frac": 0.5,
+     "term_height": 0.6
+    }
+   },
+   "fitness": 0.071,
+   "fall_rate": 0.0,
+   "ep_seconds": 2.4,
+   "speed_mps": 0.001,
+   "airborne_frac": 0.0,
+   "action_sat": 0.0,
+   "mean_height": 1.211,
+   "mean_abs_pitch": 0.0,
+   "task_curve": [
+    0.005,
+    0.005,
+    0.002,
+    -0.002,
+    0.003
+   ],
+   "term_contrib": {
+    "fwd_vel": 0.0,
+    "alive": 0.25,
+    "height": 1.7018,
+    "upright": 0.9984,
+    "ctrl_cost": -0.0042,
+    "pitch_rate": -0.0005,
+    "stand_still": 0.25
+   },
+   "failure_mode": "站着不动：不摔但也不前进"
+  },
+  {
+   "i": 3,
+   "design": {
+    "w": {
+     "fwd_vel": 2.0,
+     "alive": 0.25,
+     "height": 0.0,
+     "upright": 1.0,
+     "ctrl_cost": 0.0,
+     "smooth": 0.5,
+     "joint_lim": 0.0,
+     "foot_clear": 0.0,
+     "hop": 0.0,
+     "energy": 0.25,
+     "pitch_rate": 0.0,
+     "progress": 0.0,
+     "back_vel": 0.0,
+     "stand_still": 0.0,
+     "foot_press": 0.0,
+     "y_drift": 0.0,
+     "clock": 0.0
+    },
+    "hp": {
+     "step_size": 0.02,
+     "noise_std": 0.05,
+     "top_frac": 0.5,
+     "term_height": 0.7
+    }
+   },
+   "fitness": 0.007,
+   "fall_rate": 0.0,
+   "ep_seconds": 2.4,
+   "speed_mps": 0.011,
+   "airborne_frac": 0.0,
+   "action_sat": 0.009,
+   "mean_height": 1.213,
+   "mean_abs_pitch": 0.001,
+   "task_curve": [
+    0.0,
+    0.029,
+    0.024,
+    0.021,
+    0.028
+   ],
+   "term_contrib": {
+    "fwd_vel": 0.0101,
+    "alive": 0.25,
+    "upright": 0.994,
+    "smooth": -0.0042,
+    "energy": -0.0003
+   },
+   "failure_mode": "站着不动：不摔但也不前进"
+  }
+ ]
+}
