@@ -1,0 +1,38 @@
+<h1>第九环留下的任务：把整个靶心搬到 k=4 下</h1>
+<p>第九环只测了 <code>random</code> 和 <code>命名 · 无反馈</code> 两条臂，就把主结论改写了。剩下四条臂必须补上——否则「k=1 的臂集合」和「k=4 的臂集合」不可比。</p>
+<p>这一次<b>先写预注册再看数据</b>（<code>research/prereg/pr6_k4_bullseye.json</code>，2026-08-25 08:30）：</p>
+<table><colgroup><col width="60"/><col width="420"/><col width="150"/><col width="180"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>#</p></th><th background-color="light-gray"><p>预测</p></th><th background-color="light-gray"><p>结果</p></th><th background-color="light-gray"><p>数字</p></th></tr></thead>
+<tbody>
+<tr><td><p>①</p></td><td><p>匿名 · 无反馈 也会赢随机（它的提议同样稀疏、同样落在好区域）</p></td><td><p><b>部分成立</b></p></td><td><p>1.00 vs 0.52，d = +0.53，Holm p = <b>0.061</b>（边缘）</p></td></tr>
+<tr><td><p>②</p></td><td><p><b>两条「有反馈」臂不会比对应的无反馈臂更好</b>——反馈在 k=1 下从未有过可测贡献，而 k=4 只让评估更准，并不给反馈增加信息</p></td><td><p><b>成立</b></p></td><td><p>命名 1.18 → <b>0.81</b>；匿名 1.00 → <b>0.77</b>。<b>两对同向</b></p></td></tr>
+<tr><td><p>③</p></td><td><p>evo 仍然不会赢随机</p></td><td><p><b>成立</b></p></td><td><p>0.64 vs 0.52，p = 0.52</p></td></tr>
+</tbody></table>
+<h1>全部六条臂，两种循环配置</h1>
+<table><colgroup><col width="200"/><col width="230"/><col width="230"/><col width="150"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>精英重评（6 个新种子）</p></th><th background-color="light-gray"><p><b>k = 4</b>（8 设计 × 4 种子，n=12）</p></th><th background-color="light-gray"><p>k = 1（32 设计 × 1 种子）</p></th><th background-color="light-gray"><p>k=4 vs random 的 Holm p</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>命名 · 无反馈</b></p></td><td><p><b>1.18 [0.80, 1.61]</b></p></td><td><p>1.04 [0.74, 1.38]</p></td><td><p><b>0.042</b></p></td></tr>
+<tr><td><p>匿名 · 无反馈</p></td><td><p>1.00 [0.64, 1.37]</p></td><td><p>1.30 [0.81, 1.76]</p></td><td><p>0.061</p></td></tr>
+<tr><td><p>命名 · 有反馈</p></td><td><p>0.81 [0.56, 1.08]</p></td><td><p>0.85 [0.36, 1.42]</p></td><td><p>0.21</p></td></tr>
+<tr><td><p>匿名 · 有反馈</p></td><td><p>0.77 [0.43, 1.12]</p></td><td><p>1.21 [0.72, 1.80]</p></td><td><p>0.21</p></td></tr>
+<tr><td><p>evo</p></td><td><p>0.64 [0.29, 1.03]</p></td><td><p>0.75 [0.33, 1.22]</p></td><td><p>0.52</p></td></tr>
+<tr><td><p><b>random</b></p></td><td><p><b>0.52 [0.31, 0.75]</b></p></td><td><p>0.97 [0.66, 1.30]（n=24）</p></td><td><p>—</p></td></tr>
+</tbody></table>
+<callout emoji="🎯" background-color="light-red"><p><b>在 k = 4 下，六条臂第一次排出了一个和「先验有多少」完全一致的顺序：</b></p><p>命名 · 无反馈 <b>1.18</b> &gt; 匿名 · 无反馈 <b>1.00</b> &gt; 命名 · 有反馈 <b>0.81</b> &gt; 匿名 · 有反馈 <b>0.77</b> &gt; evo <b>0.64</b> &gt; random <b>0.52</b>。</p><p>而在 k = 1 下，同样六条臂的顺序是乱的（1.30 / 1.21 / 1.04 / 0.97 / 0.85 / 0.75），random 甚至排在中间。<b>不是臂变了，是能不能看见变了。</b></p></callout>
+<h1>本环唯一的新东西：反馈第一次显出代价</h1>
+<p>两对臂，只差「看不看得到反馈」，其余全同：</p>
+<pre lang="text"><code>命名 · 无反馈  1.18   →   命名 · 有反馈  0.81     −0.36
+匿名 · 无反馈  1.00   →   匿名 · 有反馈  0.77     −0.23</code></pre>
+<callout emoji="💡" background-color="light-orange"><p><b>两对同向，而且这是全项目第一次看到反馈有明确的方向性代价。</b>（区间仍重叠，n = 12，按系统判定是 <code>underpowered</code>——但方向一致这件事本身值得记。）</p><p>机制大概率是预算结构：k = 4 的循环<b>一共只有 8 个候选</b>。无反馈臂把 8 个全部用来从先验里独立同分布地采样；有反馈臂第 1 代用 4 个，<b>第 2 代的 4 个全部押在第 1 代那个局部上</b>。</p><p><b>候选本来就稀缺的时候，「看反馈再改」等于把一半的多样性换成一次早期承诺</b>——而第 1 代的精英是从 4 个样本里挑的，它值不值得押，本身就很可疑。</p></callout>
+<p>这条和第三环那句话是同一件事的两种预算形态：<b>k=1 多候选时，反馈的局部编辑被淹没在噪声里（无影响）；k=4 少候选时，它挤掉了多样性（有代价）。反馈在这个空间里始终没有出现过正贡献。</b></p>
+<h1>对主结论的最终交代</h1>
+<table><colgroup><col width="230"/><col width="290"/><col width="290"/></colgroup>
+<thead><tr><th background-color="light-gray"><p>信息来源</p></th><th background-color="light-gray"><p>在「懂不懂」上（decoy mass）</p></th><th background-color="light-gray"><p>在「拿到的设计好不好」上</p></th></tr></thead>
+<tbody>
+<tr><td><p><b>语义先验</b></p></td><td><p><b>0.000</b>，第 1 代到位，Holm p &lt; 0.001</p></td><td><p><b>k=4 下 1.18 vs 0.52（p = 0.042）</b>；k=1 下看不见</p></td></tr>
+<tr><td><p><b>结构先验</b>（稀疏 + 中档超参）</p></td><td><p>随机水平（0.235，无贡献）</p></td><td><p>k=4 下 1.00 vs 0.52（p = 0.061，边缘）</p></td></tr>
+<tr><td><p><b>反馈</b></p></td><td><p>匿名臂 0.321 → 0.140（只抓得到逐位无效项）</p></td><td><p><b>两种配置下都没有正贡献；k=4 下两对同向为负</b></p></td></tr>
+<tr><td><p><b>选择压力</b></p></td><td><p><b>零贡献</b>（0.295 → 0.280）</p></td><td><p>0.64 vs 0.52，测不出</p></td></tr>
+</tbody></table>
+<callout emoji="📌" background-color="light-blue"><p><b>一句话：这一路工作里真正值钱的是「先验」，而它值不值钱取决于「循环配置」；「反馈」和「选择压力」在这个空间里从头到尾没有交付过可测的正贡献。</b></p><p>而这句话只有在 k = 4 下才看得出来——<b>在通行的 k = 1 配置下，六条臂的真实质量排序是随机的。</b></p></callout>

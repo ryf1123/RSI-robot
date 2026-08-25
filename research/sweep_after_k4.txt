@@ -1,0 +1,33 @@
+status changes: none
+claim                     status                                effect    p_adj  statement
+------------------------------------------------------------------------------------------------------------------------------------
+c_dense_named_nofb        supported             1.08 vs 0.50 (d=+0.54)   0.0047  诱饵密集空间里，纯语义先验交付的设计真实质量优于随机
+c_k4_named_nofb           supported             1.18 vs 0.52 (d=+0.58)   0.0083  同算力下改用 8 设计 x 4 内层种子，纯语义先验真实质量优于随机
+c_winners_curse           supported                  rho=+0.37 (n=304)   0.0000  外层报出来的 best-so-far 与设计真实质量相关
+d_named_fb                supported             0.00 vs 0.21 (d=-1.00)   0.0001  命名·有反馈的精英诱饵占比低于随机
+d_named_nofb              supported             0.00 vs 0.21 (d=-1.00)   0.0001  命名·无反馈的精英诱饵占比低于随机
+k4_named_nofb2            supported             1.18 vs 0.52 (d=+0.58)   0.0415  k=4 下命名·无反馈优于随机（第九环的重复）
+c_anon_fb_k1              underpowered          1.21 vs 0.97 (d=+0.17)   1.0000  匿名+反馈真实质量优于随机
+c_anon_nofb_k1            underpowered          1.30 vs 0.97 (d=+0.27)   0.6828  匿名·无反馈（结构先验）真实质量优于随机
+c_dense_evo               underpowered          0.46 vs 0.50 (d=-0.20)   0.7982  诱饵密集空间里，变异精英真实质量优于随机
+c_evo_k1                  underpowered          0.75 vs 0.97 (d=-0.04)   1.0000  变异精英（选择压力）真实质量优于随机
+c_named_fb_k1             underpowered          0.85 vs 0.97 (d=-0.10)   1.0000  命名+反馈的完整 Eureka 式循环，真实质量优于随机
+c_named_nofb_k1           underpowered          1.04 vs 0.97 (d=+0.12)   1.0000  纯语义先验（零反馈）交付的设计，真实质量优于随机
+c_sparse12                underpowered          1.23 vs 0.97 (d=+0.20)   1.0000  恰好激活 12 项的稀疏提议，真实质量优于随机
+c_sparse14                underpowered          1.02 vs 0.97 (d=+0.08)   1.0000  恰好激活 14 项的稀疏提议，真实质量优于随机
+c_sparse2                 underpowered          0.91 vs 0.97 (d=+0.02)   1.0000  恰好激活 2 项的稀疏提议，真实质量优于随机
+c_sparse3                 underpowered          1.05 vs 0.97 (d=+0.12)   1.0000  恰好激活 3 项的稀疏提议，真实质量优于随机
+c_sparse5                 underpowered          0.96 vs 0.97 (d=+0.03)   1.0000  恰好激活 5 项的稀疏提议，真实质量优于随机
+c_sparse5_replication     underpowered          0.96 vs 0.97 (d=+0.03)   0.4385  sparse5 在全新种子上仍然优于随机（预注册重复）
+c_sparse8                 underpowered          0.76 vs 0.97 (d=-0.17)   1.0000  恰好激活 8 项的稀疏提议，真实质量优于随机
+d_anon_fb                 underpowered          0.14 vs 0.21 (d=-0.50)   0.0580  匿名·有反馈的精英诱饵占比低于随机
+d_anon_nofb               underpowered          0.23 vs 0.21 (d=-0.07)   0.7773  匿名·无反馈的精英诱饵占比低于随机（协议对照：应当不显著）
+k4_anon_fb                underpowered          0.77 vs 0.52 (d=+0.31)   0.2145  k=4 下匿名·有反馈优于随机
+k4_anon_nofb              underpowered          1.00 vs 0.52 (d=+0.53)   0.0608  k=4 下匿名·无反馈优于随机
+k4_evo                    underpowered          0.64 vs 0.52 (d=-0.01)   0.5230  k=4 下变异精英优于随机
+k4_named_fb               underpowered          0.81 vs 0.52 (d=+0.36)   0.2114  k=4 下命名·有反馈优于随机
+d_evo                     not_supported         0.29 vs 0.21 (d=+0.56)   0.9923  选择压力能降低精英的诱饵占比
+------------------------------------------------------------------------------------------------------------------------------------
+  supported           6 / 26
+  underpowered       19 / 26
+  not_supported       1 / 26

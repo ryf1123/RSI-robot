@@ -10,8 +10,30 @@
   "alpha": 0.05
  },
  "prereg": "pr6_k4_bullseye",
- "status": "untested",
- "evidence": {},
+ "status": "supported",
+ "evidence": {
+  "n_a": 12,
+  "n_b": 12,
+  "mean_a": 1.176,
+  "ci_a": [
+   0.8,
+   1.61
+  ],
+  "mean_b": 0.519,
+  "ci_b": [
+   0.308,
+   0.749
+  ],
+  "diff": 0.657,
+  "cliffs_delta": 0.583,
+  "p_raw": 0.00829,
+  "min_detectable_diff": 0.608,
+  "intervals_overlap": false,
+  "p_adj": 0.04145,
+  "family": "pr6_k4_bullseye",
+  "family_size": 5,
+  "checked": "2026-08-25T09:07:53"
+ },
  "history": [],
  "cited_in": [],
  "superseded_by": ""
