@@ -59,6 +59,12 @@ def sweep(write=True):
         ps = [r[1] for r in results]
         adj = S.holm(ps) if fam != "__unregistered__" else ps
         for c, (cmp_, p), pa in zip(cl, results, adj):
+            if c.superseded_by:
+                c.status = "superseded"; c.evidence = dict(cmp_, p_adj=round(float(pa), 5),
+                                                           superseded_by=c.superseded_by)
+                out.append(c)
+                if write: save(c)
+                continue
             v = S.verdict(cmp_, pa) if c.test["kind"].startswith("mwu") else (
                 "supported" if pa <= c.test.get("alpha", 0.05) else "not_supported")
             prev = c.status
@@ -76,7 +82,7 @@ def sweep(write=True):
 def report(cl=None):
     cl = cl or all_claims()
     order = {"supported": 0, "underpowered": 1, "not_supported": 2,
-             "insufficient_data": 3, "superseded": 4}
+             "insufficient_data": 3, "superseded": 5}
     print(f"{'claim':<26}{'status':<18}{'effect':>26}{'p_adj':>9}  statement")
     print("-" * 132)
     for c in sorted(cl, key=lambda c: (order.get(c.status, 9), c.id)):
@@ -90,6 +96,6 @@ def report(cl=None):
         print(f"{c.id:<26}{c.status:<18}{eff:>26}{e.get('p_adj', float('nan')):>9.4f}  {c.statement[:56]}")
     n = len(cl)
     print("-" * 132)
-    for k in ("supported", "underpowered", "not_supported", "insufficient_data"):
+    for k in ("supported", "underpowered", "not_supported", "insufficient_data", "superseded"):
         m = sum(1 for c in cl if c.status == k)
         if m: print(f"  {k:<18}{m:>3} / {n}")

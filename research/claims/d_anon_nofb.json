@@ -10,7 +10,7 @@
   "alpha": 0.05
  },
  "prereg": "pr1_decoy",
- "status": "supported",
+ "status": "superseded",
  "evidence": {
   "n_a": 27,
   "n_b": 24,
@@ -30,9 +30,7 @@
   "min_detectable_diff": 0.09,
   "intervals_overlap": true,
   "p_adj": 0.0288,
-  "family": "pr1_decoy",
-  "family_size": 6,
-  "checked": "2026-08-25T10:02:14"
+  "superseded_by": "d_anon_nofb_matched"
  },
  "history": [
   {
