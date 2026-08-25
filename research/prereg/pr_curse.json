@@ -1,0 +1,12 @@
+{
+ "id": "pr_curse",
+ "question": "外层报出来的 best-so-far 和设计的真实质量有多大关系？",
+ "prediction": "极弱；best-so-far 基本是 max-of-noise",
+ "decision_rule": "spearman(reported, reeval) 跨全部 run",
+ "family": [
+  "c_winners_curse"
+ ],
+ "created": "2026-08-24T23:35",
+ "outcome": "open",
+ "note": ""
+}

@@ -1,0 +1,16 @@
+{
+ "id": "pr1_bullseye",
+ "question": "agent 迭代机器人时，起作用的是先验、反馈还是选择压力？",
+ "prediction": "纯先验就能打过随机；匿名+反馈≈evo；命名的效应量>反馈；匿名·无反馈≈随机；decoy mass 比 fitness 更早分开",
+ "decision_rule": "单侧 MWU，精英重评口径，Holm 校正跨 5 条臂，alpha=0.05",
+ "family": [
+  "c_named_nofb_k1",
+  "c_named_fb_k1",
+  "c_anon_nofb_k1",
+  "c_anon_fb_k1",
+  "c_evo_k1"
+ ],
+ "created": "2026-08-24T23:10",
+ "outcome": "open",
+ "note": ""
+}

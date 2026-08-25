@@ -1,0 +1,12 @@
+{
+ "id": "pr4_sparse5_rep",
+ "question": "2x2 里那个 p=0.039 的稀疏主效应，是不是「先看阶梯再挑 k=5」的产物？",
+ "prediction": "是；用 16 个全新种子重跑会消失",
+ "decision_rule": "单侧 MWU，只做这一次比较，不校正（family=1）",
+ "family": [
+  "c_sparse5_replication"
+ ],
+ "created": "2026-08-25T06:25",
+ "outcome": "open",
+ "note": ""
+}

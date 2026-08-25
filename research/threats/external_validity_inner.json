@@ -1,0 +1,9 @@
+{
+ "id": "external_validity_inner",
+ "severity": "high",
+ "threat": "结论可能只在 ARS + 线性策略这一种内层学习器上成立",
+ "control": "换 PPO + MLP 重跑靶心",
+ "status": "open",
+ "finding": "",
+ "updated": "2026-08-25T08:09:47"
+}

@@ -1,0 +1,23 @@
+{
+ "n_a": 8,
+ "n_b": 24,
+ "mean_a": 0.235,
+ "ci_a": [
+  0.085,
+  0.406
+ ],
+ "mean_b": 0.209,
+ "ci_b": [
+  0.178,
+  0.24
+ ],
+ "diff": 0.026,
+ "cliffs_delta": -0.073,
+ "p_raw": 0.38863,
+ "min_detectable_diff": 0.188,
+ "intervals_overlap": true,
+ "ok": true,
+ "control": "llm_anon_nofb",
+ "baseline": "random",
+ "metric": "decoy"
+}

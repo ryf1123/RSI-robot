@@ -1,0 +1,40 @@
+{
+ "id": "c_dense_evo",
+ "statement": "诱饵密集空间里，变异精英真实质量优于随机",
+ "test": {
+  "kind": "mwu_greater",
+  "arm": "evo",
+  "baseline": "random",
+  "metric": "reeval",
+  "root": "runs_dense",
+  "alpha": 0.05
+ },
+ "prereg": "pr2_dense",
+ "status": "underpowered",
+ "evidence": {
+  "n_a": 8,
+  "n_b": 24,
+  "mean_a": 0.455,
+  "ci_a": [
+   0.094,
+   0.867
+  ],
+  "mean_b": 0.499,
+  "ci_b": [
+   0.337,
+   0.677
+  ],
+  "diff": -0.044,
+  "cliffs_delta": -0.198,
+  "p_raw": 0.79817,
+  "min_detectable_diff": 0.529,
+  "intervals_overlap": true,
+  "p_adj": 0.79817,
+  "family": "pr2_dense",
+  "family_size": 2,
+  "checked": "2026-08-25T08:11:13"
+ },
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

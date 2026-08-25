@@ -1,0 +1,8 @@
+{
+ "n_terms": 17,
+ "n_decoys": 5,
+ "claimed_chance": 0.2941,
+ "measured_chance": 0.2955,
+ "floor_reachable": true,
+ "ok": true
+}

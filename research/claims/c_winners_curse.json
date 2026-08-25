@@ -1,0 +1,33 @@
+{
+ "id": "c_winners_curse",
+ "statement": "外层报出来的 best-so-far 与设计真实质量相关",
+ "test": {
+  "kind": "spearman_reported_vs_reeval",
+  "metric": "reeval",
+  "arm": "",
+  "alpha": 0.05,
+  "roots": [
+   "runs",
+   "runs_dense",
+   "runs_k4"
+  ]
+ },
+ "prereg": "pr_curse",
+ "status": "supported",
+ "evidence": {
+  "n": 256,
+  "rho": 0.336,
+  "p_raw": 0.0,
+  "mean_reported": 2.058,
+  "mean_reeval": 0.952,
+  "shrinkage": 0.537,
+  "below_diagonal": 215,
+  "p_adj": 0.0,
+  "family": "pr_curse",
+  "family_size": 1,
+  "checked": "2026-08-25T08:11:13"
+ },
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

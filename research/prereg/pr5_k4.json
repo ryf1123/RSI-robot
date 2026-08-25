@@ -1,0 +1,12 @@
+{
+ "id": "pr5_k4",
+ "question": "「涨的是报出来的数、不是拿到的设计」会不会只是 k=1 评估的产物？",
+ "prediction": "不是；k=4 下两条臂在真实质量上仍然测不出差别",
+ "decision_rule": "单侧 MWU，精英重评口径，family=1",
+ "family": [
+  "c_k4_named_nofb"
+ ],
+ "created": "2026-08-25T07:10",
+ "outcome": "open",
+ "note": ""
+}

@@ -1,0 +1,40 @@
+{
+ "id": "d_named_nofb",
+ "statement": "命名·无反馈的精英诱饵占比低于随机",
+ "test": {
+  "kind": "mwu_less",
+  "arm": "llm_named_nofb",
+  "baseline": "random",
+  "metric": "decoy",
+  "root": "runs",
+  "alpha": 0.05
+ },
+ "prereg": "pr1_decoy",
+ "status": "supported",
+ "evidence": {
+  "n_a": 8,
+  "n_b": 24,
+  "mean_a": 0.0,
+  "ci_a": [
+   0.0,
+   0.0
+  ],
+  "mean_b": 0.209,
+  "ci_b": [
+   0.178,
+   0.24
+  ],
+  "diff": -0.209,
+  "cliffs_delta": -1.0,
+  "p_raw": 1e-05,
+  "min_detectable_diff": 0.057,
+  "intervals_overlap": false,
+  "p_adj": 5e-05,
+  "family": "pr1_decoy",
+  "family_size": 5,
+  "checked": "2026-08-25T08:11:13"
+ },
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

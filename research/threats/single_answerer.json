@@ -1,0 +1,9 @@
+{
+ "id": "single_answerer",
+ "severity": "high",
+ "threat": "所有种子的 LLM 请求由同一个会话回答，种子之间隐性迁移",
+ "control": "每个种子换独立会话回答",
+ "status": "open",
+ "finding": "方向为保守（污染只会让有反馈臂显得更好，而它没赢）",
+ "updated": "2026-08-25T08:09:47"
+}

@@ -1,0 +1,40 @@
+{
+ "id": "c_k4_named_nofb",
+ "statement": "同算力下改用 8 设计 x 4 内层种子，纯语义先验真实质量优于随机",
+ "test": {
+  "kind": "mwu_greater",
+  "arm": "llm_named_nofb",
+  "baseline": "random",
+  "metric": "reeval",
+  "root": "runs_k4",
+  "alpha": 0.05
+ },
+ "prereg": "pr5_k4",
+ "status": "supported",
+ "evidence": {
+  "n_a": 12,
+  "n_b": 12,
+  "mean_a": 1.176,
+  "ci_a": [
+   0.8,
+   1.61
+  ],
+  "mean_b": 0.519,
+  "ci_b": [
+   0.308,
+   0.749
+  ],
+  "diff": 0.657,
+  "cliffs_delta": 0.583,
+  "p_raw": 0.00829,
+  "min_detectable_diff": 0.608,
+  "intervals_overlap": false,
+  "p_adj": 0.00829,
+  "family": "pr5_k4",
+  "family_size": 1,
+  "checked": "2026-08-25T08:11:13"
+ },
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

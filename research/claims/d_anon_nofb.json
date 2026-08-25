@@ -1,0 +1,40 @@
+{
+ "id": "d_anon_nofb",
+ "statement": "匿名·无反馈的精英诱饵占比低于随机（协议对照：应当不显著）",
+ "test": {
+  "kind": "mwu_less",
+  "arm": "llm_anon_nofb",
+  "baseline": "random",
+  "metric": "decoy",
+  "root": "runs",
+  "alpha": 0.05
+ },
+ "prereg": "pr1_decoy",
+ "status": "underpowered",
+ "evidence": {
+  "n_a": 8,
+  "n_b": 24,
+  "mean_a": 0.235,
+  "ci_a": [
+   0.085,
+   0.406
+  ],
+  "mean_b": 0.209,
+  "ci_b": [
+   0.178,
+   0.24
+  ],
+  "diff": 0.026,
+  "cliffs_delta": -0.073,
+  "p_raw": 0.38863,
+  "min_detectable_diff": 0.188,
+  "intervals_overlap": true,
+  "p_adj": 0.77726,
+  "family": "pr1_decoy",
+  "family_size": 5,
+  "checked": "2026-08-25T08:11:13"
+ },
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

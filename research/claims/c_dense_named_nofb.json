@@ -1,0 +1,40 @@
+{
+ "id": "c_dense_named_nofb",
+ "statement": "诱饵密集空间里，纯语义先验交付的设计真实质量优于随机",
+ "test": {
+  "kind": "mwu_greater",
+  "arm": "llm_named_nofb",
+  "baseline": "random",
+  "metric": "reeval",
+  "root": "runs_dense",
+  "alpha": 0.05
+ },
+ "prereg": "pr2_dense",
+ "status": "supported",
+ "evidence": {
+  "n_a": 16,
+  "n_b": 24,
+  "mean_a": 1.076,
+  "ci_a": [
+   0.781,
+   1.387
+  ],
+  "mean_b": 0.499,
+  "ci_b": [
+   0.337,
+   0.677
+  ],
+  "diff": 0.577,
+  "cliffs_delta": 0.536,
+  "p_raw": 0.00233,
+  "min_detectable_diff": 0.439,
+  "intervals_overlap": false,
+  "p_adj": 0.00466,
+  "family": "pr2_dense",
+  "family_size": 2,
+  "checked": "2026-08-25T08:11:13"
+ },
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

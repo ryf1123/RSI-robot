@@ -1,0 +1,9 @@
+{
+ "id": "k4_arms_incomplete",
+ "severity": "high",
+ "threat": "k=4 的结论只在 random 和 命名·无反馈 两条臂上测过",
+ "control": "6 条主臂全部在 k=4 下重跑",
+ "status": "in_progress",
+ "finding": "",
+ "updated": "2026-08-25T08:09:47"
+}

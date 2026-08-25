@@ -1,0 +1,10 @@
+{
+ "arm": "evo",
+ "seed": 0,
+ "budget": 8,
+ "gen": 4,
+ "n_iters": 120,
+ "anon": false,
+ "feedback": true,
+ "inner_seeds": 4
+}

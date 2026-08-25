@@ -1,0 +1,40 @@
+{
+ "id": "d_anon_fb",
+ "statement": "匿名·有反馈的精英诱饵占比低于随机",
+ "test": {
+  "kind": "mwu_less",
+  "arm": "llm_anon_fb",
+  "baseline": "random",
+  "metric": "decoy",
+  "root": "runs",
+  "alpha": 0.05
+ },
+ "prereg": "pr1_decoy",
+ "status": "underpowered",
+ "evidence": {
+  "n_a": 8,
+  "n_b": 24,
+  "mean_a": 0.138,
+  "ci_a": [
+   0.092,
+   0.192
+  ],
+  "mean_b": 0.209,
+  "ci_b": [
+   0.178,
+   0.24
+  ],
+  "diff": -0.07,
+  "cliffs_delta": -0.5,
+  "p_raw": 0.01932,
+  "min_detectable_diff": 0.08,
+  "intervals_overlap": true,
+  "p_adj": 0.05796,
+  "family": "pr1_decoy",
+  "family_size": 5,
+  "checked": "2026-08-25T08:11:13"
+ },
+ "history": [],
+ "cited_in": [],
+ "superseded_by": ""
+}

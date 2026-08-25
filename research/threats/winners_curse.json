@@ -1,0 +1,9 @@
+{
+ "id": "winners_curse",
+ "severity": "fatal",
+ "threat": "best-so-far 是对噪声取 max，可能与真实质量无关",
+ "control": "精英用一批全新种子重评，报 spearman(reported, reeval)",
+ "status": "addressed",
+ "finding": "rho=0.29 (n=192)，缩水 53%；k=4 下升到 0.51",
+ "updated": "2026-08-25T08:09:47"
+}

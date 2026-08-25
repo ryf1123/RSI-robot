@@ -1,0 +1,9 @@
+{
+ "id": "loop_config",
+ "severity": "fatal",
+ "threat": "结论可能只在 k=1 评估下成立，也就是只是循环配置的产物",
+ "control": "同算力换成 8 设计 x 4 种子重跑",
+ "status": "addressed",
+ "finding": "先验从 p=1.00 变成 2.3 倍 (p=0.008)：主结论确实是 k=1 的产物",
+ "updated": "2026-08-25T08:09:47"
+}

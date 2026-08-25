@@ -1,0 +1,9 @@
+{
+ "id": "inner_noise",
+ "severity": "fatal",
+ "threat": "外层比较的两个数各自是一次随机 RL 训练，种子方差可能大到把设计差异完全盖住",
+ "control": "probes.noise_floor：同一设计跑 k 个种子，报 std/mean",
+ "status": "addressed",
+ "finding": "好设计 std 1.17 > mean 0.85；噪声只在好的一侧爆炸",
+ "updated": "2026-08-25T08:09:47"
+}

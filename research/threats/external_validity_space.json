@@ -1,0 +1,9 @@
+{
+ "id": "external_validity_space",
+ "severity": "high",
+ "threat": "离散空间买到了随机下限，代价是外部效度；自由形式代码空间未必一样",
+ "control": "在自由形式奖励代码空间上做交叉验证",
+ "status": "open",
+ "finding": "",
+ "updated": "2026-08-25T08:09:47"
+}

@@ -1,0 +1,9 @@
+{
+ "id": "forking_paths",
+ "severity": "high",
+ "threat": "在阶梯上挑最高的那个点再做比较，会必然产生假阳性",
+ "control": "用全新种子对预注册的那个点重跑",
+ "status": "addressed",
+ "finding": "sparse5 的 p=0.039 在 16 个新种子上完全消失（0.78 vs 0.97, p=0.71）",
+ "updated": "2026-08-25T08:09:47"
+}

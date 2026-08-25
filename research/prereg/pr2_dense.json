@@ -1,0 +1,13 @@
+{
+ "id": "pr2_dense",
+ "question": "把诱饵密度加倍、让随机基线越过损伤拐点，先验的优势会不会在任务适应度上显现？",
+ "prediction": "会；这是「先验买的那段区间里干净是免费的」这个机制的直接推论",
+ "decision_rule": "单侧 MWU，精英重评口径，Holm 跨 2 条臂",
+ "family": [
+  "c_dense_named_nofb",
+  "c_dense_evo"
+ ],
+ "created": "2026-08-25T00:05",
+ "outcome": "open",
+ "note": ""
+}

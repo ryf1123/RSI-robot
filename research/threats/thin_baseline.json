@@ -1,0 +1,9 @@
+{
+ "id": "thin_baseline",
+ "severity": "fatal",
+ "threat": "所有比较共用一个分母；分母 n 太小会系统性地偏向处理组",
+ "control": "baseline 种子数给到处理组的 2-3 倍并最先跑",
+ "status": "addressed",
+ "finding": "random n=8→24 后三处结论翻转，方向全部偏向「agent 有用」",
+ "updated": "2026-08-25T08:09:47"
+}

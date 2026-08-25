@@ -1,0 +1,17 @@
+{
+ "id": "pr3_sparsity",
+ "question": "「结构先验 = 少写几项」能不能解释 LLM 臂的重评优势？",
+ "prediction": "重评质量在 k=3-5 达峰，向 k=12+ 单调下降",
+ "decision_rule": "单侧 MWU 跨 6 个 k，Holm 校正；另看 spearman(k, reeval)",
+ "family": [
+  "c_sparse2",
+  "c_sparse3",
+  "c_sparse5",
+  "c_sparse8",
+  "c_sparse12",
+  "c_sparse14"
+ ],
+ "created": "2026-08-25T03:00",
+ "outcome": "open",
+ "note": ""
+}

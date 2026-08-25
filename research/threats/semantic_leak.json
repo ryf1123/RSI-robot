@@ -1,0 +1,9 @@
+{
+ "id": "semantic_leak",
+ "severity": "fatal",
+ "threat": "匿名臂里我可能记得 t07 是什么，语义从后门泄漏",
+ "control": "每个种子一份随机置换 + 检查匿名·无反馈臂是否落在随机水平",
+ "status": "addressed",
+ "finding": "decoy mass 0.235 vs random 0.209，区间重叠，未泄漏",
+ "updated": "2026-08-25T08:09:47"
+}

@@ -1,0 +1,16 @@
+{
+ "id": "pr1_decoy",
+ "question": "同上，但用不含内层噪声的 decoy mass 口径",
+ "prediction": "命名臂贴到 0.000；反馈只走一半；选择压力零贡献",
+ "decision_rule": "单侧 MWU（越小越好），Holm 跨 5 条臂",
+ "family": [
+  "d_named_nofb",
+  "d_named_fb",
+  "d_anon_nofb",
+  "d_anon_fb",
+  "d_evo"
+ ],
+ "created": "2026-08-24T23:10",
+ "outcome": "open",
+ "note": ""
+}
